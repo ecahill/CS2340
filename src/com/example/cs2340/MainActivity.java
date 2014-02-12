@@ -2,11 +2,11 @@ package com.example.cs2340;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
-//import android.content.Intent; 
 
 public class MainActivity extends Activity{
 
@@ -24,10 +24,12 @@ public class MainActivity extends Activity{
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	final OnClickListener listener = new OnClickListener() // button listener to change screen
 	{
 		public void onClick(View v){
+			//Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+			//startActivity(i);
 			setContentView(R.layout.login_view); // change content view to login
 		}
 	};

@@ -29,7 +29,6 @@ public class MemoryModel implements Model {
 	@Override
 	public User getUserByName(final String name) {
 		User u = users.get(name);
-
 		return u;
 	}
 
