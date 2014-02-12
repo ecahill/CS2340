@@ -1,4 +1,7 @@
-package com.example.cs2340;
+package com.example.views;
+
+import com.example.cs2340.R;
+import com.example.cs2340.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;
