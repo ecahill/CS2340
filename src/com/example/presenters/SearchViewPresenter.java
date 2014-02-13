@@ -25,14 +25,12 @@ public class SearchViewPresenter{// implements ClickListener {
 		String name = view.getName();
 		User user = model.getUserByName(name);
 		return user!=null;
-		//String text = (user == null) ?  "Login failed" : user.toString();
-		//view.setResultData(text);
 		
 
 	}
 	
-	public boolean isUser(String name){
-		return model.isUser(name);
+	public boolean isUser(String username, String password){
+		return model.isUser(username, password);
 	}
 
 }

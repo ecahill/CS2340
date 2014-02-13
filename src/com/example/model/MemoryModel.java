@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.util.Log;
+
 
 
 public class MemoryModel implements Model {
@@ -20,10 +22,9 @@ public class MemoryModel implements Model {
 	}
 
 	@Override
-	public boolean isUser(final String name) {
-		User u = users.get(name);
-		if (u == null) return false;
-		return true;
+	public boolean isUser(String username, String password) {
+		User u = getUserByName(username);
+		return (u.getUsername() == username&&u.getPassword()==password);
 	}
 
 	@Override

@@ -12,4 +12,12 @@ public class User {
 	public String toString(){
 		return "Username: " + username;
 	}
+	
+	public String getUsername(){
+		return username;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
 }

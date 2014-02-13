@@ -1,6 +1,9 @@
-package com.example.cs2340;
+package com.example.activities;
 
 import com.example.cs2340.R;
+import com.example.cs2340.R.id;
+import com.example.cs2340.R.layout;
+import com.example.cs2340.R.menu;
 
 import com.example.model.MemoryModel;
 import com.example.presenters.SearchViewPresenter;
@@ -16,6 +19,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+
+import android.util.Log;
 
 public class LoginActivity extends Activity implements  UserSearchView {
 	
@@ -40,7 +45,7 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		Button goButton = (Button) this.findViewById(R.id.button1);
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				if (presenter.isUser(getName())){
+				if (presenter.isUser(getName(), getPassword())){
 					setContentView(R.layout.loginsuccess_view);
 				}
 				else{

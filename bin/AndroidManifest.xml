@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.cs2340.MainActivity"
+            android:name="com.example.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.cs2340.LoginActivity"></activity>
+        <activity android:name="com.example.activities.LoginActivity"></activity>
         <activity android:name="LoginSuccessfulView"></activity>
     </application>
 
