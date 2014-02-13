@@ -16,7 +16,7 @@ public class MemoryModel implements Model {
 	 */
 	public MemoryModel() {
 		users = new HashMap<String, User>();
-		users.put("Admin", new User("admin", "pass123"));
+		users.put("admin", new User("admin", "pass123"));
 	}
 
 	@Override

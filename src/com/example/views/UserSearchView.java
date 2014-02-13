@@ -10,8 +10,8 @@ public interface UserSearchView {
 	 * @author Emily
 	 *
 	 */
-		String getSearchName();
-		void setResultData(String text);
-		void addSearchRequestNotifyCallback(ClickListener listener);
+		String getName();
+		//void setResultData(String text);
+		//void addSearchRequestNotifyCallback(ClickListener listener);
 	
 }

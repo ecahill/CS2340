@@ -6,7 +6,7 @@ import com.example.model.User;
 import com.example.views.ClickListener;
 import com.example.views.UserSearchView;
 
-public class SearchViewPresenter implements ClickListener {
+public class SearchViewPresenter{// implements ClickListener {
 	
 	private UserSearchView view;
 	private Model model;
@@ -14,18 +14,19 @@ public class SearchViewPresenter implements ClickListener {
 	public SearchViewPresenter(UserSearchView v, Model m) {
 		view = v;
 		model = m;
-		view.addSearchRequestNotifyCallback(this);
+		//view.addSearchRequestNotifyCallback(this);
 	}
 
 	/**
 	 * Handle the search button press in the view
 	 */
-	@Override
-	public void onClick() {
-		String name = view.getSearchName();
+	//@Override
+	public boolean onClick() {
+		String name = view.getName();
 		User user = model.getUserByName(name);
-		String text = (user == null) ?  "Login failed" : user.toString();
-		view.setResultData(text);
+		return user!=null;
+		//String text = (user == null) ?  "Login failed" : user.toString();
+		//view.setResultData(text);
 		
 
 	}

@@ -9,13 +9,15 @@ import com.example.views.UserSearchView;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
-public class LoginActivity extends Activity{// implements  UserSearchView {
+public class LoginActivity extends Activity implements  UserSearchView {
 	
 	//private ClickListener listener;
 	SearchViewPresenter presenter;
@@ -28,15 +30,27 @@ public class LoginActivity extends Activity{// implements  UserSearchView {
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		//presenter = new SearchViewPresenter(this, new MemoryModel());
+		setContentView(R.layout.login_view);
+		final Context context = this;
+		presenter = new SearchViewPresenter(this, new MemoryModel());
 		
 		nameField = (EditText) findViewById(R.id.editText1);
 		password = (EditText) findViewById(R.id.editText2);
 		resultField = (EditText) findViewById(R.id.editText3);
 		Button goButton = (Button) this.findViewById(R.id.button1);
-		goButton.setOnClickListener(listener);
+		goButton.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v){
+				if (presenter.isUser(getName())){
+					setContentView(R.layout.loginsuccess_view);
+				}
+				else{
+					resultField.setText("Login Failed.");
+				}
+				//Intent i = new Intent(context, LoginActivity.class);
+				//startActivity(i);
+				}
+		}); // Add event listener to button
+		
 		//resultField = (EditText) findViewById(R.id.editText2);
 	}
 	
@@ -54,7 +68,7 @@ public class LoginActivity extends Activity{// implements  UserSearchView {
 	}
 
 	//@Override
-	public String getSearchName() {
+	public String getName() {
 		return nameField.getText().toString();
 	}
 	
@@ -73,17 +87,5 @@ public class LoginActivity extends Activity{// implements  UserSearchView {
 	}*/
 
 
-
-	final OnClickListener listener = new OnClickListener() // button listener to change screen
-	{
-		public void onClick(View v){
-			//String username = getSearchName();
-			//String password = getPassword();
-			//if (presenter.isUser(username)){
-				setContentView(R.layout.loginsuccess_view); // change content view to login
-			//}
-			
-		}
-	};
 	
 }
