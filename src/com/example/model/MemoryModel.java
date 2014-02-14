@@ -24,7 +24,12 @@ public class MemoryModel implements Model {
 	@Override
 	public boolean isUser(String username, String password) {
 		User u = getUserByName(username);
-		return (u.getUsername() == username&&u.getPassword()==password);
+		if ((u.getUsername().equals(username))&&(u.getPassword().equals(password))){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	@Override
