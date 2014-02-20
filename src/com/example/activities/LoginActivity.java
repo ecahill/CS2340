@@ -50,8 +50,8 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				User u = db.getUserByUP(getName(), getPassword());
-				Log.d("Is User?", u.getUsername());
 				if (u!=null){//(presenter.isUser(getName(), getPassword())){
+					Log.d("Is User?", u.getUsername());
 					setContentView(R.layout.loginsuccess_view);
 				}
 				else{
