@@ -6,9 +6,11 @@ import com.example.cs2340.R.layout;
 import com.example.cs2340.R.menu;
 
 import com.example.model.MemoryModel;
+import com.example.model.User;
 import com.example.presenters.SearchViewPresenter;
 import com.example.views.ClickListener;
 import com.example.views.UserSearchView;
+import com.example.model.DatabaseHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import android.util.Log;
@@ -37,6 +40,7 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_view);
 		final Context context = this;
+		final DatabaseHandler db = new DatabaseHandler(this);
 		presenter = new SearchViewPresenter(this, new MemoryModel());
 		
 		nameField = (EditText) findViewById(R.id.editText1);
@@ -45,25 +49,20 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		Button goButton = (Button) this.findViewById(R.id.button1);
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				if (presenter.isUser(getName(), getPassword())){
+				User u = db.getUserByUP(getName(), getPassword());
+				Log.d("Is User?", u.getUsername());
+				if (u!=null){//(presenter.isUser(getName(), getPassword())){
 					setContentView(R.layout.loginsuccess_view);
 				}
 				else{
-					resultField.setText("Login Failed.");
+					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
+					//resultField.setText("Login Failed.");
 				}
-				//Intent i = new Intent(context, LoginActivity.class);
-				//startActivity(i);
+				
 				}
-		}); // Add event listener to button
-		
-		//resultField = (EditText) findViewById(R.id.editText2);
+		}); 
 	}
 	
-	
-	/*public void onSearchClick(View v) {
-		listener.onClick();
-		setContentView(R.layout.loginsuccess_view);
-	}*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,17 +79,5 @@ public class LoginActivity extends Activity implements  UserSearchView {
 	public String getPassword(){
 		return password.getText().toString();
 	}
-	
-	/*@Override
-	public void setResultData(final String text) {
-		resultField.setText(text);		
-	}
-	
-	@Override
-	public void addSearchRequestNotifyCallback(final ClickListener lsnr) {
-		listener = lsnr;		
-	}*/
-
-
 	
 }

@@ -3,6 +3,8 @@ package com.example.activities;
 import com.example.cs2340.R;
 import com.example.cs2340.R.id;
 import com.example.cs2340.R.layout;
+import com.example.model.DatabaseHandler;
+import com.example.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +22,9 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final Context context = this; 
+		DatabaseHandler db = new DatabaseHandler(this);
+		db.addUser(new User("admin", "pass123"));
+		db.addUser(new User("me", "mypass"));
 		Button loginButton = (Button)this.findViewById(R.id.button1);
 		loginButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
