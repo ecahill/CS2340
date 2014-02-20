@@ -45,7 +45,6 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		
 		nameField = (EditText) findViewById(R.id.editText1);
 		password = (EditText) findViewById(R.id.editText2);
-		resultField = (EditText) findViewById(R.id.editText3);
 		Button goButton = (Button) this.findViewById(R.id.button1);
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
