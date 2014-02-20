@@ -71,7 +71,7 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		return true;
 	}
 
-	//@Override
+
 	public String getName() {
 		return nameField.getText().toString();
 	}

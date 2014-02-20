@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -24,6 +26,6 @@
         </activity>
         <activity android:name="com.example.activities.LoginActivity"></activity>
         <activity android:name="LoginSuccessfulView"></activity>
+        <activity android:name="com.example.activities.RegisterActivity"></activity>
     </application>
-
 </manifest>

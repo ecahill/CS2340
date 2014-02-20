@@ -24,14 +24,21 @@ public class MainActivity extends Activity{
 		final Context context = this; 
 		DatabaseHandler db = new DatabaseHandler(this);
 		db.addUser(new User("admin", "pass123"));
-		db.addUser(new User("me", "mypass"));
 		Button loginButton = (Button)this.findViewById(R.id.button1);
+		Button registerButton = (Button)this.findViewById(R.id.button2);
 		loginButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(MainActivity.this, LoginActivity.class);
 				startActivity(i);
-				}
+			}
 		}); // Add event listener to button
+		registerButton.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v){
+				Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+				startActivity(i);
+			}
+		});
+		
 	}
 
 //	@Override

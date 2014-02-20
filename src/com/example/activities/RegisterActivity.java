@@ -3,36 +3,67 @@ package com.example.activities;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.model.User;
 import com.example.model.DatabaseHandler;
 import com.example.cs2340.*;
 
  
 public class RegisterActivity extends Activity {
+	EditText username;
+	EditText password;
+	EditText cPassword;
+	Button goButton;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.main); // ****need to change this to register screen
+        setContentView(R.layout.register_view); 
          
-        DatabaseHandler db = new DatabaseHandler(this);
+        final DatabaseHandler db = new DatabaseHandler(this);
+        final Context context = this;
         
-        //CRUD (create read update delete) operations
+        username = (EditText)findViewById(R.id.NameField);
+        password = (EditText)findViewById(R.id.PassField);
+        cPassword = (EditText)findViewById(R.id.CPassField);
+        goButton = (Button)findViewById(R.id.RegButton);
+        goButton.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v){
+				if (db.checkUsername(getName())){
+					if (getPassword().equals(getCPassword())){
+						db.addUser(new User(getName(), getPassword()));
+					}
+					else{
+						Toast.makeText(context, "Passwords do not match", Toast.LENGTH_LONG).show();
+					}
+					Toast.makeText(context, "User has been registered", Toast.LENGTH_LONG).show();
+				}
+				else{
+					Toast.makeText(context, "Username is taken", Toast.LENGTH_LONG).show();
+				}
+			}
+        });
         
-        Log.d("Insert: ", "Inserting...");
-        db.addUser(new User("admin", "pass123"));
-        db.addUser(new User("admin2", "pass2"));
-        db.addUser(new User("me", "mypass"));
-        
-        Log.d("Reading: ", "Reading all contacts...");
-        List<User> users = db.getAllUsers();
-        
-        for (User u : users){
-        	String log = "ID: "+u.getID()+" ,Username: "+u.getUsername()+" ,Password: "+u.getPassword();	
-        	Log.d("Name: ", log);
-        }
     }
+        
+    	public String getName() {
+    		return username.getText().toString();
+    	}
+    	
+    	public String getPassword(){
+    		return password.getText().toString();
+    	}
+    	
+    	public String getCPassword(){
+    		return cPassword.getText().toString();
+    	}
 }
     

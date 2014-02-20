@@ -59,7 +59,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,  KEY_USERNAME,  KEY_PASSWORD}, KEY_USERNAME+"=?", 
 				new String[] {String.valueOf(username)}, null, null, null, null);
-		return cursor.moveToFirst();
+		if ((cursor.getCount()!=0)&&(cursor.moveToFirst())){
+			return false;
+		}
+		else{
+			return true;
+		}
+
 	}
 	
 	
@@ -79,6 +85,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	//get user from db by username and password
 	public User getUserByUP(String username, String password){
 		SQLiteDatabase db = this.getReadableDatabase();
+		/*String[] args = {username, password};
+		Cursor cursor = db.rawQuery("SELECT * FROM users where KEY_USERNAME=? & KEY_PASSWORD=?", args);
+		if (cursor.moveToFirst()){
+			
+			User user = new User(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+			return user;
+		}
+		return null;*/
 		Log.d("Cursor Results", "getting cursor");
 		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID, KEY_USERNAME, KEY_PASSWORD}, KEY_USERNAME+"=? AND "+
 		KEY_PASSWORD+"=?", new String[] {String.valueOf(username), String.valueOf(password)}, null, null, null, null);
