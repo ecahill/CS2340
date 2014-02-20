@@ -55,6 +55,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close(); // close db connection
 	}
 	
+	public boolean checkUsername(String username){
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,  KEY_USERNAME,  KEY_PASSWORD}, KEY_USERNAME+"=?", 
+				new String[] {String.valueOf(username)}, null, null, null, null);
+		return cursor.moveToFirst();
+	}
+	
 	
 	//get user from db by ID
 	public User getUser(int id){
