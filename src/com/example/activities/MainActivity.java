@@ -1,5 +1,7 @@
 package com.example.activities;
 
+import java.util.List;
+
 import com.example.cs2340.R;
 import com.example.cs2340.R.id;
 import com.example.cs2340.R.layout;
@@ -23,7 +25,7 @@ public class MainActivity extends Activity{
 		setContentView(R.layout.activity_main);
 		final Context context = this; 
 		DatabaseHandler db = new DatabaseHandler(this);
-		db.addUser(new User("admin", "pass123"));
+		List<User> l = db.getAllUsers();
 		Button loginButton = (Button)this.findViewById(R.id.button1);
 		Button registerButton = (Button)this.findViewById(R.id.button2);
 		loginButton.setOnClickListener(new View.OnClickListener(){
