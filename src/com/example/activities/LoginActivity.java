@@ -51,7 +51,13 @@ public class LoginActivity extends Activity implements  UserSearchView {
 				User u = db.getUserByUP(getName(), getPassword());
 				if (u!=null){//(presenter.isUser(getName(), getPassword())){
 					Log.d("Is User?", u.getUsername());
+					
+					if(!u.getUsername().equals("admin")) {
+						Intent accMain = new Intent(LoginActivity.this, AccountMain.class);
+						startActivity(accMain);		
+					}
 					setContentView(R.layout.loginsuccess_view);
+										
 				}
 				else{
 					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
