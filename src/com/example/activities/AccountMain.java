@@ -32,10 +32,8 @@ public class AccountMain extends Activity {
 		
 		createAcc.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				//display create account activity
-				
-				//Intent i = new Intent(AccountMain.this, SomeClass.class);
-				//startActivity(i);
+				Intent i = new Intent(AccountMain.this, AccountCreationActivity.class);
+				startActivity(i);
 			}
 		});
 	}

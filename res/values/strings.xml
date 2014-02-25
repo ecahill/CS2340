@@ -15,5 +15,11 @@
     <string name="title_activity_account_main">AccountMain</string>
     <string name="createAcc">Create New Account</string>
     <string name="viewAcc">View Accounts</string>
+    <string name="accountcreation">Account Creation</string>
+    <string name="accountname">Account Name</string>
+    <string name="accountbalance">Account Balance</string>
+    <string name="monthlyinterestrate">Monthly Interest Rate</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
 
 </resources>

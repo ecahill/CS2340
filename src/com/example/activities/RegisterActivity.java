@@ -54,16 +54,16 @@ public class RegisterActivity extends Activity {
         
     }
         
-    	public String getName() {
-    		return username.getText().toString();
-    	}
-    	
-    	public String getPassword(){
-    		return password.getText().toString();
-    	}
-    	
-    	public String getCPassword(){
-    		return cPassword.getText().toString();
-    	}
+	public String getName() {
+		return username.getText().toString();
+	}
+	
+	public String getPassword(){
+		return password.getText().toString();
+	}
+	
+	public String getCPassword(){
+		return cPassword.getText().toString();
+	}
 }
     

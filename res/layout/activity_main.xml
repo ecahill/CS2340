@@ -19,16 +19,16 @@
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/declineButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_alignTop="@+id/button1"
+        android:layout_alignTop="@+id/acceptButton"
         android:layout_marginLeft="62dp"
         android:text="@string/register" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView1"

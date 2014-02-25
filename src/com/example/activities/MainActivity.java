@@ -26,8 +26,8 @@ public class MainActivity extends Activity{
 		final Context context = this; 
 		DatabaseHandler db = new DatabaseHandler(this);
 		List<User> l = db.getAllUsers();
-		Button loginButton = (Button)this.findViewById(R.id.button1);
-		Button registerButton = (Button)this.findViewById(R.id.button2);
+		Button loginButton = (Button)this.findViewById(R.id.acceptButton);
+		Button registerButton = (Button)this.findViewById(R.id.declineButton);
 		loginButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(MainActivity.this, LoginActivity.class);
