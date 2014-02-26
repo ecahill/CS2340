@@ -56,6 +56,8 @@ public class LoginActivity extends Activity implements  UserSearchView {
 						Intent accMain = new Intent(LoginActivity.this, AccountMain.class);
 						startActivity(accMain);		
 					}
+					//test1234
+					//test23432
 					setContentView(R.layout.loginsuccess_view);
 										
 				}
