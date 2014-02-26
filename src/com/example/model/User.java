@@ -6,13 +6,6 @@ public class User {
 	String _username;
 	String _password;
 
-//	private String username;
-//	private String password;
-	
-/*	public User(String u, String p){
-		username = u;
-		password = p;
-	}*/
 	
 	public User(){}
 	
@@ -51,17 +44,4 @@ public class User {
 		this._password = p;
 	}
 	
-	
-	
-	/*public String toString(){
-		return "Username: " + username;
-	}
-	
-	public String getUsername(){
-		return username;
-	}
-	
-	public String getPassword(){
-		return password;
-	}*/
 }

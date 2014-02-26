@@ -50,14 +50,6 @@ public class MainActivity extends Activity{
 		return true;
 	}*/
 
-	/*final OnClickListener listener = new OnClickListener() // button listener to change screen
-	{
-		public void onClick(View v){
-			//Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-			//startActivity(i);
-			setContentView(R.layout.login_view); // change content view to login
-		}
-	};*/
 
 
 

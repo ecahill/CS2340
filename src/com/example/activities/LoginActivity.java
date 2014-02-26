@@ -27,13 +27,10 @@ import android.util.Log;
 
 public class LoginActivity extends Activity implements  UserSearchView {
 	
-	//private ClickListener listener;
 	SearchViewPresenter presenter;
     EditText nameField;
     EditText password;
     EditText resultField;
-    //Button goButton;
-    //EditText resultField;
     
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +46,11 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				User u = db.getUserByUP(getName(), getPassword());
-				if (u!=null){//(presenter.isUser(getName(), getPassword())){
-					Log.d("Is User?", u.getUsername());
+				if (presenter.isUser(getName(), getPassword())){ 
 					setContentView(R.layout.loginsuccess_view);
 				}
 				else{
 					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
-					//resultField.setText("Login Failed.");
 				}
 				
 				}
