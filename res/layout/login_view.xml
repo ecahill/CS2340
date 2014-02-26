@@ -16,7 +16,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -25,10 +25,10 @@
         android:text="@string/go" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/AcctBalanceField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/acceptButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="49dp"
         android:ems="10"
@@ -45,7 +45,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/AccountNameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
@@ -62,7 +62,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText2"
+        android:layout_above="@+id/AcctBalanceField"
         android:layout_alignLeft="@+id/textView2"
         android:text="@string/password"
         android:textAppearance="?android:attr/textAppearanceMedium" />

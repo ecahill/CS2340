@@ -40,14 +40,21 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		final DatabaseHandler db = new DatabaseHandler(this);
 		presenter = new SearchViewPresenter(this, new MemoryModel());
 		
-		nameField = (EditText) findViewById(R.id.editText1);
-		password = (EditText) findViewById(R.id.editText2);
-		Button goButton = (Button) this.findViewById(R.id.button1);
+		nameField = (EditText) findViewById(R.id.AccountNameField);
+		password = (EditText) findViewById(R.id.AcctBalanceField);
+		Button goButton = (Button) this.findViewById(R.id.acceptButton);
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				User u = db.getUserByUP(getName(), getPassword());
-				if (presenter.isUser(getName(), getPassword())){ 
+				if (u!=null){//(presenter.isUser(getName(), getPassword())){
+					Log.d("Is User?", u.getUsername());
+					
+					if(!u.getUsername().equals("admin")) {
+						Intent accMain = new Intent(LoginActivity.this, AccountMain.class);
+						startActivity(accMain);		
+					}
 					setContentView(R.layout.loginsuccess_view);
+										
 				}
 				else{
 					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();

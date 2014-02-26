@@ -7,8 +7,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
-    
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
 
     <application
         android:allowBackup="true"
@@ -24,8 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.activities.LoginActivity"></activity>
-        <activity android:name="LoginSuccessfulView"></activity>
-        <activity android:name="com.example.activities.RegisterActivity"></activity>
+        <activity android:name="com.example.activities.LoginActivity" >
+        </activity>
+        <activity android:name="com.example.cs2340.LoginSuccessfulView" >
+        </activity>
+        <activity android:name="com.example.activities.RegisterActivity" >
+        </activity>
+        <activity
+            android:name="com.example.activities.AccountMain" >
+        </activity>
+        <activity android:name="com.example.activities.AccountCreationActivity"></activity>
     </application>
+
 </manifest>
