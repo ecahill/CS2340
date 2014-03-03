@@ -21,5 +21,6 @@
     <string name="monthlyinterestrate">Monthly Interest Rate</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
+    <string name="view">View Accounts</string>
 
 </resources>

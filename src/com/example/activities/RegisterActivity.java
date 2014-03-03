@@ -39,7 +39,9 @@ public class RegisterActivity extends Activity {
 			public void onClick(View v){
 				if (db.checkUsername(getName())){
 					if (getPassword().equals(getCPassword())){
-						db.addUser(new User(getName(), getPassword()));
+						long id = db.addUser(new User(getName(), getPassword()));
+						User u = db.getUser(id);
+						u.setID(id);
 					}
 					else{
 						Toast.makeText(context, "Passwords do not match", Toast.LENGTH_LONG).show();

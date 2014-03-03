@@ -5,7 +5,7 @@ import com.example.cs2340.R.id;
 import com.example.cs2340.R.layout;
 import com.example.cs2340.R.menu;
 
-import com.example.model.MemoryModel;
+import com.example.model.SessionManager;
 import com.example.model.User;
 import com.example.presenters.SearchViewPresenter;
 import com.example.views.ClickListener;
@@ -31,6 +31,7 @@ public class LoginActivity extends Activity implements  UserSearchView {
     EditText nameField;
     EditText password;
     EditText resultField;
+    SessionManager session;
     
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,29 +39,30 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		setContentView(R.layout.login_view);
 		final Context context = this;
 		final DatabaseHandler db = new DatabaseHandler(this);
-		presenter = new SearchViewPresenter(this, new MemoryModel());
+		session = new SessionManager(getApplicationContext()); 
 		
 		nameField = (EditText) findViewById(R.id.AccountNameField);
 		password = (EditText) findViewById(R.id.AcctBalanceField);
 		Button goButton = (Button) this.findViewById(R.id.acceptButton);
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				User u = db.getUserByUP(getName(), getPassword());
-				if (u!=null){//(presenter.isUser(getName(), getPassword())){
-					Log.d("Is User?", u.getUsername());
-					
-					if(!u.getUsername().equals("admin")) {
-						Intent accMain = new Intent(LoginActivity.this, AccountMain.class);
-						startActivity(accMain);		
-					}
-					setContentView(R.layout.loginsuccess_view);
+				if (getName().length()>0 && getPassword().length()>0){
+					User u = db.getUserByUP(getName(), getPassword());
+					if (u!=null){
+						if(!u.getUsername().equals("admin")) {
+							session.createLoginSession(u.getUsername(), u.getID());
+							Intent accMain = new Intent(LoginActivity.this, AccountMain.class);
+							startActivity(accMain);	
+						
+						}
+						setContentView(R.layout.loginsuccess_view);
 										
+					}
+					else{
+						Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
+					}
 				}
-				else{
-					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
-				}
-				
-				}
+			}
 		}); 
 	}
 	
@@ -74,11 +76,11 @@ public class LoginActivity extends Activity implements  UserSearchView {
 
 
 	public String getName() {
-		return nameField.getText().toString();
+		return nameField.getText().toString().trim();
 	}
 	
 	public String getPassword(){
-		return password.getText().toString();
+		return password.getText().toString().trim();
 	}
 	
 }

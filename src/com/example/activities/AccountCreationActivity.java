@@ -1,6 +1,9 @@
 package com.example.activities;
 
 import com.example.cs2340.R;
+import com.example.model.Account;
+import com.example.model.DatabaseHandler;
+import com.example.model.SessionManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,25 +27,32 @@ public class AccountCreationActivity extends Activity {
 	EditText monthlyInterestRate;
 	Button acceptButton;
 	Button declineButton;
+	SessionManager session;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.accountcreation_view);
-	 
+		final DatabaseHandler db = new DatabaseHandler(this);
+		session = new SessionManager(getApplicationContext());
+		
 	    accName = (EditText)findViewById(R.id.AccNameField);
         accBalance = (EditText)findViewById(R.id.AccBalanceField);
         monthlyInterestRate = (EditText)findViewById(R.id.MonthlyInterestField);
         acceptButton = (Button)findViewById(R.id.acceptButton);
         declineButton = (Button)findViewById(R.id.declineButton);
-        
+        session.checkLogin();
         acceptButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				//new account is created
+				long userID = session.getUserID();
 				
-				//Intent i = new Intent(AccountCreationActivity.this, SomeClass.class);
-				//startActivity(i);
+				Account a = new Account(accName.getText().toString(), Integer.parseInt(accBalance.getText().toString()), userID);
+				long id = db.createAccount(a);
+				a.setID(id);
+				
+				Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
+				startActivity(i);
 			}
 		});
         declineButton.setOnClickListener(new View.OnClickListener(){

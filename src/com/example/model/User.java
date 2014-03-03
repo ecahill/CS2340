@@ -2,14 +2,14 @@ package com.example.model;
 
 
 public class User {
-	int _id;
+	long _id;
 	String _username;
 	String _password;
 
 	
 	public User(){}
 	
-	public User(int id, String u, String p){
+	public User(long id, String u, String p){
 		this._id = id;
 		this._username = u;
 		this._password = p;
@@ -20,11 +20,11 @@ public class User {
 		this._password = p;
 	}
 	
-	public int getID(){
+	public long getID(){
 		return this._id;
 	}
 	
-	public void setID(int id){
+	public void setID(long id){
 		this._id = id;
 	}
 	
