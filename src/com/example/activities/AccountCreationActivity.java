@@ -34,7 +34,8 @@ public class AccountCreationActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.accountcreation_view);
-		final DatabaseHandler db = new DatabaseHandler(this);
+		final Context context = this;
+		final DatabaseHandler db = new DatabaseHandler(context);
 		session = new SessionManager(getApplicationContext());
 		
 	    accName = (EditText)findViewById(R.id.AccNameField);
@@ -45,14 +46,20 @@ public class AccountCreationActivity extends Activity {
         session.checkLogin();
         acceptButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				long userID = session.getUserID();
-				
-				Account a = new Account(accName.getText().toString(), Integer.parseInt(accBalance.getText().toString()), userID);
-				long id = db.createAccount(a);
-				a.setID(id);
-				
-				Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
-				startActivity(i);
+				if (accName.getText().toString().length()>0&&accBalance.getText().toString().length()>0&&monthlyInterestRate.getText().toString().length()>0){
+					long userID = session.getUserID();
+					
+					Account a = new Account(accName.getText().toString(), Integer.parseInt(accBalance.getText().toString()), userID);
+					long id = db.createAccount(a);
+					a.setID(id);
+					
+					Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
+					startActivity(i);
+				}
+				else{
+					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
+				}
+
 			}
 		});
         declineButton.setOnClickListener(new View.OnClickListener(){

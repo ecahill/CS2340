@@ -7,9 +7,7 @@ import com.example.cs2340.R.menu;
 
 import com.example.model.SessionManager;
 import com.example.model.User;
-import com.example.presenters.SearchViewPresenter;
 import com.example.views.ClickListener;
-import com.example.views.UserSearchView;
 import com.example.model.DatabaseHandler;
 
 import android.os.Bundle;
@@ -25,9 +23,8 @@ import android.view.View.OnClickListener;
 
 import android.util.Log;
 
-public class LoginActivity extends Activity implements  UserSearchView {
+public class LoginActivity extends Activity{
 	
-	SearchViewPresenter presenter;
     EditText nameField;
     EditText password;
     EditText resultField;
@@ -38,7 +35,7 @@ public class LoginActivity extends Activity implements  UserSearchView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_view);
 		final Context context = this;
-		final DatabaseHandler db = new DatabaseHandler(this);
+		final DatabaseHandler db = new DatabaseHandler(context);
 		session = new SessionManager(getApplicationContext()); 
 		
 		nameField = (EditText) findViewById(R.id.AccountNameField);

@@ -25,8 +25,8 @@ public class AccountMain extends Activity {
 			public void onClick(View v){
 				//display accounts
 				
-				Intent i = new Intent(AccountMain.this, ViewAccountsActivity.class);
-				startActivity(i);
+				//Intent i = new Intent(AccountMain.this, ViewAccountsActivity.class);
+				//startActivity(i);
 			}
 		});
 		
