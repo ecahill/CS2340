@@ -26,6 +26,15 @@ public class MainActivity extends Activity{
 		setContentView(R.layout.activity_main);
 		final Context context = this; 
 		DatabaseHandler db = new DatabaseHandler(this);
+		
+		/**
+		 * Refresh database
+		 * Delete these 2 lines after running app ONE time
+		 */
+		SQLiteDatabase d = db.getDB();
+		db.onUpgrade(d, 1, 1);
+		
+		
 		List<User> l = db.getAllUsers();
 		Button loginButton = (Button)this.findViewById(R.id.acceptButton);
 		Button registerButton = (Button)this.findViewById(R.id.declineButton);

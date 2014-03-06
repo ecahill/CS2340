@@ -18,6 +18,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	//Table names
 	private static final String TABLE_USERS = "users";
 	private static final String TABLE_ACCOUNTS = "accounts";
+	private static final String TABLE_TRANSACTIONS = "transactions";
 	//Column names
 	private static final String KEY_ID = "id";
 	private static final String KEY_USERNAME = "username";
@@ -26,12 +27,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_ACCOUNT_NAME = "account_name";
 	private static final String KEY_BALANCE = "balance";
 	private static final String KEY_USER_ID = "user_id";
+	private static final String KEY_INTEREST = "interest";
+	
+	private static final String KEY_ACCOUNT_ID = "account_id";
+	private static final String KEY_DEPOSIT = "deposit_amount";
+	private static final String KEY_WITHDRAWAL = "withdrawal_amount";
+	private static final String KEY_DATE = "date";
+	private static final String KEY_TRANSACTION_NAME = "transaction_name";
 	
 	private static final String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("+KEY_ID+ " INTEGER PRIMARY KEY," 
 	+ KEY_USERNAME+" TEXT,"+KEY_PASSWORD+" TEXT"+")";
 	
 	private static final String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + TABLE_ACCOUNTS + "("+KEY_ID+" INTEGER PRIMARY KEY,"
-			+KEY_ACCOUNT_NAME+" TEXT,"+KEY_BALANCE+" INTEGER,"+KEY_USER_ID+" INTEGER)";
+			+KEY_ACCOUNT_NAME+" TEXT,"+KEY_BALANCE+" INTEGER,"+KEY_USER_ID+" INTEGER,"+KEY_INTEREST+" REAL)";
+	
+	private static final String CREATE_TRANSACTIONS_TABLE = "CREATE TABLE " + TABLE_TRANSACTIONS+"("+KEY_ID+ " INTEGER PRIMARY KEY,"
+			+KEY_TRANSACTION_NAME+" TEXT,"+KEY_ACCOUNT_ID+" INTEGER,"+KEY_USER_ID+" INTEGER,"+KEY_DEPOSIT+" REAL,"+KEY_WITHDRAWAL+" REAL,"
+			+KEY_DATE+" TEXT"+")";
 	
 
 	public DatabaseHandler(Context context){
@@ -43,7 +55,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		db.execSQL(CREATE_USERS_TABLE);
 		db.execSQL(CREATE_ACCOUNTS_TABLE);
-		Log.d("Database Creation", "Users and Accounts tables created");
+		db.execSQL(CREATE_TRANSACTIONS_TABLE);
+		//Log.d("Database Creation", "Users and Accounts tables created");
 	}
 	
 	public SQLiteDatabase getDB(){
@@ -56,6 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		//drop old table
 		db.execSQL("DROP TABLE IF EXISTS "+TABLE_USERS);
 		db.execSQL("DROP TABLE IF EXISTS "+TABLE_ACCOUNTS);
+		db.execSQL("DROP TABLE IF EXISTS "+TABLE_TRANSACTIONS);
 		//create new table again
 		onCreate(db);
 	}
@@ -91,6 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,  KEY_USERNAME,  KEY_PASSWORD}, KEY_USERNAME+"=?", 
 				new String[] {String.valueOf(username)}, null, null, null, null);
+		db.close();
 		if ((cursor.getCount()!=0)&&(cursor.moveToFirst())){
 			return false;
 		}
@@ -191,6 +206,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return accounts;
 	}
 	
+	
+	public List<Transaction> getAllTransactionsByID(long id){
+		List<Transaction> transactions = new ArrayList<Transaction>();
+		String selectQuery = "SELECT * FROM "+TABLE_TRANSACTIONS + " WHERE "+KEY_ACCOUNT_ID + " = "+id;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()){
+			do{
+				Transaction t = new Transaction();
+				//t.set...set everything like in accounts above
+				//transactions.add(t);
+			} while(c.moveToNext());
+		}
+		return transactions;
+	}
 	
 	//get number of users in db
 	public int getUsersCount(){

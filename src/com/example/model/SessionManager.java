@@ -32,8 +32,11 @@ public class SessionManager {
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
      
-    // Email address (make variable public to access from outside)
+    // User id (make variable public to access from outside)
     public static final String KEY_ID = "id";
+    
+    // Account id
+    public static final String KEY_ACCOUNT_ID = "account_id";
      
     // Constructor
     public SessionManager(Context context){
@@ -62,6 +65,18 @@ public class SessionManager {
     }
     
     /**
+     * Create account session
+     */
+    
+    public void createAccountSession(String name, long id, long accountid){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_NAME, name);
+        editor.putLong(KEY_ID, id);
+    	editor.putLong(KEY_ACCOUNT_ID, id);
+    	editor.commit();
+    }
+    
+    /**
      * Get stored session data
      * */
     public HashMap<String, String> getUserDetails(){
@@ -83,6 +98,10 @@ public class SessionManager {
     	return pref.getLong(KEY_ID, 0);
     }
     
+    public long getAccountID(){
+    	return pref.getLong(KEY_ACCOUNT_ID, 0);
+    }
+    
     /**
      * Check login method wil check user login status
      * If false it will redirect user to login page
@@ -102,6 +121,12 @@ public class SessionManager {
             // Staring Login Activity
             _context.startActivity(i);
         }      
+    }
+    
+    public void removeAccount(){
+    	editor.remove(KEY_ACCOUNT_ID);
+    	editor.commit();
+    	//re add login session?
     }
     
     /**
