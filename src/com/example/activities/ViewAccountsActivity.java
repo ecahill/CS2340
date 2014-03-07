@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.cs2340.R;
 import com.example.model.Account;
@@ -30,10 +31,17 @@ public class ViewAccountsActivity extends ListActivity{
 		session = new SessionManager(context);
 		long id = session.getUserID();
 		Log.d("SessionManager", "ID: "+id);
-		List<Account> list = db.getAllAccountsByID(id);
-		Log.d("AccountList", list.get(0).toString());
-		adapter = new ArrayAdapter<Account>(context, android.R.layout.simple_list_item_1, list);
-	    setListAdapter(adapter);
+		List<Account> list = db.getAllAccountsByID(id);	
+	    
+		if (!list.isEmpty()) {
+			Log.d("AccountList", list.get(0).toString());
+			adapter = new ArrayAdapter<Account>(context, android.R.layout.simple_list_item_1, list);
+			setListAdapter(adapter);			
+		} else {
+			Toast.makeText(context, "No accounts to display!", Toast.LENGTH_LONG).show();
+		}
+			
+	    
 		
 	   // View rootView = inflater.inflate(R.layout.viewaccounts_view, container, false);
 	    //ListView myListView = (ListView) this.findViewById(R.id.accountList);   

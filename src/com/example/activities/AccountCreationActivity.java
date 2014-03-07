@@ -57,7 +57,7 @@ public class AccountCreationActivity extends Activity {
 					startActivity(i);
 				}
 				else{
-					Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "Account creation unsuccessful!", Toast.LENGTH_LONG).show();
 				}
 
 			}

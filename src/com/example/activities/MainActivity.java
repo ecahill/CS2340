@@ -31,8 +31,8 @@ public class MainActivity extends Activity{
 		 * Refresh database
 		 * Delete these 2 lines after running app ONE time
 		 */
-		SQLiteDatabase d = db.getDB();
-		db.onUpgrade(d, 1, 1);
+//		SQLiteDatabase d = db.getDB();
+//		db.onUpgrade(d, 1, 1);
 		
 		
 		List<User> l = db.getAllUsers();

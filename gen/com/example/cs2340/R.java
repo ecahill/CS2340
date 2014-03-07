@@ -34,8 +34,7 @@ public final class R {
         public static final int PassField=0x7f08000e;
         public static final int RegButton=0x7f08000d;
         public static final int acceptButton=0x7f080007;
-        public static final int accountList=0x7f080012;
-        public static final int action_settings=0x7f080013;
+        public static final int action_settings=0x7f080012;
         public static final int bCreateAccount=0x7f080009;
         public static final int bViewAccount=0x7f08000a;
         public static final int declineButton=0x7f080008;
