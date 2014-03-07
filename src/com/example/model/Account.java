@@ -3,14 +3,14 @@ package com.example.model;
 public class Account {
 	long id; 
 	String account_name;
-	int balance;
+	double balance;
 	long userID;
 	
 	public Account(){
 		
 	}
 	
-	public Account(String account_name, int balance, long userID){
+	public Account(String account_name, double balance, long userID){
 		this.account_name = account_name;
 		this.balance = balance;
 		this.userID = userID;
@@ -47,7 +47,7 @@ public class Account {
 		return this.account_name;
 	}
 	
-	public int getBalance(){
+	public double getBalance(){
 		return this.balance;
 	}
 	
