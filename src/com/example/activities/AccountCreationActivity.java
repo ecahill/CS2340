@@ -4,6 +4,7 @@ import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
+import com.example.presenters.AccountRules;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class AccountCreationActivity extends Activity {
 	    setContentView(R.layout.accountcreation_view);
 		final Context context = this;
 		final DatabaseHandler db = new DatabaseHandler(context);
+		final AccountRules rules = new AccountRules(db);
 		session = new SessionManager(getApplicationContext());
 		
 	    accName = (EditText)findViewById(R.id.AccNameField);
@@ -48,13 +50,20 @@ public class AccountCreationActivity extends Activity {
 			public void onClick(View v){
 				if (accName.getText().toString().length()>0&&accBalance.getText().toString().length()>0&&monthlyInterestRate.getText().toString().length()>0){
 					long userID = session.getUserID();
+					if (rules.checkAccountName(userID, accName.getText().toString())){
+						Account a = new Account(accName.getText().toString(), Double.parseDouble(accBalance.getText().toString()),
+								userID, Double.parseDouble(monthlyInterestRate.getText().toString()));
+						long id = db.createAccount(a);
+						Log.d("Account Balance", "Balance: " + a.getBalance());
+						Log.d("Account Balance", "Balance from db: " + db.getAccount(id).getBalance());
+						a.setID(id);
 					
-					Account a = new Account(accName.getText().toString(), Integer.parseInt(accBalance.getText().toString()), userID);
-					long id = db.createAccount(a);
-					a.setID(id);
-					
-					Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
-					startActivity(i);
+						Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
+						startActivity(i);
+					}
+					else{
+						Toast.makeText(context, "Account name already exists!", Toast.LENGTH_LONG).show();
+					}
 				}
 				else{
 					Toast.makeText(context, "Account creation unsuccessful!", Toast.LENGTH_LONG).show();

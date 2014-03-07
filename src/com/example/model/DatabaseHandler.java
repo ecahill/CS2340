@@ -39,7 +39,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	+ KEY_USERNAME+" TEXT,"+KEY_PASSWORD+" TEXT"+")";
 	
 	private static final String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + TABLE_ACCOUNTS + "("+KEY_ID+" INTEGER PRIMARY KEY,"
-			+KEY_ACCOUNT_NAME+" TEXT,"+KEY_BALANCE+" INTEGER,"+KEY_USER_ID+" INTEGER,"+KEY_INTEREST+" REAL)";
+			+KEY_ACCOUNT_NAME+" TEXT,"+KEY_BALANCE+" REAL,"+KEY_USER_ID+" INTEGER,"+KEY_INTEREST+" REAL)";
 	
 	private static final String CREATE_TRANSACTIONS_TABLE = "CREATE TABLE " + TABLE_TRANSACTIONS+"("+KEY_ID+ " INTEGER PRIMARY KEY,"
 			+KEY_TRANSACTION_NAME+" TEXT,"+KEY_ACCOUNT_ID+" INTEGER,"+KEY_USER_ID+" INTEGER,"+KEY_DEPOSIT+" REAL,"+KEY_WITHDRAWAL+" REAL,"
@@ -81,6 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_ACCOUNT_NAME, a.getAccountName());
 		values.put(KEY_BALANCE, a.getBalance());
 		values.put(KEY_USER_ID, a.getUserID());
+		values.put(KEY_INTEREST, a.getInterestRate());
 		
 		long account_id = db.insert(TABLE_ACCOUNTS, null, values);
 		db.close();
@@ -129,7 +130,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return user;
 	}
 	
-	public Account getAccount(int account_id){
+	public Account getAccount(long account_id){
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM "+TABLE_ACCOUNTS+" WHERE "+KEY_ID+" = "+ account_id;
 		
@@ -142,6 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		account.setAccountName(c.getString(c.getColumnIndex(KEY_ACCOUNT_NAME)));
 		account.setBalance(c.getInt(c.getColumnIndex(KEY_BALANCE)));
 		account.setUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
+		account.setInterestRate(c.getDouble(c.getColumnIndex(KEY_INTEREST)));
 		return account;
 	}
 	
@@ -197,8 +199,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				Account account = new Account();
 				account.setID(c.getLong(c.getColumnIndex(KEY_ID)));
 				account.setAccountName(c.getString(c.getColumnIndex(KEY_ACCOUNT_NAME)));
-				account.setBalance(c.getInt(c.getColumnIndex(KEY_BALANCE)));
+				account.setBalance(c.getDouble(c.getColumnIndex(KEY_BALANCE)));
 				account.setUserID(c.getLong(c.getColumnIndex(KEY_USER_ID)));
+				account.setInterestRate(c.getDouble(c.getColumnIndex(KEY_INTEREST)));
 				accounts.add(account);
 			}
 			while(c.moveToNext());

@@ -36,7 +36,9 @@ public class ViewAccountsActivity extends ListActivity{
 		if (!list.isEmpty()) {
 			Log.d("AccountList", list.get(0).toString());
 			adapter = new ArrayAdapter<Account>(context, android.R.layout.simple_list_item_1, list);
-			setListAdapter(adapter);			
+			setListAdapter(adapter);	
+			//if clicked, get account
+			//session.createAccountSession(account.getName(), session.getUserID(), account.getID());
 		} else {
 			Toast.makeText(context, "No accounts to display!", Toast.LENGTH_LONG).show();
 		}

@@ -1,26 +1,30 @@
 package com.example.model;
+import java.text.NumberFormat;
 
 public class Account {
-	long id; 
-	String account_name;
-	double balance;
-	long userID;
+	private long id; 
+	private String account_name;
+	private double balance;
+	private long userID;
+	private double interestRate;
 	
 	public Account(){
 		
 	}
 	
-	public Account(String account_name, double balance, long userID){
+	public Account(String account_name, double balance, long userID, double interestRate){
 		this.account_name = account_name;
 		this.balance = balance;
 		this.userID = userID;
+		this.interestRate = interestRate;
 	}
 	
-	public Account(long id, String account_name, int balance, long userID){
+	public Account(long id, String account_name, double balance, long userID, double interestRate){
 		this.id = id;
 		this.account_name = account_name;
 		this.balance = balance;
 		this.userID = userID;
+		this.interestRate = interestRate;
 	}
 	
 	public void setID(long id){
@@ -31,12 +35,16 @@ public class Account {
 		this.account_name = name;
 	}
 	
-	public void setBalance(int bal){
+	public void setBalance(double bal){
 		this.balance = bal;
 	}
 	
 	public void setUserID(long id){
 		this.userID = id;
+	}
+	
+	public void setInterestRate(double rate){
+		this.interestRate = rate;
 	}
 	
 	public long getID(){
@@ -55,7 +63,12 @@ public class Account {
 		return this.userID;
 	}
 	
+	public double getInterestRate(){
+		return this.interestRate;
+	}
+	
 	public String toString(){
-		return this.account_name+ " [$"+this.balance+"]";
+		NumberFormat us = NumberFormat.getCurrencyInstance();
+		return this.account_name+ " ["+us.format(balance)+"] "+interestRate;
 	}
 }

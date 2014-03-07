@@ -72,7 +72,7 @@ public class SessionManager {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
         editor.putLong(KEY_ID, id);
-    	editor.putLong(KEY_ACCOUNT_ID, id);
+    	editor.putLong(KEY_ACCOUNT_ID, accountid);
     	editor.commit();
     }
     
