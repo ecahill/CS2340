@@ -22,5 +22,10 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="view">View Accounts</string>
+    <string name="depositTransaction">Deposit</string>
+    <string name="makeTransaction">Make Transaction</string>
+    <string name="transactionReason">Reason for Transaction</string>
+    <string name="transactionAmount">Transaction Amount</string>
+    <string name="withdrawalTransaction">Withdrawal</string>
 
 </resources>
