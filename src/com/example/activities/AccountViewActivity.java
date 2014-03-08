@@ -28,12 +28,13 @@ public class AccountViewActivity extends Activity {
 		db = new DatabaseHandler(this);
 		long accountID = session.getAccountID();
 		Account curAccount = db.getAccount(accountID);
+		session.createAccountSession(curAccount.getAccountName(), session.getUserID(), curAccount.getID());
 		accName.setText(curAccount.toString());	
 		
 		makeTransaction.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-//				Intent viewAccount = new Intent(ViewAccountsActivity.this, AccountViewActivity.class);
-//				startActivity(viewAccount);
+				Intent viewAccount = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
+				startActivity(viewAccount);
 			}
 		});
 	}

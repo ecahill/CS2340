@@ -33,7 +33,7 @@ public class MakeTransactionActivity extends Activity {
 	private String transactionType;
 	private EditText transactionReason;
 	private EditText transactionAmount;
-	SessionManager session;
+	private SessionManager session;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -48,7 +48,7 @@ public class MakeTransactionActivity extends Activity {
 		transactionReason = (EditText) findViewById(R.id.transactionReasonEditText);
 		transactionAmount = (EditText) findViewById(R.id.transactionAmountEditText);
 		transactionRadioGroup = (RadioGroup) findViewById(R.id.transactionradiogroup);
-		acceptButton = (Button) findViewById(R.id.acceptButton);
+		acceptButton = (Button) findViewById(R.id.acceptTransaction);
 		
 		acceptButton.setOnClickListener(new OnClickListener() {
 
@@ -68,18 +68,16 @@ public class MakeTransactionActivity extends Activity {
 				// available yet, but that check implementation will look something
 				// like: if (getTransactionType().equals("Withdrawal") 
 				//				&& getTransactionAmount() < getAccountBalance()) {}
-				if (getTransactionAmount() > 0) {
-					//proceed to next view
-					//Intent i = new Intent(someActivity.this, someClass.class);
-					//startActivity(i);
-				} else {
-					Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
+					if (getTransactionAmount() > 0) {
+						//proceed to next view
+						//Intent i = new Intent(someActivity.this, someClass.class);
+						//startActivity(i);
+					} else {
+						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
+					}		
 				}
-			}
-
-		});
-
-	}
+			});
+		}
 	
 	public void setTransactionType(String type) {
 		transactionType = type;

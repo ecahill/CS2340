@@ -27,5 +27,6 @@
     <string name="transactionReason">Reason for Transaction</string>
     <string name="transactionAmount">Transaction Amount</string>
     <string name="withdrawalTransaction">Withdrawal</string>
+    <string name="accNameHeader">(Account Name)</string>
 
 </resources>

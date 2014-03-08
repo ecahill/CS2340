@@ -13,7 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/acceptTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/transactionAmountEditText"
@@ -28,16 +28,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/transactionAmount"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="@string/transactionReason"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -80,5 +70,15 @@
             android:layout_height="wrap_content"
             android:text="@string/withdrawalTransaction" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:text="@string/transactionReason"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

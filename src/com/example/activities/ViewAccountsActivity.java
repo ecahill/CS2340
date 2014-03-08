@@ -26,7 +26,7 @@ public class ViewAccountsActivity extends ListActivity{
 	private List<Account> accountList;
 	private DatabaseHandler db;
 	
-	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.viewaccounts_view);
@@ -49,11 +49,18 @@ public class ViewAccountsActivity extends ListActivity{
 		}
 	}
 	
+//	@Override
+//	protected void onStop() {
+//		super.onStop();
+//		session.logoutUser();
+//	}
+
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id1) {
 		long itemID = l.getItemIdAtPosition(position) + 1;
 		Account account = db.getAccount(itemID);
 		session.createAccountSession(account.getAccountName(), session.getUserID(), account.getID());
+		Toast.makeText(getBaseContext(), "AccName: " + account.getAccountName(), Toast.LENGTH_LONG).show();
 		Intent viewAccount = new Intent(ViewAccountsActivity.this, AccountViewActivity.class);
 		startActivity(viewAccount);
 	}
