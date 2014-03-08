@@ -69,6 +69,6 @@ public class Account {
 	
 	public String toString(){
 		NumberFormat us = NumberFormat.getCurrencyInstance();
-		return this.account_name+ " ["+us.format(balance)+"] "+interestRate;
+		return this.account_name+ " ["+us.format(balance)+"]";
 	}
 }

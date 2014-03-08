@@ -141,7 +141,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Account account = new Account();
 		account.setID(c.getInt(c.getColumnIndex(KEY_ID)));
 		account.setAccountName(c.getString(c.getColumnIndex(KEY_ACCOUNT_NAME)));
-		account.setBalance(c.getInt(c.getColumnIndex(KEY_BALANCE)));
+		account.setBalance(c.getDouble(c.getColumnIndex(KEY_BALANCE)));
 		account.setUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
 		account.setInterestRate(c.getDouble(c.getColumnIndex(KEY_INTEREST)));
 		return account;

@@ -6,10 +6,12 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.cs2340.R;
@@ -18,8 +20,11 @@ import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 
 public class ViewAccountsActivity extends ListActivity{
-	SessionManager session;
-	ArrayAdapter<Account> adapter;
+	
+	private SessionManager session;
+	private ArrayAdapter<Account> adapter;
+	private List<Account> accountList;
+	private DatabaseHandler db;
 	
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,28 +32,29 @@ public class ViewAccountsActivity extends ListActivity{
 	    setContentView(R.layout.viewaccounts_view);
 	
 		final Context context = this; 
-		DatabaseHandler db = new DatabaseHandler(this);
-		session = new SessionManager(context);
+		db = new DatabaseHandler(this);
+		session = new SessionManager(getApplicationContext());
 		long id = session.getUserID();
 		Log.d("SessionManager", "ID: "+id);
-		List<Account> list = db.getAllAccountsByID(id);	
+		accountList = db.getAllAccountsByID(id);	
+		//ListView myListView = getListView();
 	    
-		if (!list.isEmpty()) {
-			Log.d("AccountList", list.get(0).toString());
-			adapter = new ArrayAdapter<Account>(context, android.R.layout.simple_list_item_1, list);
-			setListAdapter(adapter);	
-			//if clicked, get account
-			//session.createAccountSession(account.getName(), session.getUserID(), account.getID());
+		if (!accountList.isEmpty()) {
+			Log.d("AccountList", accountList.get(0).toString());
+			adapter = new ArrayAdapter<Account>(context, android.R.layout.simple_list_item_1, accountList);
+			setListAdapter(adapter);
 		} else {
+			//myListView.getEmptyView();
 			Toast.makeText(context, "No accounts to display!", Toast.LENGTH_LONG).show();
 		}
-			
-	    
-		
-	   // View rootView = inflater.inflate(R.layout.viewaccounts_view, container, false);
-	    //ListView myListView = (ListView) this.findViewById(R.id.accountList);   
-	    
 	}
 	
-
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id1) {
+		long itemID = l.getItemIdAtPosition(position) + 1;
+		Account account = db.getAccount(itemID);
+		session.createAccountSession(account.getAccountName(), session.getUserID(), account.getID());
+		Intent viewAccount = new Intent(ViewAccountsActivity.this, AccountViewActivity.class);
+		startActivity(viewAccount);
+	}
 }

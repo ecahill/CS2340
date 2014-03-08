@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/accNameHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:text="@string/accNameHeader"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+<!--     <TextView -->
+<!--         android:id="@+id/accBalanceHeader" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_below="@+id/accName" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_marginTop="18dp" -->
+<!--         android:text="@string/accBalanceHeader" -->
+<!--         android:textAppearance="?android:attr/textAppearanceLarge" /> -->
+
+    <Button
+        android:id="@+id/makeTransaction"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accNameHeader"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="94dp"
+        android:text="@string/makeTransaction"
+        android:textSize="50sp" />
+
+</RelativeLayout>

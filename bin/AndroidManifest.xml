@@ -36,6 +36,7 @@
         </activity>
         <activity android:name="com.example.activities.ViewAccountsActivity"></activity>
         <activity android:name="com.example.activities.AccountCreationActivity"></activity>
+        <activity android:name="com.example.activities.AccountViewActivity"></activity>
     </application>
 
 </manifest>

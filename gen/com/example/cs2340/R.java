@@ -33,16 +33,18 @@ public final class R {
         public static final int NameField=0x7f08000f;
         public static final int PassField=0x7f08000e;
         public static final int RegButton=0x7f08000d;
+        public static final int accNameHeader=0x7f080011;
         public static final int acceptButton=0x7f080007;
-        public static final int action_settings=0x7f080012;
+        public static final int action_settings=0x7f080014;
         public static final int bCreateAccount=0x7f080009;
         public static final int bViewAccount=0x7f08000a;
         public static final int declineButton=0x7f080008;
+        public static final int makeTransaction=0x7f080012;
         public static final int textView1=0x7f080000;
         public static final int textView2=0x7f080002;
         public static final int textView3=0x7f080004;
         public static final int textView4=0x7f080005;
-        public static final int viewTitle=0x7f080011;
+        public static final int viewTitle=0x7f080013;
     }
     public static final class layout {
         public static final int accountcreation_view=0x7f030000;
@@ -51,12 +53,15 @@ public final class R {
         public static final int login_view=0x7f030003;
         public static final int loginsuccess_view=0x7f030004;
         public static final int register_view=0x7f030005;
-        public static final int viewaccounts_view=0x7f030006;
+        public static final int single_account_view=0x7f030006;
+        public static final int viewaccounts_view=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
+        public static final int accBalanceHeader=0x7f050016;
+        public static final int accNameHeader=0x7f050015;
         public static final int accept=0x7f050012;
         public static final int accountbalance=0x7f050010;
         public static final int accountcreation=0x7f05000e;
@@ -70,6 +75,7 @@ public final class R {
         public static final int hello_world=0x7f050002;
         public static final int login=0x7f050003;
         public static final int loginsuccessful=0x7f050008;
+        public static final int makeTransaction=0x7f050017;
         public static final int monthlyinterestrate=0x7f050011;
         public static final int password=0x7f050006;
         public static final int register=0x7f050009;

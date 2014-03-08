@@ -22,5 +22,8 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="view">View Accounts</string>
+    <string name="accNameHeader">(Account Name)</string>
+    <string name="accBalanceHeader">(Account Balance)</string>
+    <string name="makeTransaction">Make Transaction</string>
 
 </resources>
