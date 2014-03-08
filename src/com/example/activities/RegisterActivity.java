@@ -18,10 +18,10 @@ import com.example.cs2340.*;
 
  
 public class RegisterActivity extends Activity {
-	EditText username;
-	EditText password;
-	EditText cPassword;
-	Button goButton;
+	private EditText username;
+	private EditText password;
+	private EditText cPassword;
+	private Button goButton;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {

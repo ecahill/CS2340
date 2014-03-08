@@ -12,7 +12,7 @@ import com.example.activities.LoginActivity;
  
 public class SessionManager {
     // Shared Preferences
-    SharedPreferences pref;
+    private SharedPreferences pref;
      
     // Editor for Shared preferences
     Editor editor;

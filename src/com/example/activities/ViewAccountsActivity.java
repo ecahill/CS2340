@@ -25,6 +25,7 @@ public class ViewAccountsActivity extends ListActivity{
 	private ArrayAdapter<Account> adapter;
 	private List<Account> accountList;
 	private DatabaseHandler db;
+	private long itemID;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,20 +49,17 @@ public class ViewAccountsActivity extends ListActivity{
 			Toast.makeText(context, "No accounts to display!", Toast.LENGTH_LONG).show();
 		}
 	}
-	
-//	@Override
-//	protected void onStop() {
-//		super.onStop();
-//		session.logoutUser();
-//	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id1) {
-		long itemID = l.getItemIdAtPosition(position) + 1;
+		itemID = l.getItemIdAtPosition(position) + 1;
 		Account account = db.getAccount(itemID);
-		session.createAccountSession(account.getAccountName(), session.getUserID(), account.getID());
-		Toast.makeText(getBaseContext(), "AccName: " + account.getAccountName(), Toast.LENGTH_LONG).show();
+		//session.createAccountSession(account.getAccountName(), session.getUserID(), account.getID());
+		//Toast.makeText(getBaseContext(), "AccName: " + account.getAccountName() + " UserID: " + session.getUserID(), Toast.LENGTH_LONG).show();
+		//Log.d("AccountID", "ID" + session.getAccountID());
+		
 		Intent viewAccount = new Intent(ViewAccountsActivity.this, AccountViewActivity.class);
+		viewAccount.putExtra("itemID", itemID);
 		startActivity(viewAccount);
 	}
 }
