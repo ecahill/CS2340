@@ -255,7 +255,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_USER_ID, a.getUserID());
 		values.put(KEY_INTEREST, a.getInterestRate());
 		
-		return db.update(TABLE_ACCOUNTS, values, KEY_ACCOUNT_ID+ " =?", new String[] {String.valueOf(a.getID())});
+		return db.update(TABLE_ACCOUNTS, values, KEY_ID+ " =?", new String[] {String.valueOf(a.getID())});
 	}
 	
 	
