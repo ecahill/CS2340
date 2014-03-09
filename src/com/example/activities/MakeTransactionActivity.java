@@ -4,11 +4,14 @@ import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
+import com.example.model.Transaction;
 import com.example.presenters.AccountRules;
 
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -34,6 +37,10 @@ public class MakeTransactionActivity extends Activity {
 	private EditText transactionReason;
 	private EditText transactionAmount;
 	private SessionManager session;
+	private static final String DEPOSIT = "Deposit";
+	private static final String WITHDRAW = "Withdraw";
+	private Date date;
+	private List<Account> accountList;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -44,6 +51,9 @@ public class MakeTransactionActivity extends Activity {
 	    final Context context = this;
 		final DatabaseHandler db = new DatabaseHandler(context);
 		session = new SessionManager(getApplicationContext());
+		final long userID = session.getUserID();
+		final long accountID = session.getAccountID();
+		accountList = db.getAllAccountsByID(userID);
 	    
 		transactionReason = (EditText) findViewById(R.id.transactionReasonEditText);
 		transactionAmount = (EditText) findViewById(R.id.transactionAmountEditText);
@@ -59,8 +69,8 @@ public class MakeTransactionActivity extends Activity {
 				
 				// find the radiobutton by the previously returned id
 				transactionRadioButton = (RadioButton) findViewById(selectedOption);
-				
-				setTransactionType(transactionRadioButton.getText().toString());
+				long itemID = getIntent().getLongExtra("itemID", 0);
+				date = new Date();
 			
 				// Check if transaction amount is valid. So far, the only check
 				// is: must be positive. Need to add check to see if withdrawal
@@ -68,10 +78,43 @@ public class MakeTransactionActivity extends Activity {
 				// available yet, but that check implementation will look something
 				// like: if (getTransactionType().equals("Withdrawal") 
 				//				&& getTransactionAmount() < getAccountBalance()) {}
-					if (getTransactionAmount() > 0) {
+					if (transactionAmount != null && !getTransactionReason().equals("")) {
 						//proceed to next view
 						//Intent i = new Intent(someActivity.this, someClass.class);
 						//startActivity(i);
+						
+						setTransactionType(transactionRadioButton.getText().toString());
+						String transactionName = transactionReason.getText().toString();
+						double amount = Double.parseDouble(transactionAmount.getText().toString());
+						
+						Account curAccount = null;
+						for (int i = 0; i < accountList.size(); i++) {
+							if (i == itemID - 1) {
+								curAccount = accountList.get(i);
+							}
+						}						
+						double curBalance = curAccount.getBalance();
+						
+						if (transactionType.equals(DEPOSIT)) {
+							Transaction depositTrans = new Transaction(userID, itemID, transactionName, 
+										amount, amount, date.getTime());
+							depositTrans.setWithdrawAmount(0);							
+							if (amount > 0) {
+								curAccount.setBalance(curBalance + amount);
+							}							
+							Toast.makeText(context, "New balance: $" + curAccount.getBalance(), Toast.LENGTH_SHORT).show();
+						} else {
+							Transaction withdrawTrans = new Transaction(userID, accountID, transactionName, 
+										amount, amount, date.getTime());
+							withdrawTrans.setDepositAmount(0);
+							if (amount <= curBalance && amount > 0) {
+								curAccount.setBalance(curBalance - amount);			
+							}
+							Toast.makeText(context, "New balance: $" + curAccount.getBalance(), Toast.LENGTH_SHORT).show();
+						}
+						
+						// ERROR OCCURS AFTER THIS CALL
+//						db.updateAccount(curAccount);
 					} else {
 						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
 					}		
@@ -96,6 +139,4 @@ public class MakeTransactionActivity extends Activity {
 		String transactionAmountString = transactionAmount.getText().toString();
 		return Double.parseDouble(transactionAmountString);
 	}
-	
-
 }

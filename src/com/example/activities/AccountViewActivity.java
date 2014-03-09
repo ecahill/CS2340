@@ -20,6 +20,7 @@ public class AccountViewActivity extends Activity {
 	
 	private SessionManager session;
 	private DatabaseHandler db;
+	private long itemID;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class AccountViewActivity extends Activity {
 		List<Account> accountList = db.getAllAccountsByID(userID);	
 		
 		// receives the clicked account position from ViewAccountsActivity
-		long itemID = getIntent().getLongExtra("itemID", 0);
+		itemID = getIntent().getLongExtra("itemID", 0);
 		
 		// gets the account to display from the account list
 		Account curAccount = null;
@@ -54,6 +55,7 @@ public class AccountViewActivity extends Activity {
 		makeTransaction.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent viewAccount = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
+				viewAccount.putExtra("itemID", itemID);
 				startActivity(viewAccount);
 			}
 		});

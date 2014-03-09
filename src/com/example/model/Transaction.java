@@ -9,7 +9,7 @@ public class Transaction {
 	private String transactionName;
 	private double depositAmount;
 	private double withdrawAmount;
-	private Date date;
+	private long date;
 	
 	public Transaction() {
 //		transactionName = name;
@@ -18,17 +18,19 @@ public class Transaction {
 	}
 	
 	public Transaction(long userID, long accountID, String transactionName, double depositAmount, 
-			double withdrawAmount, Date date){
+			double withdrawAmount, long date){
 		this.userID = userID;
 		this.accountID = accountID;
 		this.transactionName = transactionName;
 		this.depositAmount = depositAmount;
 		this.withdrawAmount  = withdrawAmount;
 		this.date = date;
+//		db = new DatabaseHandler(context);
+//		this.curAccount = db.getAccount(accountID);
 	}
 	
 	public Transaction(long id, long userID, long accountID, String transactionName, double depositAmount,
-			double withdrawAmount, Date date){
+			double withdrawAmount, long date){
 		this.id = id;
 		this.userID = userID;
 		this.accountID = accountID;
@@ -37,6 +39,20 @@ public class Transaction {
 		this.withdrawAmount  = withdrawAmount;
 		this.date = date;
 	}
+	
+//	public void withdraw(double withdrawAmount) {
+//		double curBalance = curAccount.getBalance();
+//		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
+//			curAccount.setBalance(curBalance - withdrawAmount);			
+//		}
+//	}
+//	
+//	public void deposit(double depositAmount) {
+//		double curBalance = curAccount.getBalance();
+//		if (depositAmount > 0) {
+//			curAccount.setBalance(curBalance + depositAmount);
+//		}
+//	}
 	
 	public long getID(){
 		return this.id;
@@ -86,13 +102,11 @@ public class Transaction {
 		this.withdrawAmount = withdrawAmount;
 	}
 	
-	public Date getDate(){
+	public long getDate(){
 		return this.date;
 	}
 	
-	public void setDate(Date d){
+	public void setDate(long d){
 		this.date = d;
-	}
-	
-	
+	}	
 }
