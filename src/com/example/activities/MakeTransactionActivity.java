@@ -10,6 +10,7 @@ import com.example.presenters.AccountRules;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -79,14 +80,11 @@ public class MakeTransactionActivity extends Activity {
 				// like: if (getTransactionType().equals("Withdrawal") 
 				//				&& getTransactionAmount() < getAccountBalance()) {}
 					if (transactionAmount != null && !getTransactionReason().equals("")) {
-						//proceed to next view
-						//Intent i = new Intent(someActivity.this, someClass.class);
-						//startActivity(i);
-						
 						setTransactionType(transactionRadioButton.getText().toString());
 						String transactionName = transactionReason.getText().toString();
 						double amount = Double.parseDouble(transactionAmount.getText().toString());
 						
+						//Toast.makeText(context, "itemID: " + itemID, Toast.LENGTH_SHORT).show();
 						Account curAccount = null;
 						for (int i = 0; i < accountList.size(); i++) {
 							if (i == itemID - 1) {
@@ -94,27 +92,26 @@ public class MakeTransactionActivity extends Activity {
 							}
 						}						
 						double curBalance = curAccount.getBalance();
+						Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
+						NumberFormat us = NumberFormat.getCurrencyInstance();
 						
-						if (transactionType.equals(DEPOSIT)) {
-							Transaction depositTrans = new Transaction(userID, itemID, transactionName, 
-										amount, amount, date.getTime());
-							depositTrans.setWithdrawAmount(0);							
-							if (amount > 0) {
-								curAccount.setBalance(curBalance + amount);
-							}							
-							Toast.makeText(context, "New balance: $" + curAccount.getBalance(), Toast.LENGTH_SHORT).show();
-						} else {
-							Transaction withdrawTrans = new Transaction(userID, accountID, transactionName, 
-										amount, amount, date.getTime());
-							withdrawTrans.setDepositAmount(0);
-							if (amount <= curBalance && amount > 0) {
-								curAccount.setBalance(curBalance - amount);			
+						if (transactionType.equals(DEPOSIT)) {							
+							if (amount < 0) {
+								Toast.makeText(context, "Invalid deposit amount!", Toast.LENGTH_SHORT).show();
+							} else {
+								trans.deposit(amount);					
+								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()), Toast.LENGTH_SHORT).show();
 							}
-							Toast.makeText(context, "New balance: $" + curAccount.getBalance(), Toast.LENGTH_SHORT).show();
+							
+						} else {
+							if (amount > curBalance || amount < 0) {
+								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
+							} else {
+								trans.withdraw(amount);
+								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()), Toast.LENGTH_SHORT).show();
+							}							
 						}
-						
-						// ERROR OCCURS AFTER THIS CALL
-//						db.updateAccount(curAccount);
+						db.updateAccount(curAccount);
 					} else {
 						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
 					}		

@@ -37,10 +37,10 @@ public final class R {
         public static final int acceptButton=0x7f080007;
         public static final int acceptTransaction=0x7f08000d;
         public static final int action_settings=0x7f08001b;
-        public static final int bCreateAccount=0x7f080009;
-        public static final int bViewAccount=0x7f08000a;
+        public static final int bCreateAccount=0x7f080008;
+        public static final int bViewAccount=0x7f080009;
         public static final int button1=0x7f080011;
-        public static final int declineButton=0x7f080008;
+        public static final int declineButton=0x7f08000a;
         public static final int makeTransaction=0x7f080019;
         public static final int makeTransactionRadioButton=0x7f080012;
         public static final int makeWithdrawalRadioButton=0x7f080013;

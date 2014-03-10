@@ -8,13 +8,22 @@ public class Transaction {
 	private long accountID;
 	private String transactionName;
 	private double depositAmount;
-	private double withdrawAmount;
+	private double withdrawAmount;	
 	private long date;
+	private Account account;
 	
-	public Transaction() {
-//		transactionName = name;
-//		depositAmount = depAmount;
-//		withdrawAmount = wdAmount;
+	// to be stored for record
+	private double finalWithdrawAmount;
+	private double finalDepositAmount;
+	
+	public Transaction(){
+		
+	}
+	
+	public Transaction(Account account, String transactionName, long date) {
+		this.transactionName = transactionName;
+		this.account = account;
+		this.date = date;
 	}
 	
 	public Transaction(long userID, long accountID, String transactionName, double depositAmount, 
@@ -40,19 +49,21 @@ public class Transaction {
 		this.date = date;
 	}
 	
-//	public void withdraw(double withdrawAmount) {
-//		double curBalance = curAccount.getBalance();
-//		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
-//			curAccount.setBalance(curBalance - withdrawAmount);			
-//		}
-//	}
-//	
-//	public void deposit(double depositAmount) {
-//		double curBalance = curAccount.getBalance();
-//		if (depositAmount > 0) {
-//			curAccount.setBalance(curBalance + depositAmount);
-//		}
-//	}
+	public void withdraw(double withdrawAmount) {
+		double curBalance = account.getBalance();
+		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
+			account.setBalance(curBalance - withdrawAmount);			
+		}
+		this.finalWithdrawAmount = withdrawAmount;
+	}
+	
+	public void deposit(double depositAmount) {
+		double curBalance = account.getBalance();
+		if (depositAmount > 0) {
+			account.setBalance(curBalance + depositAmount);
+		}
+		this.finalDepositAmount = depositAmount;
+	}
 	
 	public long getID(){
 		return this.id;

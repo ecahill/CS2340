@@ -62,4 +62,13 @@ public class ViewAccountsActivity extends ListActivity{
 		viewAccount.putExtra("itemID", itemID);
 		startActivity(viewAccount);
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		long id = session.getUserID();
+		accountList = db.getAllAccountsByID(id);
+		adapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, accountList);
+		setListAdapter(adapter);
+	}
 }

@@ -27,7 +27,7 @@ public class AccountCreationActivity extends Activity {
 	EditText accBalance;
 	EditText monthlyInterestRate;
 	Button acceptButton;
-	Button declineButton;
+//	Button declineButton;
 	SessionManager session;
 	
 	/** Called when the activity is first created. */
@@ -44,7 +44,7 @@ public class AccountCreationActivity extends Activity {
         accBalance = (EditText)findViewById(R.id.AccBalanceField);
         monthlyInterestRate = (EditText)findViewById(R.id.MonthlyInterestField);
         acceptButton = (Button)findViewById(R.id.acceptButton);
-        declineButton = (Button)findViewById(R.id.declineButton);
+//        declineButton = (Button)findViewById(R.id.declineButton);
         session.checkLogin();
         acceptButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
@@ -71,15 +71,15 @@ public class AccountCreationActivity extends Activity {
 
 			}
 		});
-        declineButton.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				//account is not created
-				
-				//for now, go back to previous page
-				Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
-				startActivity(i);
-			}
-		});
+//        declineButton.setOnClickListener(new View.OnClickListener(){
+//			public void onClick(View v){
+//				//account is not created
+//				
+//				//for now, go back to previous page
+//				Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
+//				startActivity(i);
+//			}
+//		});
 	}
         
     public String getAccountName() {
