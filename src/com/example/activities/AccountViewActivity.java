@@ -6,6 +6,7 @@ import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
+import com.example.presenters.IDatabaseHandler;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 public class AccountViewActivity extends Activity {
 	
 	private SessionManager session;
-	private DatabaseHandler db;
+	private IDatabaseHandler db;
 	private long itemID;
 	private TextView accName;
 	private Account curAccount;

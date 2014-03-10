@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.model.User;
 import com.example.model.DatabaseHandler;
+import com.example.presenters.IDatabaseHandler;
 import com.example.cs2340.*;
 
  
@@ -28,7 +29,7 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_view); 
          
-        final DatabaseHandler db = new DatabaseHandler(this);
+        final IDatabaseHandler db = new DatabaseHandler(this);
         final Context context = this;
         
         username = (EditText)findViewById(R.id.NameField);

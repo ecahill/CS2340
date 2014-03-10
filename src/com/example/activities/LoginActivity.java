@@ -9,6 +9,7 @@ import com.example.model.SessionManager;
 import com.example.model.User;
 import com.example.views.ClickListener;
 import com.example.model.DatabaseHandler;
+import com.example.presenters.IDatabaseHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,7 +36,7 @@ public class LoginActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_view);
 		final Context context = this;
-		final DatabaseHandler db = new DatabaseHandler(context);
+		final IDatabaseHandler db = new DatabaseHandler(context);
 		session = new SessionManager(getApplicationContext()); 
 		
 		nameField = (EditText) findViewById(R.id.AccountNameField);
