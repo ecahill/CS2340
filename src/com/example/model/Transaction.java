@@ -8,9 +8,13 @@ public class Transaction {
 	private long accountID;
 	private String transactionName;
 	private double depositAmount;
-	private double withdrawAmount;
+	private double withdrawAmount;	
 	private long date;
 	private Account account;
+	
+	// to be stored for record
+	private double finalWithdrawAmount;
+	private double finalDepositAmount;
 	
 	public Transaction(){
 		
@@ -19,8 +23,6 @@ public class Transaction {
 	public Transaction(Account account, String transactionName, long date) {
 		this.transactionName = transactionName;
 		this.account = account;
-		this.depositAmount = depositAmount;
-		this.withdrawAmount = withdrawAmount;
 		this.date = date;
 	}
 	
@@ -52,6 +54,7 @@ public class Transaction {
 		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
 			account.setBalance(curBalance - withdrawAmount);			
 		}
+		this.finalWithdrawAmount = withdrawAmount;
 	}
 	
 	public void deposit(double depositAmount) {
@@ -59,6 +62,7 @@ public class Transaction {
 		if (depositAmount > 0) {
 			account.setBalance(curBalance + depositAmount);
 		}
+		this.finalDepositAmount = depositAmount;
 	}
 	
 	public long getID(){
