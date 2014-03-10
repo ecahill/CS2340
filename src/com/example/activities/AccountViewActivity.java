@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,12 +22,14 @@ public class AccountViewActivity extends Activity {
 	private SessionManager session;
 	private DatabaseHandler db;
 	private long itemID;
+	private TextView accName;
+	private Account curAccount;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_account_view);
 		
-		TextView accName = (TextView) findViewById(R.id.accNameHeader);
+		accName = (TextView) findViewById(R.id.accNameHeader);
 		Button makeTransaction = (Button) findViewById(R.id.makeTransaction);
 		
 		session = new SessionManager(getApplicationContext());
@@ -38,7 +41,6 @@ public class AccountViewActivity extends Activity {
 		itemID = getIntent().getLongExtra("itemID", 0);
 		
 		// gets the account to display from the account list
-		Account curAccount = null;
 		for (int i = 0; i < accountList.size(); i++) {
 			if (i == itemID - 1) {
 				curAccount = accountList.get(i);
@@ -50,14 +52,21 @@ public class AccountViewActivity extends Activity {
 //		Log.d("2: AccountID", "ID" + accountID);
 		
 		session.createAccountSession(curAccount.getAccountName(), session.getUserID(), itemID);
-		accName.setText(curAccount.toString());	
+		accName.setText(curAccount.toString());
 		
 		makeTransaction.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				Intent viewAccount = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
-				viewAccount.putExtra("itemID", itemID);
-				startActivity(viewAccount);
+			public void onClick(View v) {
+				Intent transaction = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
+				transaction.putExtra("itemID", itemID);
+				startActivity(transaction);
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		accName = (TextView) findViewById(R.id.accNameHeader);
+		accName.setText(curAccount.toString());
 	}
 }

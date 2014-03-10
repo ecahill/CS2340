@@ -79,14 +79,11 @@ public class MakeTransactionActivity extends Activity {
 				// like: if (getTransactionType().equals("Withdrawal") 
 				//				&& getTransactionAmount() < getAccountBalance()) {}
 					if (transactionAmount != null && !getTransactionReason().equals("")) {
-						//proceed to next view
-						//Intent i = new Intent(someActivity.this, someClass.class);
-						//startActivity(i);
-						
 						setTransactionType(transactionRadioButton.getText().toString());
 						String transactionName = transactionReason.getText().toString();
 						double amount = Double.parseDouble(transactionAmount.getText().toString());
 						
+						//Toast.makeText(context, "itemID: " + itemID, Toast.LENGTH_SHORT).show();
 						Account curAccount = null;
 						for (int i = 0; i < accountList.size(); i++) {
 							if (i == itemID - 1) {
@@ -114,7 +111,7 @@ public class MakeTransactionActivity extends Activity {
 						}
 						
 						// ERROR OCCURS AFTER THIS CALL
-//						db.updateAccount(curAccount);
+						db.updateAccount(curAccount);
 					} else {
 						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
 					}		
