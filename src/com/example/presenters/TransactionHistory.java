@@ -1,22 +1,40 @@
 package com.example.presenters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.model.Transaction;
 
 public class TransactionHistory {
-	private IDatabaseHandler db;
+	private List<Transaction> transactionList;
 	
-	public TransactionHistory(IDatabaseHandler db){
-		this.db = db;
+	public TransactionHistory(List<Transaction> transactionList){
+		this.transactionList = transactionList;
 	}
 	
-	public List<Transaction> getTransactionsByID(long id){
-		return db.getAllTransactionsByID(id);
+	public List<Transaction> getTransactions(){
+		return transactionList;
 	}
 	
-	public long addTransaction(Transaction t){
-		return db.addTransaction(t);
+	public List<Transaction> getWithdrawals(){
+		List<Transaction> withdrawals = new ArrayList<Transaction>();
+		for (Transaction t : transactionList){
+			if (t.getWithdrawAmount() != 0){
+				withdrawals.add(t);
+			}
+		}
+		return withdrawals;
 	}
+	
+	public List<Transaction> getDeposits(){
+		List<Transaction> deposits = new ArrayList<Transaction>();
+		for (Transaction t : transactionList){
+			if (t.getDepositAmount() != 0){
+				deposits.add(t);
+			}
+		}
+		return deposits;
+	}
+	
 
 }
