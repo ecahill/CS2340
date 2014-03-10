@@ -21,7 +21,7 @@ public interface IDatabaseHandler {
 	public User getUserByUP(String username, String password);
 	public List<User> getAllUsers();
 	public List<Account> getAllAccountsByID(long id);
-	public List<Transaction> getAllTransactionsByID(long id);
+	public TransactionHistory getAllTransactionsByID(long id);
 	public int getUsersCount();
 	public int updateUser(User user);
 	public int updateAccount(Account a);

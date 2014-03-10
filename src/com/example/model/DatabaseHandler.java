@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.presenters.IDatabaseHandler;
+import com.example.presenters.TransactionHistory;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -229,7 +230,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	
-	public List<Transaction> getAllTransactionsByID(long id){
+	public TransactionHistory getAllTransactionsByID(long id){
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String selectQuery = "SELECT * FROM "+TABLE_TRANSACTIONS + " WHERE "+KEY_ACCOUNT_ID + " = "+id;
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -241,7 +242,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 				//transactions.add(t);
 			} while(c.moveToNext());
 		}
-		return transactions;
+		return new TransactionHistory(transactions);
 	}
 	
 	//get number of users in db
