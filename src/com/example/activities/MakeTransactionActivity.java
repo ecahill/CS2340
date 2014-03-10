@@ -105,6 +105,7 @@ public class MakeTransactionActivity extends Activity {
 							}							
 						}
 						db.updateAccount(curAccount);
+						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " + curAccount.getAccountName());
 					} else {
 						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
 					}		

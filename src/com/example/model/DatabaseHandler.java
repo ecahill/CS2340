@@ -117,6 +117,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		
 		long transaction_id = db.insert(TABLE_TRANSACTIONS, null, values);
 		db.close();
+		//Log.d("DatabaseHandler", "Transaction: " + t.getTransactionName() + " added to account: " + this.getAccount(t.getAccountID()));
 		return transaction_id;
 	}
 	

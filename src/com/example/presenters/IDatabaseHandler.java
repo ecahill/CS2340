@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 public interface IDatabaseHandler {
 	
 	public void onCreate(SQLiteDatabase db);
-	public SQLiteDatabase getDB();
+	//public SQLiteDatabase getDB();
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion);
 	public long createAccount(Account a);
 	public long addUser(User u);
