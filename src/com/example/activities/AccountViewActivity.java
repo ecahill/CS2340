@@ -21,6 +21,8 @@ public class AccountViewActivity extends Activity {
 	private SessionManager session;
 	private DatabaseHandler db;
 	private long itemID;
+	private TextView accName;
+	private Account curAccount;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,10 +56,17 @@ public class AccountViewActivity extends Activity {
 		
 		makeTransaction.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				Intent viewAccount = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
-				viewAccount.putExtra("itemID", itemID);
-				startActivity(viewAccount);
+				Intent transaction = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
+				transaction.putExtra("itemID", itemID);
+				startActivity(transaction);
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		accName = (TextView) findViewById(R.id.accNameHeader);
+		accName.setText(curAccount.toString());
 	}
 }
