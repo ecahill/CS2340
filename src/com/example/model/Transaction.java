@@ -10,11 +10,18 @@ public class Transaction {
 	private double depositAmount;
 	private double withdrawAmount;
 	private long date;
+	private Account account;
 	
-	public Transaction() {
-//		transactionName = name;
-//		depositAmount = depAmount;
-//		withdrawAmount = wdAmount;
+	public Transaction(){
+		
+	}
+	
+	public Transaction(Account account, String transactionName, long date) {
+		this.transactionName = transactionName;
+		this.account = account;
+		this.depositAmount = depositAmount;
+		this.withdrawAmount = withdrawAmount;
+		this.date = date;
 	}
 	
 	public Transaction(long userID, long accountID, String transactionName, double depositAmount, 
@@ -40,19 +47,19 @@ public class Transaction {
 		this.date = date;
 	}
 	
-//	public void withdraw(double withdrawAmount) {
-//		double curBalance = curAccount.getBalance();
-//		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
-//			curAccount.setBalance(curBalance - withdrawAmount);			
-//		}
-//	}
-//	
-//	public void deposit(double depositAmount) {
-//		double curBalance = curAccount.getBalance();
-//		if (depositAmount > 0) {
-//			curAccount.setBalance(curBalance + depositAmount);
-//		}
-//	}
+	public void withdraw(double withdrawAmount) {
+		double curBalance = account.getBalance();
+		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
+			account.setBalance(curBalance - withdrawAmount);			
+		}
+	}
+	
+	public void deposit(double depositAmount) {
+		double curBalance = account.getBalance();
+		if (depositAmount > 0) {
+			account.setBalance(curBalance + depositAmount);
+		}
+	}
 	
 	public long getID(){
 		return this.id;
