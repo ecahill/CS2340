@@ -6,10 +6,10 @@ import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 
 public class AccountRules {
-	DatabaseHandler d;
+	private IDatabaseHandler d;
 	
 	
-	public AccountRules(DatabaseHandler d){
+	public AccountRules(IDatabaseHandler d){
 		this.d = d;
 	}
 	

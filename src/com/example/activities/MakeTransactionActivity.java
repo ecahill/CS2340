@@ -6,6 +6,7 @@ import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.presenters.AccountRules;
+import com.example.presenters.IDatabaseHandler;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ public class MakeTransactionActivity extends Activity {
 	    setContentView(R.layout.maketransaction_view);
 	    
 	    final Context context = this;
-		final DatabaseHandler db = new DatabaseHandler(context);
+		final IDatabaseHandler db = new DatabaseHandler(context);
 		session = new SessionManager(getApplicationContext());
 		final long userID = session.getUserID();
 		final long accountID = session.getAccountID();

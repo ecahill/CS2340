@@ -5,6 +5,7 @@ import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.presenters.AccountRules;
+import com.example.presenters.IDatabaseHandler;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class AccountCreationActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.accountcreation_view);
 		final Context context = this;
-		final DatabaseHandler db = new DatabaseHandler(context);
+		final IDatabaseHandler db = new DatabaseHandler(context);
 		final AccountRules rules = new AccountRules(db);
 		session = new SessionManager(getApplicationContext());
 		

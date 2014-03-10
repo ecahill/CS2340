@@ -18,13 +18,14 @@ import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
+import com.example.presenters.IDatabaseHandler;
 
 public class ViewAccountsActivity extends ListActivity{
 	
 	private SessionManager session;
 	private ArrayAdapter<Account> adapter;
 	private List<Account> accountList;
-	private DatabaseHandler db;
+	private IDatabaseHandler db;
 	private long itemID;
 	
 	@Override

@@ -3,6 +3,8 @@ package com.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.presenters.IDatabaseHandler;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DatabaseHandler extends SQLiteOpenHelper {
+public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandler {
 	//DB version
 	private static final int DATABASE_VERSION = 1;
 	//DB name
@@ -100,6 +102,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		long user_id = db.insert(TABLE_USERS, null, values);
 		db.close(); // close db connection
 		return user_id;
+	}
+	
+	//add transaction
+	public long addTransaction(Transaction t){
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(KEY_TRANSACTION_NAME, t.getTransactionName());
+		values.put(KEY_ACCOUNT_ID, t.getAccountID());
+		values.put(KEY_USER_ID, t.getUserID());
+		values.put(KEY_WITHDRAWAL, t.getWithdrawAmount());
+		values.put(KEY_DEPOSIT, t.getDepositAmount());
+		values.put(KEY_DATE, t.getDate());
+		
+		long transaction_id = db.insert(TABLE_TRANSACTIONS, null, values);
+		db.close();
+		return transaction_id;
 	}
 	
 	public boolean checkUsername(String username){

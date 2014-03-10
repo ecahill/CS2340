@@ -7,6 +7,7 @@ import com.example.cs2340.R.id;
 import com.example.cs2340.R.layout;
 import com.example.model.DatabaseHandler;
 import com.example.model.User;
+import com.example.presenters.IDatabaseHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -25,7 +26,7 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final Context context = this; 
-		DatabaseHandler db = new DatabaseHandler(this);
+		IDatabaseHandler db = new DatabaseHandler(this);
 		
 		/**
 		 * Refresh database
