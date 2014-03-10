@@ -73,19 +73,11 @@ public class MakeTransactionActivity extends Activity {
 				transactionRadioButton = (RadioButton) findViewById(selectedOption);
 				long itemID = getIntent().getLongExtra("itemID", 0);
 				date = new Date();
-			
-				// Check if transaction amount is valid. So far, the only check
-				// is: must be positive. Need to add check to see if withdrawal
-				// amount exceeds balance. Access to balance available is not
-				// available yet, but that check implementation will look something
-				// like: if (getTransactionType().equals("Withdrawal") 
-				//				&& getTransactionAmount() < getAccountBalance()) {}
-					if (transactionAmount != null && !getTransactionReason().equals("")) {
+					if (transactionAmount.getText().toString().length() > 0 && getTransactionReason().length() > 0) {
 						setTransactionType(transactionRadioButton.getText().toString());
 						String transactionName = transactionReason.getText().toString();
 						double amount = Double.parseDouble(transactionAmount.getText().toString());
 						
-						//Toast.makeText(context, "itemID: " + itemID, Toast.LENGTH_SHORT).show();
 						Account curAccount = null;
 						for (int i = 0; i < accountList.size(); i++) {
 							if (i == itemID - 1) {
