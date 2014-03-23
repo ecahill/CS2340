@@ -12,20 +12,30 @@
         android:id="@+id/bCreateAccount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bViewAccount"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:textSize="45sp" 
-        android:text="@string/createAcc" />
+        android:layout_alignLeft="@+id/bViewSpendingCategoryReport"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="44dp"
+        android:text="@string/createAcc"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/bViewAccount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bCreateAccount"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="36dp"
+        android:layout_alignLeft="@+id/bViewSpendingCategoryReport"
+        android:layout_below="@+id/bViewSpendingCategoryReport"
+        android:layout_marginTop="73dp"
+        android:text="@string/viewSpendingCategoryReport"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bViewSpendingCategoryReport"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bCreateAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp"
         android:text="@string/viewAcc"
-        android:textSize="45sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

@@ -28,5 +28,6 @@
     <string name="transactionAmount">Transaction Amount</string>
     <string name="withdrawalTransaction">Withdrawal</string>
     <string name="accNameHeader">(Account Name)</string>
+    <string name="viewSpendingCategoryReport">View Spending Category Report</string>
 
 </resources>

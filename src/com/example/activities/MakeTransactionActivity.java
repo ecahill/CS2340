@@ -104,8 +104,11 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()), Toast.LENGTH_SHORT).show();
 							}							
 						}
+						db.addTransaction(trans);
 						db.updateAccount(curAccount);
 						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " + curAccount.getAccountName());
+						Intent i = new Intent(MakeTransactionActivity.this, ViewAccountsActivity.class);
+						startActivity(i);
 					} else {
 						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
 					}		
