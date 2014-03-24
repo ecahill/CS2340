@@ -120,4 +120,8 @@ public class Transaction {
 	public void setDate(long d){
 		this.date = d;
 	}	
+	
+	public String withdrawToString() {
+		return ("Transaction Name: " + transactionName + "Withdraw Amount: " + withdrawAmount);
+	}
 }
