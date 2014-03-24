@@ -19,22 +19,22 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/bViewAccount"
+        android:id="@+id/bViewSpendingCategoryReport"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bViewSpendingCategoryReport"
-        android:layout_below="@+id/bViewSpendingCategoryReport"
-        android:layout_marginTop="73dp"
+        android:layout_below="@+id/bViewAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
         android:text="@string/viewSpendingCategoryReport"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/bViewSpendingCategoryReport"
+        android:id="@+id/bViewAccount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bViewSpendingCategoryReport"
         android:layout_below="@+id/bCreateAccount"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="79dp"
         android:text="@string/viewAcc"
         android:textSize="20sp" />
 

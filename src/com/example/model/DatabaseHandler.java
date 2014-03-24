@@ -238,8 +238,10 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		if (c.moveToFirst()){
 			do{
 				Transaction t = new Transaction();
+				t.setID(c.getLong(c.getColumnIndex(KEY_ID)));
+				
 				//t.set...set everything like in accounts above
-				//transactions.add(t);
+				transactions.add(t);
 			} while(c.moveToNext());
 		}
 		return new TransactionHistory(transactions);

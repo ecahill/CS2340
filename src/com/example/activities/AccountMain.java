@@ -40,8 +40,10 @@ public class AccountMain extends Activity {
 		viewSpendCatRep.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(AccountMain.this, GetDates.class);
-				// start Spending Category Report Activity
-				Toast.makeText(AccountMain.this, "View report", Toast.LENGTH_SHORT).show();
+				Intent report = new Intent(AccountMain.this, SpendCatReportActivity.class);
+				startActivity(i);
+				//startActivity(report);
+				//Toast.makeText(AccountMain.this, "View report", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

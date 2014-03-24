@@ -35,7 +35,7 @@ public class SpendCatReportActivity extends ListActivity{
 		
 		//ListView myListView = getListView();
 	    
-		if (expenses.length != 0) {
+		if (expenses.length > 1) {
 			adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, expenses);
 			setListAdapter(adapter);
 		} else {

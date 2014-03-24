@@ -1,5 +1,6 @@
 package com.example.activities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,17 +40,14 @@ public class genSpendCatReportActivity extends Activity {
 				if (startDate != null && endDate != null) {
 					TransactionHistory transactionsHist = db.getAllTransactionsByID(id);
 					List<Transaction> transactions = transactionsHist.getWithdrawals();
-					List<Transaction> validTrans = null;
+					List<Transaction> validTrans = new ArrayList<Transaction>();
 					for (Transaction t : transactions) {
 						if (t.getDate() >= Date.parse(startDate.toString()) && t.getDate() <= Date.parse(endDate.toString())) {
 							validTrans.add(t);
 						}
-					}
-					
+					}					
 				}
 			}
-		});
-		
-		
+		});		
 	}
 }

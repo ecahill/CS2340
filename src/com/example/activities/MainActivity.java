@@ -50,8 +50,7 @@ public class MainActivity extends Activity{
 				Intent i = new Intent(MainActivity.this, RegisterActivity.class);
 				startActivity(i);
 			}
-		});
-		
+		});		
 	}
 
 //	@Override
