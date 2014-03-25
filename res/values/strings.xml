@@ -33,5 +33,7 @@
     <string name="EndDate">End Date</string>
     <string name="GenerateReport"></string>
     <string name="generateReport">Generate Report</string>
+    <string name="back">Back</string>
+    <string name="total">Total:</string>
 
 </resources>

@@ -158,7 +158,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		if ((cursor.getCount()!=0)&&(cursor.moveToFirst())){
 			return false;
 		}
-		else{
+		else {
 			return true;
 		}
 

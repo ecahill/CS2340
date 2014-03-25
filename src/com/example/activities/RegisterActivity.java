@@ -29,8 +29,8 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_view); 
          
-        final IDatabaseHandler db = new DatabaseHandler(this);
         final Context context = this;
+        final IDatabaseHandler db = new DatabaseHandler(context);
         
         username = (EditText)findViewById(R.id.NameField);
         password = (EditText)findViewById(R.id.PassField);

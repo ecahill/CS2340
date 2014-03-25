@@ -85,7 +85,8 @@ public class MakeTransactionActivity extends Activity {
 							}
 						}
 						double curBalance = curAccount.getBalance();
-						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), transactionName, 0, 0, date.getTime());
+						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), 
+														transactionName, 0, 0, date.getTime());
 						//Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
 						//Toast.makeText(context, "Date: " + date.getTime(), Toast.LENGTH_SHORT).show();
 						//Toast.makeText(context, "Date: " + date, Toast.LENGTH_SHORT).show();
@@ -97,10 +98,8 @@ public class MakeTransactionActivity extends Activity {
 							} else {
 								//trans.deposit(amount);
 								//double currentBalance = curAccount.getBalance();
-								if (amount > 0) {
-									curAccount.setBalance(curBalance + amount);
-									trans.setWithdrawAmount(amount);
-								}
+								curAccount.setBalance(curBalance + amount);
+								trans.setDepositAmount(amount);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}
@@ -110,10 +109,8 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
 							} else {
 								//double curBalance = account.getBalance();
-								if (amount <= curBalance && amount > 0) {
 									curAccount.setBalance(curBalance - amount);	
 									trans.setWithdrawAmount(amount);
-								}
 								//trans.withdraw(amount);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();

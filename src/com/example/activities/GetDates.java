@@ -99,24 +99,28 @@ public class GetDates extends Activity {
 				
 					if (startDate.getText().toString().length() > 0 && endDate.getText().toString().length() > 0) {
 						long start = 0, end = 0;
-						try {
-							start = Date.parse(startDate.getText().toString());
-							end = Date.parse(endDate.getText().toString());
-						} catch (IllegalArgumentException e) {
-							Toast.makeText(context, "Please enter a valid date!", Toast.LENGTH_SHORT).show();
-						}
-						
+						boolean flag = false;
+							try {
+								start = Date.parse(startDate.getText().toString());
+								end = Date.parse(endDate.getText().toString());
+								flag = true;
+							} catch (IllegalArgumentException e) {
+								Toast.makeText(context, "Please enter a valid date!", Toast.LENGTH_SHORT).show();
+							}
+			
 //						long startDate = startDate.getMinDate();
 //						long endDate = endDate.getMinDate();
 						
 						List<Transaction> trans = db.getTransactionsByDates(start, end, session.getUserID());
 						//Toast.makeText(context, "UserID: " + session.getUserID(), Toast.LENGTH_SHORT).show();
 
-						Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
-						//i.putExtra("EXPENSES", expenses);
-						long[] dates = {start, end};
-						i.putExtra("DATES", dates); 
-						startActivity(i);
+						if (flag == true) {
+							Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
+							//i.putExtra("EXPENSES", expenses);
+							long[] dates = {start, end};
+							i.putExtra("DATES", dates); 
+							startActivity(i);
+						}						
 					} else {					
 						Toast.makeText(GetDates.this, "Invalid date!", Toast.LENGTH_SHORT).show();
 					}
