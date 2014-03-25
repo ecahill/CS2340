@@ -122,6 +122,32 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		return transaction_id;
 	}
 	
+	// USER ID CORRECTLY USED??
+	public List<Transaction> getTransactionsByDates(long startDate, long endDate, long userID) {
+		List<Transaction> result = new ArrayList<Transaction>();
+		
+		String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE "+ KEY_DATE + " >= " + startDate +
+				" AND " + KEY_DATE + " <= " + endDate;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()){
+			do{
+				Transaction trans = new Transaction();
+				trans.setAccountID(c.getLong(c.getColumnIndex(KEY_ID)));
+				trans.setTransactionName(c.getString(c.getColumnIndex(KEY_TRANSACTION_NAME)));
+				trans.setAccountID(c.getInt(c.getColumnIndex(KEY_ACCOUNT_ID)));
+				trans.setUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
+				trans.setWithdrawAmount(c.getDouble(c.getColumnIndex(KEY_WITHDRAWAL)));
+				trans.setDepositAmount(c.getDouble(c.getColumnIndex(KEY_DEPOSIT)));
+				trans.setDate(c.getLong(c.getColumnIndex(KEY_DATE)));
+				
+				result.add(trans);
+			}
+			while(c.moveToNext());
+		}
+		return result;
+	}
+	
 	public boolean checkUsername(String username){
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,  KEY_USERNAME,  KEY_PASSWORD}, KEY_USERNAME+"=?", 

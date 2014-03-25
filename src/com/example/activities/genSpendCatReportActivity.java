@@ -16,6 +16,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 public class genSpendCatReportActivity extends Activity {
@@ -23,6 +24,7 @@ public class genSpendCatReportActivity extends Activity {
 	EditText startDate;
 	EditText endDate;
 	Button makeReportButton;
+	DatePicker start;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class genSpendCatReportActivity extends Activity {
 		makeReportButton = (Button)findViewById(R.id.makeReport);
 		makeReportButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
+				
 				if (startDate != null && endDate != null) {
 					TransactionHistory transactionsHist = db.getAllTransactionsByID(id);
 					List<Transaction> transactions = transactionsHist.getWithdrawals();

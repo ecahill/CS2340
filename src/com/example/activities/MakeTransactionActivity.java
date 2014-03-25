@@ -11,9 +11,9 @@ import com.example.presenters.IDatabaseHandler;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.util.Date;
 import java.text.NumberFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -83,10 +83,10 @@ public class MakeTransactionActivity extends Activity {
 							if (i == itemID - 1) {
 								curAccount = accountList.get(i);
 							}
-						}						
+						}
 						double curBalance = curAccount.getBalance();
 						Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
-						Toast.makeText(context, "Date: " + date.getTime(), Toast.LENGTH_SHORT).show();
+						//Toast.makeText(context, "Date: " + date.getTime(), Toast.LENGTH_SHORT).show();
 						//Toast.makeText(context, "Date: " + date, Toast.LENGTH_SHORT).show();
 						NumberFormat us = NumberFormat.getCurrencyInstance();
 						
@@ -95,7 +95,8 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "Invalid deposit amount!", Toast.LENGTH_SHORT).show();
 							} else {
 								trans.deposit(amount);					
-								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()), Toast.LENGTH_SHORT).show();
+								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
+																		Toast.LENGTH_SHORT).show();
 							}
 							
 						} else {
@@ -103,12 +104,14 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
 							} else {
 								trans.withdraw(amount);
-								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()), Toast.LENGTH_SHORT).show();
+								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
+																		Toast.LENGTH_SHORT).show();
 							}							
 						}
 						db.addTransaction(trans);
 						db.updateAccount(curAccount);
-						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " + curAccount.getAccountName());
+						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " 
+																		+ curAccount.getAccountName());
 						Intent i = new Intent(MakeTransactionActivity.this, ViewAccountsActivity.class);
 						startActivity(i);
 					} else {

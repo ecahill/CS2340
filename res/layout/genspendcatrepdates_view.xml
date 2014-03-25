@@ -8,22 +8,21 @@
         android:id="@+id/sDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.24"
+        android:layout_weight="0.03"
         android:ems="10"
-        android:inputType="date"
-        android:text="@string/StartDate" />
-
+        android:textSize="25sp"
+        android:hint="@string/StartDate"
+        android:inputType="date" />
+    
     <EditText
         android:id="@+id/eDate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.28"
+        android:layout_weight="0.04"
         android:ems="10"
-        android:inputType="date"
-        android:text="@string/EndDate" >
-
-        <requestFocus />
-    </EditText>
+        android:textSize="25sp"
+        android:hint="@string/EndDate"
+        android:inputType="date" />
 
     <Button
         android:id="@+id/makeReport"

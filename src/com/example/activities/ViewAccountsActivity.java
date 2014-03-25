@@ -54,7 +54,7 @@ public class ViewAccountsActivity extends ListActivity{
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id1) {
 		itemID = l.getItemIdAtPosition(position) + 1;
-		Account account = db.getAccount(itemID);
+		//Account account = db.getAccount(itemID);
 		//session.createAccountSession(account.getAccountName(), session.getUserID(), account.getID());
 		//Toast.makeText(getBaseContext(), "AccName: " + account.getAccountName() + " UserID: " + session.getUserID(), Toast.LENGTH_LONG).show();
 		//Log.d("AccountID", "ID" + session.getAccountID());
