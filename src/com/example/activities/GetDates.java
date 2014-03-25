@@ -110,6 +110,7 @@ public class GetDates extends Activity {
 //						long endDate = endDate.getMinDate();
 						
 						List<Transaction> trans = db.getTransactionsByDates(start, end, session.getUserID());
+						//Toast.makeText(context, "UserID: " + session.getUserID(), Toast.LENGTH_SHORT).show();
 
 						Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
 						//i.putExtra("EXPENSES", expenses);

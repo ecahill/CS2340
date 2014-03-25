@@ -127,15 +127,17 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		List<Transaction> result = new ArrayList<Transaction>();
 		
 		String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE "+ KEY_DATE + " >= " + startDate +
-				" AND " + KEY_DATE + " <= " + endDate;
+				" AND " + KEY_DATE + " <= " + endDate + " AND " + KEY_USER_ID + " = " + userID;
+		String queryTwo = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + KEY_USER_ID + " = " + userID;
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery(selectQuery, null);
+		Cursor c = db.rawQuery(queryTwo, null);
+		
 		if (c.moveToFirst()){
 			do{
 				Transaction trans = new Transaction();
-				trans.setAccountID(c.getLong(c.getColumnIndex(KEY_ID)));
+				trans.setAccountID(c.getLong(c.getColumnIndex(KEY_ACCOUNT_ID)));
 				trans.setTransactionName(c.getString(c.getColumnIndex(KEY_TRANSACTION_NAME)));
-				trans.setAccountID(c.getInt(c.getColumnIndex(KEY_ACCOUNT_ID)));
+				//trans.setAccountID(c.getInt(c.getColumnIndex(KEY_ACCOUNT_ID)));
 				trans.setUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
 				trans.setWithdrawAmount(c.getDouble(c.getColumnIndex(KEY_WITHDRAWAL)));
 				trans.setDepositAmount(c.getDouble(c.getColumnIndex(KEY_DEPOSIT)));
