@@ -85,7 +85,8 @@ public class MakeTransactionActivity extends Activity {
 							}
 						}
 						double curBalance = curAccount.getBalance();
-						Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
+						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), transactionName, 0, 0, date.getTime());
+						//Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
 						//Toast.makeText(context, "Date: " + date.getTime(), Toast.LENGTH_SHORT).show();
 						//Toast.makeText(context, "Date: " + date, Toast.LENGTH_SHORT).show();
 						NumberFormat us = NumberFormat.getCurrencyInstance();

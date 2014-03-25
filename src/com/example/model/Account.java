@@ -7,6 +7,7 @@ public class Account {
 	private double balance;
 	private long userID;
 	private double interestRate;
+	//private TransactionHistory
 	
 	public Account(){
 		

@@ -1,6 +1,7 @@
 package com.example.presenters;
 
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import com.example.model.Transaction;
@@ -35,6 +36,16 @@ public class TransactionHistory {
 		}
 		return deposits;
 	}
+	
+	public int getTransactionAmount(){
+		return transactionList.size();
+	}
+	
+	/*public List<Transaction> getTransactionsByDate(Date start, Date end){
+		for (Transaction t : transactionList){
+			if (t.getDate())
+		}
+	}*/
 	
 
 }
