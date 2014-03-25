@@ -32,8 +32,8 @@ public class MainActivity extends Activity{
 		 * Refresh database
 		 * Delete these 2 lines after running app ONE time
 		 */
-	//	SQLiteDatabase d = db.getDB();
-	//	db.onUpgrade(d, 1, 1);
+//		SQLiteDatabase d = ((DatabaseHandler) db).getDB();
+//		db.onUpgrade(d, 1, 1);
 		
 		
 		List<User> l = db.getAllUsers();
@@ -50,8 +50,7 @@ public class MainActivity extends Activity{
 				Intent i = new Intent(MainActivity.this, RegisterActivity.class);
 				startActivity(i);
 			}
-		});
-		
+		});		
 	}
 
 //	@Override

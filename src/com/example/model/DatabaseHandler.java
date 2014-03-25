@@ -118,7 +118,34 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		
 		long transaction_id = db.insert(TABLE_TRANSACTIONS, null, values);
 		db.close();
+		//Log.d("DatabaseHandler", "Transaction: " + t.getTransactionName() + " added to account: " + this.getAccount(t.getAccountID()));
 		return transaction_id;
+	}
+	
+	// USER ID CORRECTLY USED??
+	public List<Transaction> getTransactionsByDates(long startDate, long endDate, long userID) {
+		List<Transaction> result = new ArrayList<Transaction>();
+		
+		String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE "+ KEY_DATE + " >= " + startDate +
+				" AND " + KEY_DATE + " <= " + endDate;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()){
+			do{
+				Transaction trans = new Transaction();
+				trans.setAccountID(c.getLong(c.getColumnIndex(KEY_ID)));
+				trans.setTransactionName(c.getString(c.getColumnIndex(KEY_TRANSACTION_NAME)));
+				trans.setAccountID(c.getInt(c.getColumnIndex(KEY_ACCOUNT_ID)));
+				trans.setUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
+				trans.setWithdrawAmount(c.getDouble(c.getColumnIndex(KEY_WITHDRAWAL)));
+				trans.setDepositAmount(c.getDouble(c.getColumnIndex(KEY_DEPOSIT)));
+				trans.setDate(c.getLong(c.getColumnIndex(KEY_DATE)));
+				
+				result.add(trans);
+			}
+			while(c.moveToNext());
+		}
+		return result;
 	}
 	
 	public boolean checkUsername(String username){
@@ -237,8 +264,10 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		if (c.moveToFirst()){
 			do{
 				Transaction t = new Transaction();
+				t.setID(c.getLong(c.getColumnIndex(KEY_ID)));
+				
 				//t.set...set everything like in accounts above
-				//transactions.add(t);
+				transactions.add(t);
 			} while(c.moveToNext());
 		}
 		return new TransactionHistory(transactions);

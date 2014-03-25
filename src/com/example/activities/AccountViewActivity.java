@@ -67,6 +67,7 @@ public class AccountViewActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		//session.createAccountSession(curAccount.getAccountName(), session.getUserID(), itemID);
 		accName = (TextView) findViewById(R.id.accNameHeader);
 		accName.setText(curAccount.toString());
 	}

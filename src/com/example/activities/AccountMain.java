@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class AccountMain extends Activity {
 
@@ -20,11 +21,10 @@ public class AccountMain extends Activity {
 		
 		Button viewAcc = (Button)this.findViewById(R.id.bViewAccount);
 		Button createAcc = (Button)this.findViewById(R.id.bCreateAccount);
+		Button viewSpendCatRep = (Button)this.findViewById(R.id.bViewSpendingCategoryReport);
 		
 		viewAcc.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				//display accounts
-				
+			public void onClick(View v){				
 				Intent i = new Intent(AccountMain.this, ViewAccountsActivity.class);
 				startActivity(i);
 			}
@@ -36,13 +36,15 @@ public class AccountMain extends Activity {
 				startActivity(i);
 			}
 		});
+		
+		viewSpendCatRep.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v){
+				Intent i = new Intent(AccountMain.this, GetDates.class);
+				Intent report = new Intent(AccountMain.this, SpendCatReportActivity.class);
+				startActivity(i);
+				//startActivity(report);
+				//Toast.makeText(AccountMain.this, "View report", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.account_main, menu);
-//		return true;
-//	}
-
 }

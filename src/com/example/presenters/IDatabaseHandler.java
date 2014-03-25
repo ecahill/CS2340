@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 public interface IDatabaseHandler {
 	
 	public void onCreate(SQLiteDatabase db);
-	public SQLiteDatabase getDB();
+	//public SQLiteDatabase getDB();
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion);
 	public long createAccount(Account a);
 	public long addUser(User u);
@@ -22,6 +22,7 @@ public interface IDatabaseHandler {
 	public List<User> getAllUsers();
 	public List<Account> getAllAccountsByID(long id);
 	public TransactionHistory getAllTransactionsByID(long id);
+	public List<Transaction> getTransactionsByDates(long startDate, long endDate, long userID);
 	public int getUsersCount();
 	public int updateUser(User user);
 	public int updateAccount(Account a);

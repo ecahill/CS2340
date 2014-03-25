@@ -1,6 +1,7 @@
 package com.example.model;
 
 import java.sql.Date;
+import java.text.NumberFormat;
 
 public class Transaction {
 	private long id;
@@ -106,7 +107,7 @@ public class Transaction {
 	}
 
 	public double getWithdrawAmount() {
-		return withdrawAmount;
+		return finalWithdrawAmount;
 	}
 
 	public void setWithdrawAmount(double withdrawAmount) {
@@ -120,4 +121,9 @@ public class Transaction {
 	public void setDate(long d){
 		this.date = d;
 	}	
+	
+	public String toString() {
+		NumberFormat us = NumberFormat.getCurrencyInstance();
+		return ("Transaction Name: [" + transactionName + "] Withdraw Amount: " + us.format(finalWithdrawAmount));
+	}
 }
