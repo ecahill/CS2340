@@ -45,15 +45,17 @@ public class AccountCreationActivity extends Activity {
         accBalance = (EditText)findViewById(R.id.AccBalanceField);
         monthlyInterestRate = (EditText)findViewById(R.id.MonthlyInterestField);
         acceptButton = (Button)findViewById(R.id.acceptButton);
-//        declineButton = (Button)findViewById(R.id.declineButton);
+//      declineButton = (Button)findViewById(R.id.declineButton);
         session.checkLogin();
         acceptButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				if (accName.getText().toString().length()>0&&accBalance.getText().toString().length()>0&&monthlyInterestRate.getText().toString().length()>0){
+				if (accName.getText().toString().length() > 0 && accBalance.getText().toString().length() > 0 && 
+							monthlyInterestRate.getText().toString().length() > 0){
 					long userID = session.getUserID();
 					if (rules.checkAccountName(userID, accName.getText().toString())){
-						Account a = new Account(accName.getText().toString(), Double.parseDouble(accBalance.getText().toString()),
-								userID, Double.parseDouble(monthlyInterestRate.getText().toString()));
+						Account a = new Account(accName.getText().toString(), 
+											Double.parseDouble(accBalance.getText().toString()),
+											userID, Double.parseDouble(monthlyInterestRate.getText().toString()));
 						long id = db.createAccount(a);
 						Log.d("Account Balance", "Balance: " + a.getBalance());
 						Log.d("Account Balance", "Balance from db: " + db.getAccount(id).getBalance());
@@ -61,15 +63,12 @@ public class AccountCreationActivity extends Activity {
 					
 						Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
 						startActivity(i);
-					}
-					else{
+					} else {
 						Toast.makeText(context, "Account name already exists!", Toast.LENGTH_LONG).show();
 					}
-				}
-				else{
+				} else {
 					Toast.makeText(context, "Account creation unsuccessful!", Toast.LENGTH_LONG).show();
 				}
-
 			}
 		});
 //        declineButton.setOnClickListener(new View.OnClickListener(){
@@ -96,8 +95,4 @@ public class AccountCreationActivity extends Activity {
 		String monthlyInterestRateString = monthlyInterestRate.getText().toString();
 		return Double.parseDouble(monthlyInterestRateString);
 	}
-  
-	
-	
-
 }

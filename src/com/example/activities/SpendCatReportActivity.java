@@ -1,5 +1,8 @@
 package com.example.activities;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.example.cs2340.R;
@@ -7,14 +10,19 @@ import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.model.Transaction;
+import com.example.model.User;
 import com.example.presenters.IDatabaseHandler;
+import com.example.presenters.TransactionHistory;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SpendCatReportActivity extends ListActivity{
@@ -24,18 +32,56 @@ public class SpendCatReportActivity extends ListActivity{
 	private long[] dates;
 	private IDatabaseHandler db;
 	private long itemID;
+	private Button back;
+	private TextView total;
+	private TextView title;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.viewexpensereport_view);
 	
-		final Context context = this; 
-		db = new DatabaseHandler(this);
+	    Intent intent = getIntent();
+	    
+	    db = new DatabaseHandler(this);
 		session = new SessionManager(getApplicationContext());
-		Intent intent = getIntent();
 		dates = intent.getLongArrayExtra("DATES");
+		back = (Button)findViewById(R.id.bBack);
+		total = (TextView)findViewById(R.id.tTotal);
+		title = (TextView)findViewById(R.id.tTitle);	
+	    
+		final Context context = this;		
 		List<Transaction> trans = db.getTransactionsByDates(dates[0], dates[1], session.getUserID());
+		User user = db.getUser(session.getUserID());	
+		
+		title.setText("SCR for [" + user.getUsername() + "]");
+		
+		double totalWithdrawAmount = 0;
+		if (trans.size() != 0) {
+			for (int i = 0; i < trans.size(); i++) {
+				if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
+					trans.remove(i);
+				}
+				totalWithdrawAmount = totalWithdrawAmount + trans.get(i).getWithdrawAmount();
+			}
+		}		
+//		for (Transaction transaction : trans) {
+//			if (transaction.getDepositAmount() > 0) {
+//				trans.remove(transaction);
+//			} else {
+//				totalWithdrawAmount = totalWithdrawAmount + transaction.getWithdrawAmount();
+//			}
+//		}
+		
+		NumberFormat us = NumberFormat.getCurrencyInstance();
+		total.setText("Total Spending: " + us.format(totalWithdrawAmount));		
+		
+		back.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v){
+				Intent i = new Intent(SpendCatReportActivity.this, AccountMain.class);
+				startActivity(i);
+			}
+		});		
 		
 		adapter = new ArrayAdapter<Transaction>(context, android.R.layout.simple_list_item_1, trans);
 		setListAdapter(adapter);

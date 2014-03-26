@@ -36,7 +36,8 @@ public final class R {
         public static final int accNameHeader=0x7f08001b;
         public static final int acceptButton=0x7f080007;
         public static final int acceptTransaction=0x7f080011;
-        public static final int action_settings=0x7f08001e;
+        public static final int action_settings=0x7f080021;
+        public static final int bBack=0x7f08001f;
         public static final int bCreateAccount=0x7f080008;
         public static final int bViewAccount=0x7f08000a;
         public static final int bViewSpendingCategoryReport=0x7f080009;
@@ -47,6 +48,8 @@ public final class R {
         public static final int makeTransactionRadioButton=0x7f080015;
         public static final int makeWithdrawalRadioButton=0x7f080016;
         public static final int sDate=0x7f08000c;
+        public static final int tTitle=0x7f080020;
+        public static final int tTotal=0x7f08001e;
         public static final int textView1=0x7f080000;
         public static final int textView2=0x7f080002;
         public static final int textView3=0x7f080004;
@@ -83,6 +86,7 @@ public final class R {
         public static final int accountname=0x7f05000f;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int back=0x7f050020;
         public static final int confirmPassword=0x7f05000a;
         public static final int createAcc=0x7f05000c;
         public static final int decline=0x7f050013;
@@ -97,6 +101,7 @@ public final class R {
         public static final int password=0x7f050006;
         public static final int register=0x7f050009;
         public static final int title_activity_account_main=0x7f05000b;
+        public static final int total=0x7f050021;
         public static final int transactionAmount=0x7f050018;
         public static final int transactionReason=0x7f050017;
         public static final int username=0x7f050005;

@@ -32,13 +32,17 @@ public class ViewAccountsActivity extends ListActivity{
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.viewaccounts_view);
+	    
+	    db = new DatabaseHandler(this);
+		session = new SessionManager(getApplicationContext());
 	
 		final Context context = this; 
-		db = new DatabaseHandler(this);
-		session = new SessionManager(getApplicationContext());
 		long id = session.getUserID();
-		Log.d("SessionManager", "ID: "+id);
+		
 		accountList = db.getAllAccountsByID(id);	
+		Log.d("SessionManager", "ID: " + id);
+		
+		
 		//ListView myListView = getListView();
 	    
 		if (!accountList.isEmpty()) {

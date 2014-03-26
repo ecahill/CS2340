@@ -32,11 +32,13 @@ public class genSpendCatReportActivity extends Activity {
 	    setContentView(R.layout.genspendcatrepdates_view);
 		final Context context = this;
 		final IDatabaseHandler db = new DatabaseHandler(context);
-		session = new SessionManager(getApplicationContext());
 		final long id = session.getUserID();
+		
+		session = new SessionManager(getApplicationContext());
 		startDate = (EditText)findViewById(R.id.sDate);
 		endDate = (EditText)findViewById(R.id.eDate);
 		makeReportButton = (Button)findViewById(R.id.makeReport);
+		
 		makeReportButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
 				

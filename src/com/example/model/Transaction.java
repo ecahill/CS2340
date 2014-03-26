@@ -28,7 +28,7 @@ public class Transaction {
 	}
 	
 	public Transaction(long userID, long accountID, String transactionName, double depositAmount, 
-			double withdrawAmount, long date){
+			double withdrawAmount, long date) {
 		this.userID = userID;
 		this.accountID = accountID;
 		this.transactionName = transactionName;
@@ -40,7 +40,7 @@ public class Transaction {
 	}
 	
 	public Transaction(long id, long userID, long accountID, String transactionName, double depositAmount,
-			double withdrawAmount, long date){
+			double withdrawAmount, long date) {
 		this.id = id;
 		this.userID = userID;
 		this.accountID = accountID;
@@ -66,27 +66,27 @@ public class Transaction {
 		this.finalDepositAmount = depositAmount;
 	}
 	
-	public long getID(){
+	public long getID() {
 		return this.id;
 	}
 	
-	public void setID(long id){
+	public void setID(long id) {
 		this.id = id;
 	}
 	
-	public long getUserID(){
+	public long getUserID() {
 		return this.userID;
 	}
 	
-	public void setUserID(long uid){
+	public void setUserID(long uid) {
 		this.userID = uid;
 	}
 	
-	public long getAccountID(){
+	public long getAccountID() {
 		return this.accountID;
 	}
 	
-	public void setAccountID(long aid){
+	public void setAccountID(long aid) {
 		this.accountID = aid;
 	}
 	
@@ -114,11 +114,11 @@ public class Transaction {
 		this.withdrawAmount = withdrawAmount;
 	}
 	
-	public long getDate(){
+	public long getDate() {
 		return this.date;
 	}
 	
-	public void setDate(long d){
+	public void setDate(long d) {
 		this.date = d;
 	}	
 	

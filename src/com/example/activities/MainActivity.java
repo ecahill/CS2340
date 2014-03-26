@@ -20,12 +20,15 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity{
-
+	
+	Button loginButton;
+	Button registerButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		final Context context = this; 
+		//final Context context = this; 
 		IDatabaseHandler db = new DatabaseHandler(this);
 		
 		/**
@@ -35,16 +38,17 @@ public class MainActivity extends Activity{
 //		SQLiteDatabase d = ((DatabaseHandler) db).getDB();
 //		db.onUpgrade(d, 1, 1);
 		
-		
 		List<User> l = db.getAllUsers();
-		Button loginButton = (Button)this.findViewById(R.id.acceptButton);
-		Button registerButton = (Button)this.findViewById(R.id.declineButton);
+		loginButton = (Button)this.findViewById(R.id.acceptButton);
+		registerButton = (Button)this.findViewById(R.id.declineButton);
+		
 		loginButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(MainActivity.this, LoginActivity.class);
 				startActivity(i);
 			}
 		}); // Add event listener to button
+		
 		registerButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(MainActivity.this, RegisterActivity.class);
@@ -52,15 +56,4 @@ public class MainActivity extends Activity{
 			}
 		});		
 	}
-
-//	@Override
-	/*public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}*/
-
-
-
-
 }

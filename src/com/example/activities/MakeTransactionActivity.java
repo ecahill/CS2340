@@ -49,21 +49,22 @@ public class MakeTransactionActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.maketransaction_view);
-
-	    final Context context = this;
-		final IDatabaseHandler db = new DatabaseHandler(context);
-		session = new SessionManager(getApplicationContext());
-		final long userID = session.getUserID();
-		final long accountID = session.getAccountID();
+	    
+	    session = new SessionManager(getApplicationContext());
+	    final Context context = this;   
+	    final IDatabaseHandler db = new DatabaseHandler(context);
+		final long userID = session.getUserID();		    
+	    
 		accountList = db.getAllAccountsByID(userID);
-
 		transactionReason = (EditText) findViewById(R.id.transactionReasonEditText);
 		transactionAmount = (EditText) findViewById(R.id.transactionAmountEditText);
 		transactionRadioGroup = (RadioGroup) findViewById(R.id.transactionradiogroup);
-		acceptButton = (Button) findViewById(R.id.acceptTransaction);
-
+		acceptButton = (Button) findViewById(R.id.acceptTransaction); 
+	    
+		//final long accountID = session.getAccountID();	
+		
 		acceptButton.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 			    // get the selected radio button from the group
@@ -85,7 +86,8 @@ public class MakeTransactionActivity extends Activity {
 							}
 						}
 						double curBalance = curAccount.getBalance();
-						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), transactionName, 0, 0, date.getTime());
+						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), 
+														transactionName, 0, 0, date.getTime());
 						//Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
 						//Toast.makeText(context, "Date: " + date.getTime(), Toast.LENGTH_SHORT).show();
 						//Toast.makeText(context, "Date: " + date, Toast.LENGTH_SHORT).show();
@@ -97,10 +99,8 @@ public class MakeTransactionActivity extends Activity {
 							} else {
 								//trans.deposit(amount);
 								//double currentBalance = curAccount.getBalance();
-								if (amount > 0) {
-									curAccount.setBalance(curBalance + amount);
-									trans.setWithdrawAmount(amount);
-								}
+								curAccount.setBalance(curBalance + amount);
+								trans.setDepositAmount(amount);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}
@@ -110,10 +110,8 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
 							} else {
 								//double curBalance = account.getBalance();
-								if (amount <= curBalance && amount > 0) {
 									curAccount.setBalance(curBalance - amount);	
 									trans.setWithdrawAmount(amount);
-								}
 								//trans.withdraw(amount);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
@@ -143,7 +141,6 @@ public class MakeTransactionActivity extends Activity {
 	public String getTransactionReason() {
 		return transactionReason.getText().toString();
 	}
-
 
 	public double getTransactionAmount() {
 		String transactionAmountString = transactionAmount.getText().toString();

@@ -30,8 +30,6 @@ import com.example.presenters.TransactionHistory;
 
 public class GetDates extends Activity {
 	SessionManager session;
-//	DatePicker start;
-//	DatePicker end;
 	TextView startDate;
 	TextView endDate;
 	Button makeReportButton;
@@ -42,20 +40,17 @@ public class GetDates extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.genspendcatrepdates_view);
 	    
-		final Context context = this;
+	    final Context context = this;
 		final IDatabaseHandler db = new DatabaseHandler(context);
-		session = new SessionManager(getApplicationContext());
-		
-		accounts = db.getAllAccountsByID(session.getUserID());
-		//Toast.makeText(GetDates.this, "accounts: " + accounts.size(), Toast.LENGTH_SHORT).show();		
-		
-		
-		final long id = session.getAccountID();
+	    
+	    session = new SessionManager(getApplicationContext());		
+		accounts = db.getAllAccountsByID(session.getUserID());		
 		startDate = (TextView)findViewById(R.id.sDate);
 		endDate = (TextView)findViewById(R.id.eDate);
-//		start = (DatePicker)findViewById(R.id.datePicker1);
-//		end = (DatePicker)findViewById(R.id.datePicker2);
-		makeReportButton = (Button)findViewById(R.id.makeReport);
+		makeReportButton = (Button)findViewById(R.id.makeReport);	    
+		
+		//final long id = session.getAccountID();		
+		
 		makeReportButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
 //				if (startDate != null && endDate != null) {
@@ -99,24 +94,27 @@ public class GetDates extends Activity {
 				
 					if (startDate.getText().toString().length() > 0 && endDate.getText().toString().length() > 0) {
 						long start = 0, end = 0;
-						try {
-							start = Date.parse(startDate.getText().toString());
-							end = Date.parse(endDate.getText().toString());
-						} catch (IllegalArgumentException e) {
-							Toast.makeText(context, "Please enter a valid date!", Toast.LENGTH_SHORT).show();
-						}
-						
+						boolean flag = false;
+							try {
+								start = Date.parse(startDate.getText().toString());
+								end = Date.parse(endDate.getText().toString());
+								flag = true;
+							} catch (IllegalArgumentException e) {
+								Toast.makeText(context, "Please enter a valid date!", Toast.LENGTH_SHORT).show();
+							}
+			
 //						long startDate = startDate.getMinDate();
 //						long endDate = endDate.getMinDate();
 						
 						List<Transaction> trans = db.getTransactionsByDates(start, end, session.getUserID());
 						//Toast.makeText(context, "UserID: " + session.getUserID(), Toast.LENGTH_SHORT).show();
 
-						Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
-						//i.putExtra("EXPENSES", expenses);
-						long[] dates = {start, end};
-						i.putExtra("DATES", dates); 
-						startActivity(i);
+						if (flag == true) {
+							Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
+							long[] dates = {start, end};
+							i.putExtra("DATES", dates); 
+							startActivity(i);
+						}						
 					} else {					
 						Toast.makeText(GetDates.this, "Invalid date!", Toast.LENGTH_SHORT).show();
 					}

@@ -39,7 +39,7 @@ public class SessionManager {
     public static final String KEY_ACCOUNT_ID = "account_id";
      
     // Constructor
-    public SessionManager(Context context){
+    public SessionManager(Context context) {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
@@ -48,7 +48,7 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, long id){
+    public void createLoginSession(String name, long id) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
          
@@ -68,7 +68,7 @@ public class SessionManager {
      * Create account session
      */
     
-    public void createAccountSession(String name, long id, long accountid){
+    public void createAccountSession(String name, long id, long accountid) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
         editor.putLong(KEY_ID, id);
@@ -79,7 +79,7 @@ public class SessionManager {
     /**
      * Get stored session data
      * */
-    public HashMap<String, String> getUserDetails(){
+    public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
@@ -94,11 +94,11 @@ public class SessionManager {
     /**
      * Get session user id
      */
-    public long getUserID(){
+    public long getUserID() {
     	return pref.getLong(KEY_ID, 0);
     }
     
-    public long getAccountID(){
+    public long getAccountID() {
     	return pref.getLong(KEY_ACCOUNT_ID, 0);
     }
     
@@ -107,7 +107,7 @@ public class SessionManager {
      * If false it will redirect user to login page
      * Else won't do anything
      * */
-    public void checkLogin(){
+    public void checkLogin() {
         // Check login status
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
@@ -123,7 +123,7 @@ public class SessionManager {
         }      
     }
     
-    public void removeAccount(){
+    public void removeAccount() {
     	editor.remove(KEY_ACCOUNT_ID);
     	editor.commit();
     	//re add login session?
@@ -132,7 +132,7 @@ public class SessionManager {
     /**
      * Clear session details
      * */
-    public void logoutUser(){
+    public void logoutUser() {
         // Clearing all data from Shared Preferences
         editor.clear();
         editor.commit();
@@ -153,8 +153,7 @@ public class SessionManager {
      * Quick check for login
      * **/
     // Get Login State
-    public boolean isLoggedIn(){
+    public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
-    }
-    
+    }    
 }
