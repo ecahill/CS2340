@@ -95,7 +95,12 @@ public class MakeTransactionActivity extends Activity {
 							if (amount < 0) {
 								Toast.makeText(context, "Invalid deposit amount!", Toast.LENGTH_SHORT).show();
 							} else {
-								trans.deposit(amount);					
+								//trans.deposit(amount);
+								//double currentBalance = curAccount.getBalance();
+								if (amount > 0) {
+									curAccount.setBalance(curBalance + amount);
+									trans.setWithdrawAmount(amount);
+								}
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}
@@ -104,7 +109,12 @@ public class MakeTransactionActivity extends Activity {
 							if (amount > curBalance || amount < 0) {
 								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
 							} else {
-								trans.withdraw(amount);
+								//double curBalance = account.getBalance();
+								if (amount <= curBalance && amount > 0) {
+									curAccount.setBalance(curBalance - amount);	
+									trans.setWithdrawAmount(amount);
+								}
+								//trans.withdraw(amount);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}							

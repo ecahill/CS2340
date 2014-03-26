@@ -107,7 +107,7 @@ public class Transaction {
 	}
 
 	public double getWithdrawAmount() {
-		return finalWithdrawAmount;
+		return withdrawAmount;
 	}
 
 	public void setWithdrawAmount(double withdrawAmount) {
@@ -124,6 +124,10 @@ public class Transaction {
 	
 	public String toString() {
 		NumberFormat us = NumberFormat.getCurrencyInstance();
-		return ("Transaction Name: [" + transactionName + "] Withdraw Amount: " + us.format(finalWithdrawAmount));
+		if (getWithdrawAmount() > 0) {
+			return ("Transaction Name: [" + transactionName + "] Withdraw Amount: " + us.format(getWithdrawAmount()));		
+		} else {
+			return ("Transaction Name: [" + transactionName + "] Deposit Amount: " + us.format(getDepositAmount()));	
+		}
 	}
 }
