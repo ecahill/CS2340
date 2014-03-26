@@ -9,11 +9,11 @@ public class AccountRules {
 	private IDatabaseHandler d;
 	
 	
-	public AccountRules(IDatabaseHandler d){
+	public AccountRules(IDatabaseHandler d) {
 		this.d = d;
 	}
 	
-	public boolean checkAccountName(long userID, String name){
+	public boolean checkAccountName(long userID, String name) {
 		List<Account> l = d.getAllAccountsByID(userID);
 		for (Account a: l){
 			if (name.equals(a.getAccountName())){
@@ -22,5 +22,4 @@ public class AccountRules {
 		}
 		return true;
 	}
-
 }

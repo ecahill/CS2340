@@ -24,7 +24,7 @@ public class AccountMain extends Activity {
 		Button viewSpendCatRep = (Button)this.findViewById(R.id.bViewSpendingCategoryReport);
 		
 		viewAcc.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){				
+			public void onClick(View v) {				
 				Intent i = new Intent(AccountMain.this, ViewAccountsActivity.class);
 				startActivity(i);
 			}

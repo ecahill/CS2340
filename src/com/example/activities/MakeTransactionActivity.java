@@ -49,21 +49,22 @@ public class MakeTransactionActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.maketransaction_view);
-
-	    final Context context = this;
-		final IDatabaseHandler db = new DatabaseHandler(context);
-		session = new SessionManager(getApplicationContext());
-		final long userID = session.getUserID();
-		final long accountID = session.getAccountID();
+	    
+	    session = new SessionManager(getApplicationContext());
+	    final Context context = this;   
+	    final IDatabaseHandler db = new DatabaseHandler(context);
+		final long userID = session.getUserID();		    
+	    
 		accountList = db.getAllAccountsByID(userID);
-
 		transactionReason = (EditText) findViewById(R.id.transactionReasonEditText);
 		transactionAmount = (EditText) findViewById(R.id.transactionAmountEditText);
 		transactionRadioGroup = (RadioGroup) findViewById(R.id.transactionradiogroup);
-		acceptButton = (Button) findViewById(R.id.acceptTransaction);
-
+		acceptButton = (Button) findViewById(R.id.acceptTransaction); 
+	    
+		//final long accountID = session.getAccountID();	
+		
 		acceptButton.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 			    // get the selected radio button from the group
@@ -140,7 +141,6 @@ public class MakeTransactionActivity extends Activity {
 	public String getTransactionReason() {
 		return transactionReason.getText().toString();
 	}
-
 
 	public double getTransactionAmount() {
 		String transactionAmountString = transactionAmount.getText().toString();

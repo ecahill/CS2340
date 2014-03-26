@@ -41,27 +41,30 @@ public class SpendCatReportActivity extends ListActivity{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.viewexpensereport_view);
 	
-		final Context context = this; 
-		db = new DatabaseHandler(this);
+	    Intent intent = getIntent();
+	    
+	    db = new DatabaseHandler(this);
 		session = new SessionManager(getApplicationContext());
-		Intent intent = getIntent();
 		dates = intent.getLongArrayExtra("DATES");
-		List<Transaction> trans = db.getTransactionsByDates(dates[0], dates[1], session.getUserID());
 		back = (Button)findViewById(R.id.bBack);
 		total = (TextView)findViewById(R.id.tTotal);
-		title = (TextView)findViewById(R.id.tTitle);			
-		
-		User user = db.getUser(session.getUserID());
+		title = (TextView)findViewById(R.id.tTitle);	
+	    
+		final Context context = this;		
+		List<Transaction> trans = db.getTransactionsByDates(dates[0], dates[1], session.getUserID());
+		User user = db.getUser(session.getUserID());	
 		
 		title.setText("SCR for [" + user.getUsername() + "]");
 		
 		double totalWithdrawAmount = 0;
-		for (int i = 0; i < trans.size(); i++) {
-			if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
-				trans.remove(i);
+		if (trans.size() != 0) {
+			for (int i = 0; i < trans.size(); i++) {
+				if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
+					trans.remove(i);
+				}
+				totalWithdrawAmount = totalWithdrawAmount + trans.get(i).getWithdrawAmount();
 			}
-			totalWithdrawAmount = totalWithdrawAmount + trans.get(i).getWithdrawAmount();
-		}
+		}		
 //		for (Transaction transaction : trans) {
 //			if (transaction.getDepositAmount() > 0) {
 //				trans.remove(transaction);

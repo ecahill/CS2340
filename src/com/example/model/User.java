@@ -7,41 +7,42 @@ public class User {
 	String _password;
 
 	
-	public User(){}
+	public User() {
+		
+	}
 	
-	public User(long id, String u, String p){
+	public User(long id, String u, String p) {
 		this._id = id;
 		this._username = u;
 		this._password = p;
 	}
 	
-	public User(String u, String p){
+	public User(String u, String p) {
 		this._username = u;
 		this._password = p;
 	}
 	
-	public long getID(){
+	public long getID() {
 		return this._id;
 	}
 	
-	public void setID(long id){
+	public void setID(long id) {
 		this._id = id;
 	}
 	
-	public String getUsername(){
+	public String getUsername() {
 		return this._username;
 	}
 	
-	public void setUsername(String u){
+	public void setUsername(String u) {
 		this._username = u;
 	}
 	
-	public String getPassword(){
+	public String getPassword() {
 		return this._password;
 	}
 	
-	public void setPassword(String p){
+	public void setPassword(String p) {
 		this._password = p;
-	}
-	
+	}	
 }

@@ -9,18 +9,18 @@ public class Account {
 	private double interestRate;
 	//private TransactionHistory
 	
-	public Account(){
+	public Account() {
 		
 	}
 	
-	public Account(String account_name, double balance, long userID, double interestRate){
+	public Account(String account_name, double balance, long userID, double interestRate) {
 		this.account_name = account_name;
 		this.balance = balance;
 		this.userID = userID;
 		this.interestRate = interestRate;
 	}
 	
-	public Account(long id, String account_name, double balance, long userID, double interestRate){
+	public Account(long id, String account_name, double balance, long userID, double interestRate) {
 		this.id = id;
 		this.account_name = account_name;
 		this.balance = balance;
@@ -28,47 +28,47 @@ public class Account {
 		this.interestRate = interestRate;
 	}
 	
-	public void setID(long id){
+	public void setID(long id) {
 		this.id = id;
 	}
 	
-	public void setAccountName(String name){
+	public void setAccountName(String name) {
 		this.account_name = name;
 	}
 	
-	public void setBalance(double bal){
+	public void setBalance(double bal) {
 		this.balance = bal;
 	}
 	
-	public void setUserID(long id){
+	public void setUserID(long id) {
 		this.userID = id;
 	}
 	
-	public void setInterestRate(double rate){
+	public void setInterestRate(double rate) {
 		this.interestRate = rate;
 	}
 	
-	public long getID(){
+	public long getID() {
 		return this.id;
 	}
 	
-	public String getAccountName(){
+	public String getAccountName() {
 		return this.account_name;
 	}
 	
-	public double getBalance(){
+	public double getBalance() {
 		return this.balance;
 	}
 	
-	public long getUserID(){
+	public long getUserID() {
 		return this.userID;
 	}
 	
-	public double getInterestRate(){
+	public double getInterestRate() {
 		return this.interestRate;
 	}
 	
-	public String toString(){
+	public String toString() {
 		NumberFormat us = NumberFormat.getCurrencyInstance();
 		return this.account_name+ " ["+us.format(balance)+"]";
 	}

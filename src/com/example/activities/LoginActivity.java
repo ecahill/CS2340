@@ -29,6 +29,7 @@ public class LoginActivity extends Activity{
     EditText nameField;
     EditText password;
     EditText resultField;
+    Button goButton;
     SessionManager session;
     
     @Override
@@ -37,11 +38,12 @@ public class LoginActivity extends Activity{
 		setContentView(R.layout.login_view);
 		final Context context = this;
 		final IDatabaseHandler db = new DatabaseHandler(context);
-		session = new SessionManager(getApplicationContext()); 
 		
+		session = new SessionManager(getApplicationContext()); 			
 		nameField = (EditText) findViewById(R.id.AccountNameField);
 		password = (EditText) findViewById(R.id.AcctBalanceField);
-		Button goButton = (Button) this.findViewById(R.id.acceptButton);
+		goButton = (Button) this.findViewById(R.id.acceptButton);
+		
 		goButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				if (getName().length()>0 && getPassword().length()>0){
@@ -50,20 +52,16 @@ public class LoginActivity extends Activity{
 						if(!u.getUsername().equals("admin")) {
 							session.createLoginSession(u.getUsername(), u.getID());
 							Intent accMain = new Intent(LoginActivity.this, AccountMain.class);
-							startActivity(accMain);	
-						
+							startActivity(accMain);							
 						}
-						setContentView(R.layout.loginsuccess_view);
-										
-					}
-					else{
+						setContentView(R.layout.loginsuccess_view);										
+					} else {
 						Toast.makeText(context, "Login Failed.", Toast.LENGTH_LONG).show();
 					}
 				}
 			}
 		}); 
-	}
-	
+	}	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,13 +70,11 @@ public class LoginActivity extends Activity{
 		return true;
 	}
 
-
 	public String getName() {
 		return nameField.getText().toString().trim();
 	}
 	
 	public String getPassword(){
 		return password.getText().toString().trim();
-	}
-	
+	}	
 }

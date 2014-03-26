@@ -38,23 +38,24 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	private static final String KEY_DATE = "date";
 	private static final String KEY_TRANSACTION_NAME = "transaction_name";
 	
-	private static final String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("+KEY_ID+ " INTEGER PRIMARY KEY," 
-	+ KEY_USERNAME+" TEXT,"+KEY_PASSWORD+" TEXT"+")";
+	private static final String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "(" + KEY_ID + 
+			" INTEGER PRIMARY KEY," + KEY_USERNAME + " TEXT," + KEY_PASSWORD + " TEXT" + ")";
 	
-	private static final String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + TABLE_ACCOUNTS + "("+KEY_ID+" INTEGER PRIMARY KEY,"
-			+KEY_ACCOUNT_NAME+" TEXT,"+KEY_BALANCE+" REAL,"+KEY_USER_ID+" INTEGER,"+KEY_INTEREST+" REAL)";
+	private static final String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + TABLE_ACCOUNTS + "(" + KEY_ID + 
+			" INTEGER PRIMARY KEY," + KEY_ACCOUNT_NAME + " TEXT," + KEY_BALANCE + " REAL," + KEY_USER_ID + 
+			" INTEGER," + KEY_INTEREST+" REAL)";
 	
-	private static final String CREATE_TRANSACTIONS_TABLE = "CREATE TABLE " + TABLE_TRANSACTIONS+"("+KEY_ID+ " INTEGER PRIMARY KEY,"
-			+KEY_TRANSACTION_NAME+" TEXT,"+KEY_ACCOUNT_ID+" INTEGER,"+KEY_USER_ID+" INTEGER,"+KEY_DEPOSIT+" REAL,"+KEY_WITHDRAWAL+" REAL,"
-			+KEY_DATE+" TEXT"+")";
+	private static final String CREATE_TRANSACTIONS_TABLE = "CREATE TABLE " + TABLE_TRANSACTIONS + "(" + KEY_ID +
+			" INTEGER PRIMARY KEY," + KEY_TRANSACTION_NAME + " TEXT," + KEY_ACCOUNT_ID + " INTEGER," + 
+			KEY_USER_ID+" INTEGER," + KEY_DEPOSIT + " REAL," + KEY_WITHDRAWAL + " REAL," + KEY_DATE+" TEXT" + ")";
 	
 
-	public DatabaseHandler(Context context){
+	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	@Override
-	public void onCreate(SQLiteDatabase db){
+	public void onCreate(SQLiteDatabase db) {
 
 		db.execSQL(CREATE_USERS_TABLE);
 		db.execSQL(CREATE_ACCOUNTS_TABLE);
@@ -62,10 +63,9 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		//Log.d("Database Creation", "Users and Accounts tables created");
 	}
 	
-	public SQLiteDatabase getDB(){
+	public SQLiteDatabase getDB() {
 		return this.getWritableDatabase();
-	}
-	
+	}	
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -78,7 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	
-	public long createAccount(Account a){
+	public long createAccount(Account a) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(KEY_ACCOUNT_NAME, a.getAccountName());
@@ -92,7 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	//add user to db
-	public long addUser(User u){
+	public long addUser(User u) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		//get user username and passowrd
@@ -106,7 +106,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	//add transaction
-	public long addTransaction(Transaction t){
+	public long addTransaction(Transaction t) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(KEY_TRANSACTION_NAME, t.getTransactionName());
@@ -126,14 +126,14 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	public List<Transaction> getTransactionsByDates(long startDate, long endDate, long userID) {
 		List<Transaction> result = new ArrayList<Transaction>();
 		
-		String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE "+ KEY_DATE + " >= " + startDate +
+		String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + KEY_DATE + " >= " + startDate +
 				" AND " + KEY_DATE + " <= " + endDate + " AND " + KEY_USER_ID + " = " + userID;
 		String queryTwo = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + KEY_USER_ID + " = " + userID;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(queryTwo, null);
 		
-		if (c.moveToFirst()){
-			do{
+		if (c.moveToFirst()) {
+			do {
 				Transaction trans = new Transaction();
 				trans.setAccountID(c.getLong(c.getColumnIndex(KEY_ACCOUNT_ID)));
 				trans.setTransactionName(c.getString(c.getColumnIndex(KEY_TRANSACTION_NAME)));
@@ -152,25 +152,23 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	
 	public boolean checkUsername(String username){
 		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,  KEY_USERNAME,  KEY_PASSWORD}, KEY_USERNAME+"=?", 
+		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,  KEY_USERNAME,  KEY_PASSWORD}, KEY_USERNAME + "=?", 
 				new String[] {String.valueOf(username)}, null, null, null, null);
 		db.close();
-		if ((cursor.getCount()!=0)&&(cursor.moveToFirst())){
+		if ((cursor.getCount() != 0) && (cursor.moveToFirst())){
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
-
 	}
 	
 	
 	//get user from db by ID
-	public User getUser(long id){
+	public User getUser(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		
-		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID, KEY_USERNAME, KEY_PASSWORD}, KEY_ID+"=?", new String[]
-				{String.valueOf(id)}, null, null, null, null);
+		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID, KEY_USERNAME, KEY_PASSWORD}, KEY_ID + "=?",
+				new String[] {String.valueOf(id)}, null, null, null, null);
 		if (cursor!=null){
 			cursor.moveToFirst();
 		}
@@ -180,10 +178,10 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	
 	public Account getAccount(long account_id){
 		SQLiteDatabase db = this.getReadableDatabase();
-		String selectQuery = "SELECT * FROM "+TABLE_ACCOUNTS+" WHERE "+KEY_ID+" = "+ account_id;
+		String selectQuery = "SELECT * FROM " + TABLE_ACCOUNTS + " WHERE " + KEY_ID+" = " + account_id;
 		
 		Cursor c = db.rawQuery(selectQuery, null);
-		if (c!=null){
+		if (c!=null) {
 			c.moveToFirst();
 		}
 		Account account = new Account();
@@ -196,7 +194,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	//get user from db by username and password
-	public User getUserByUP(String username, String password){
+	public User getUserByUP(String username, String password) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		/*String[] args = {username, password};
 		Cursor cursor = db.rawQuery("SELECT * FROM users where KEY_USERNAME=? & KEY_PASSWORD=?", args);
@@ -206,9 +204,9 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 			return user;
 		}
 		return null;*/
-		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID, KEY_USERNAME, KEY_PASSWORD}, KEY_USERNAME+"=? AND "+
-		KEY_PASSWORD+"=?", new String[] {String.valueOf(username), String.valueOf(password)}, null, null, null, null);
-		if (cursor.moveToFirst()){//(cursor!=null){
+		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID, KEY_USERNAME, KEY_PASSWORD}, KEY_USERNAME + "=? AND "
+		+ KEY_PASSWORD + "=?", new String[] {String.valueOf(username), String.valueOf(password)}, null, null, null, null);
+		if (cursor.moveToFirst()) {//(cursor!=null){
 			//cursor.moveToFirst();
 			User user = new User(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
 			return user;
@@ -218,20 +216,20 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	
 	
 	//get arraylist of all users in db
-	public List<User> getAllUsers(){
+	public List<User> getAllUsers() {
 		List<User> userList = new ArrayList<User>();
 		String selectQuery = "SELECT * FROM "+TABLE_USERS;
 	
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
-		if (cursor.moveToFirst()){
-			do{
+		if (cursor.moveToFirst()) {
+			do {
 				User user = new User();
 				user.setID(Integer.parseInt(cursor.getString(0)));
 				user.setUsername(cursor.getString(1));
 				user.setPassword(cursor.getString(2));
 				userList.add(user);
-			}while(cursor.moveToNext());
+			} while(cursor.moveToNext());
 		}
 		return userList;
 	}
@@ -242,8 +240,8 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		String selectQuery = "SELECT * FROM " + TABLE_ACCOUNTS + " WHERE "+ KEY_USER_ID + " = "+ id;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
-		if (c.moveToFirst()){
-			do{
+		if (c.moveToFirst()) {
+			do {
 				Account account = new Account();
 				account.setID(c.getLong(c.getColumnIndex(KEY_ID)));
 				account.setAccountName(c.getString(c.getColumnIndex(KEY_ACCOUNT_NAME)));
@@ -258,13 +256,13 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	
-	public TransactionHistory getAllTransactionsByID(long id){
+	public TransactionHistory getAllTransactionsByID(long id) {
 		List<Transaction> transactions = new ArrayList<Transaction>();
-		String selectQuery = "SELECT * FROM "+TABLE_TRANSACTIONS + " WHERE "+KEY_ACCOUNT_ID + " = "+id;
+		String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + KEY_ACCOUNT_ID + " = " + id;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
-		if (c.moveToFirst()){
-			do{
+		if (c.moveToFirst()) {
+			do {
 				Transaction t = new Transaction();
 				t.setID(c.getLong(c.getColumnIndex(KEY_ID)));
 				
@@ -276,7 +274,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	}
 	
 	//get number of users in db
-	public int getUsersCount(){
+	public int getUsersCount() {
 		String countQuery = "SELECT * FROM " + TABLE_USERS;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(countQuery, null);
@@ -287,17 +285,17 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 	
 	
 	//update a user in the database
-	public int updateUser(User user){
+	public int updateUser(User user) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(KEY_USERNAME, user.getUsername());
 		values.put(KEY_PASSWORD, user.getPassword());
 		
-		return db.update(TABLE_USERS, values, KEY_ID+ " =?", new String[] {String.valueOf(user.getID())});
+		return db.update(TABLE_USERS, values, KEY_ID + " =?", new String[] {String.valueOf(user.getID())});
 	}	
 	
 	// FIX PLEASE:
-	public int updateAccount(Account a){
+	public int updateAccount(Account a) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(KEY_ACCOUNT_NAME, a.getAccountName());
@@ -306,16 +304,12 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		values.put(KEY_INTEREST, a.getInterestRate());
 		
 		return db.update(TABLE_ACCOUNTS, values, KEY_ID+ " =?", new String[] {String.valueOf(a.getID())});
-	}
-	
+	}	
 	
 	//Delete a user from the database
 	public void deleteUser(User user){
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_USERS, KEY_ID+" = ?", new String[] {String.valueOf(user.getID())});
+		db.delete(TABLE_USERS, KEY_ID + " = ?", new String[] {String.valueOf(user.getID())});
 		db.close();
-	}
-	
-	
-	
+	}	
 }

@@ -30,8 +30,6 @@ import com.example.presenters.TransactionHistory;
 
 public class GetDates extends Activity {
 	SessionManager session;
-//	DatePicker start;
-//	DatePicker end;
 	TextView startDate;
 	TextView endDate;
 	Button makeReportButton;
@@ -42,20 +40,17 @@ public class GetDates extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.genspendcatrepdates_view);
 	    
-		final Context context = this;
+	    final Context context = this;
 		final IDatabaseHandler db = new DatabaseHandler(context);
-		session = new SessionManager(getApplicationContext());
-		
-		accounts = db.getAllAccountsByID(session.getUserID());
-		//Toast.makeText(GetDates.this, "accounts: " + accounts.size(), Toast.LENGTH_SHORT).show();		
-		
-		
-		final long id = session.getAccountID();
+	    
+	    session = new SessionManager(getApplicationContext());		
+		accounts = db.getAllAccountsByID(session.getUserID());		
 		startDate = (TextView)findViewById(R.id.sDate);
 		endDate = (TextView)findViewById(R.id.eDate);
-//		start = (DatePicker)findViewById(R.id.datePicker1);
-//		end = (DatePicker)findViewById(R.id.datePicker2);
-		makeReportButton = (Button)findViewById(R.id.makeReport);
+		makeReportButton = (Button)findViewById(R.id.makeReport);	    
+		
+		//final long id = session.getAccountID();		
+		
 		makeReportButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
 //				if (startDate != null && endDate != null) {
@@ -116,7 +111,6 @@ public class GetDates extends Activity {
 
 						if (flag == true) {
 							Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
-							//i.putExtra("EXPENSES", expenses);
 							long[] dates = {start, end};
 							i.putExtra("DATES", dates); 
 							startActivity(i);
