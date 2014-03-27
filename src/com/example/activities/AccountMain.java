@@ -39,7 +39,7 @@ public class AccountMain extends Activity {
 		
 		viewSpendCatRep.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
-				Intent i = new Intent(AccountMain.this, GetDates.class);
+				Intent i = new Intent(AccountMain.this, GetDatesActivity.class);
 				Intent report = new Intent(AccountMain.this, SpendCatReportActivity.class);
 				startActivity(i);
 				//startActivity(report);
