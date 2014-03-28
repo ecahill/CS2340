@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 	
 	Button loginButton;
 	Button registerButton;

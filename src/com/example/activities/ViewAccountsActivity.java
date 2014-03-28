@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.Toast;
@@ -20,13 +21,14 @@ import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.presenters.IDatabaseHandler;
 
-public class ViewAccountsActivity extends ListActivity{
+public class ViewAccountsActivity extends ListActivity {
 	
 	private SessionManager session;
 	private ArrayAdapter<Account> adapter;
 	private List<Account> accountList;
 	private IDatabaseHandler db;
 	private long itemID;
+	private Button back;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class ViewAccountsActivity extends ListActivity{
 	    
 	    db = new DatabaseHandler(this);
 		session = new SessionManager(getApplicationContext());
+		back = (Button)findViewById(R.id.bBacktoAccMain);
 	
 		final Context context = this; 
 		long id = session.getUserID();
@@ -42,7 +45,12 @@ public class ViewAccountsActivity extends ListActivity{
 		accountList = db.getAllAccountsByID(id);	
 		Log.d("SessionManager", "ID: " + id);
 		
-		
+		back.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v){
+				Intent i = new Intent(ViewAccountsActivity.this, AccountMain.class);
+				startActivity(i);
+			}
+		});		
 		//ListView myListView = getListView();
 	    
 		if (!accountList.isEmpty()) {

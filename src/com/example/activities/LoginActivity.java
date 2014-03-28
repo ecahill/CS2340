@@ -24,13 +24,13 @@ import android.view.View.OnClickListener;
 
 import android.util.Log;
 
-public class LoginActivity extends Activity{
+public class LoginActivity extends Activity {
 	
-    EditText nameField;
-    EditText password;
-    EditText resultField;
-    Button goButton;
-    SessionManager session;
+    private EditText nameField;
+    private EditText password;
+    private EditText resultField;
+    private Button goButton;
+    private SessionManager session;
     
     @Override
 	protected void onCreate(Bundle savedInstanceState) {

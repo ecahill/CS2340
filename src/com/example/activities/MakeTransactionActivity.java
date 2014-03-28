@@ -7,6 +7,7 @@ import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.presenters.AccountRules;
 import com.example.presenters.IDatabaseHandler;
+import com.example.presenters.TransactionAdapter;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -99,7 +100,7 @@ public class MakeTransactionActivity extends Activity {
 							} else {
 								//trans.deposit(amount);
 								//double currentBalance = curAccount.getBalance();
-								curAccount.setBalance(curBalance + amount);
+								curAccount.setBalance(TransactionAdapter.deposit(amount, curBalance));
 								trans.setDepositAmount(amount);
 								db.addTransaction(trans);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
@@ -111,10 +112,10 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
 							} else {
 								//double curBalance = account.getBalance();
-									curAccount.setBalance(curBalance - amount);	
-									trans.setWithdrawAmount(amount);
+								curAccount.setBalance(TransactionAdapter.withdraw(amount, curBalance));	
+								trans.setWithdrawAmount(amount);
 								//trans.withdraw(amount);
-									db.addTransaction(trans);
+								db.addTransaction(trans);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}							
