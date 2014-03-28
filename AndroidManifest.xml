@@ -39,7 +39,7 @@
         <activity android:name="com.example.activities.AccountViewActivity"></activity>
         <activity android:name="com.example.activities.MakeTransactionActivity"></activity>
         <activity android:name="com.example.activities.genSpendCatReportActivity"></activity>
-        <activity android:name="com.example.activities.GetDates"></activity>
+        <activity android:name="com.example.activities.GetDatesActivity"></activity>
         <activity android:name="com.example.activities.SpendCatReportActivity"></activity>
     </application>
 

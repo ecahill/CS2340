@@ -94,13 +94,14 @@ public class MakeTransactionActivity extends Activity {
 						NumberFormat us = NumberFormat.getCurrencyInstance();
 
 						if (transactionType.equals(DEPOSIT)) {							
-							if (amount < 0) {
+							if (amount <= 0) {
 								Toast.makeText(context, "Invalid deposit amount!", Toast.LENGTH_SHORT).show();
 							} else {
 								//trans.deposit(amount);
 								//double currentBalance = curAccount.getBalance();
 								curAccount.setBalance(curBalance + amount);
 								trans.setDepositAmount(amount);
+								db.addTransaction(trans);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}
@@ -113,11 +114,12 @@ public class MakeTransactionActivity extends Activity {
 									curAccount.setBalance(curBalance - amount);	
 									trans.setWithdrawAmount(amount);
 								//trans.withdraw(amount);
+									db.addTransaction(trans);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}							
 						}
-						db.addTransaction(trans);
+						//db.addTransaction(trans);
 						db.updateAccount(curAccount);
 						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " 
 																		+ curAccount.getAccountName());

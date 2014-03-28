@@ -57,14 +57,19 @@ public class SpendCatReportActivity extends ListActivity{
 		title.setText("SCR for [" + user.getUsername() + "]");
 		
 		double totalWithdrawAmount = 0;
-		if (trans.size() != 0) {
-			for (int i = 0; i < trans.size(); i++) {
-				if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
-					trans.remove(i);
-				}
+
+		for (int i = 0; i < trans.size(); i++) {			
+			if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
+				trans.remove(i);
+			}				
+			if (i != trans.size()) {
 				totalWithdrawAmount = totalWithdrawAmount + trans.get(i).getWithdrawAmount();
-			}
-		}		
+			}			
+		}
+		
+//		for (int i = 0; i < trans.size(); i++) {
+//			
+//		}
 //		for (Transaction transaction : trans) {
 //			if (transaction.getDepositAmount() > 0) {
 //				trans.remove(transaction);

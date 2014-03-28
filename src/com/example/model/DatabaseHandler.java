@@ -240,6 +240,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
 		String selectQuery = "SELECT * FROM " + TABLE_ACCOUNTS + " WHERE "+ KEY_USER_ID + " = "+ id;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
+		//db.close();
 		if (c.moveToFirst()) {
 			do {
 				Account account = new Account();
