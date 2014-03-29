@@ -47,8 +47,10 @@ public class ViewAccountsActivity extends ListActivity {
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
-				Intent i = new Intent(ViewAccountsActivity.this, AccountMain.class);
-				startActivity(i);
+				Intent intent = new Intent(ViewAccountsActivity.this, AccountMain.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
+				ViewAccountsActivity.this.finish();
+				startActivity(intent);
 			}
 		});		
 		//ListView myListView = getListView();

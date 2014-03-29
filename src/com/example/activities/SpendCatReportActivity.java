@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SpendCatReportActivity extends ListActivity{
+public class SpendCatReportActivity extends ListActivity {
 	
 	private SessionManager session;
 	private ArrayAdapter<Transaction> adapter;
@@ -83,8 +83,9 @@ public class SpendCatReportActivity extends ListActivity{
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
-				Intent i = new Intent(SpendCatReportActivity.this, AccountMain.class);
-				startActivity(i);
+				Intent intent = new Intent(SpendCatReportActivity.this, AccountMain.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
+				startActivity(intent);
 			}
 		});		
 		

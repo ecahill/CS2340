@@ -59,6 +59,7 @@ public class AccountViewActivity extends Activity {
 			public void onClick(View v) {
 				Intent transaction = new Intent(AccountViewActivity.this, MakeTransactionActivity.class);
 				transaction.putExtra("itemID", itemID);
+				AccountViewActivity.this.finish();
 				startActivity(transaction);
 			}
 		});

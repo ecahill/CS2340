@@ -5,66 +5,62 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:text="@string/login"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/acceptButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="41dp"
-        android:text="@string/go" />
-
     <EditText
         android:id="@+id/AcctBalanceField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/acceptButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp"
+        android:layout_above="@+id/loginButton"
+        android:layout_alignLeft="@+id/AccountNameField"
+        android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp"
-        android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/AccountNameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_above="@+id/textView3"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
         android:ems="10"
-        android:inputType="textPersonName" >
-        
-        <requestFocus />
-    </EditText>
-    
+        android:inputType="textPersonName" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/AccountNameField"
+        android:layout_centerHorizontal="true"
+        android:text="@string/username"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/AcctBalanceField"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_centerHorizontal="true"
         android:text="@string/password"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/registerButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:textSize="30sp"
+        android:text="@string/login" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"
+        android:text="@string/register"
+        android:textSize="30sp" />
 
 </RelativeLayout>

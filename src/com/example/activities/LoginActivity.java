@@ -29,7 +29,8 @@ public class LoginActivity extends Activity {
     private EditText nameField;
     private EditText password;
     private EditText resultField;
-    private Button goButton;
+    private Button loginButton;
+    private Button registerButton;
     private SessionManager session;
     
     @Override
@@ -42,9 +43,10 @@ public class LoginActivity extends Activity {
 		session = new SessionManager(getApplicationContext()); 			
 		nameField = (EditText) findViewById(R.id.AccountNameField);
 		password = (EditText) findViewById(R.id.AcctBalanceField);
-		goButton = (Button) this.findViewById(R.id.acceptButton);
+		loginButton = (Button) findViewById(R.id.loginButton);
+		registerButton = (Button) findViewById(R.id.registerButton);
 		
-		goButton.setOnClickListener(new View.OnClickListener(){
+		loginButton.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				if (getName().length()>0 && getPassword().length()>0){
 					User u = db.getUserByUP(getName(), getPassword());
@@ -61,6 +63,13 @@ public class LoginActivity extends Activity {
 				}
 			}
 		}); 
+		
+		registerButton.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v){
+				Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+				startActivity(i);
+			}
+		});
 	}	
 
 	@Override
