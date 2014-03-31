@@ -28,7 +28,7 @@ import com.example.model.Transaction;
 import com.example.presenters.IDatabaseHandler;
 import com.example.presenters.TransactionHistory;
 
-public class GetDates extends Activity {
+public class GetDatesActivity extends Activity {
 	SessionManager session;
 	TextView startDate;
 	TextView endDate;
@@ -110,13 +110,13 @@ public class GetDates extends Activity {
 						//Toast.makeText(context, "UserID: " + session.getUserID(), Toast.LENGTH_SHORT).show();
 
 						if (flag == true) {
-							Intent i = new Intent(GetDates.this, SpendCatReportActivity.class);
+							Intent i = new Intent(GetDatesActivity.this, SpendCatReportActivity.class);
 							long[] dates = {start, end};
 							i.putExtra("DATES", dates); 
 							startActivity(i);
 						}						
 					} else {					
-						Toast.makeText(GetDates.this, "Invalid date!", Toast.LENGTH_SHORT).show();
+						Toast.makeText(GetDatesActivity.this, "Invalid date!", Toast.LENGTH_SHORT).show();
 					}
 				}
 //			}

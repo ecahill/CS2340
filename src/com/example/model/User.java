@@ -2,9 +2,9 @@ package com.example.model;
 
 
 public class User {
-	long _id;
-	String _username;
-	String _password;
+	private long _id;
+	private String _username;
+	private String _password;
 
 	
 	public User() {

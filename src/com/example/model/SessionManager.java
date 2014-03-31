@@ -15,10 +15,10 @@ public class SessionManager {
     private SharedPreferences pref;
      
     // Editor for Shared preferences
-    Editor editor;
+    private Editor editor;
      
     // Context
-    Context _context;
+    private Context _context;
      
     // Shared pref mode
     int PRIVATE_MODE = 0;
