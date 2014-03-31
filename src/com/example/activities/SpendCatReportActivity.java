@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SpendCatReportActivity extends ListActivity{
+public class SpendCatReportActivity extends ListActivity {
 	
 	private SessionManager session;
 	private ArrayAdapter<Transaction> adapter;
@@ -57,14 +57,19 @@ public class SpendCatReportActivity extends ListActivity{
 		title.setText("SCR for [" + user.getUsername() + "]");
 		
 		double totalWithdrawAmount = 0;
-		if (trans.size() != 0) {
-			for (int i = 0; i < trans.size(); i++) {
-				if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
-					trans.remove(i);
-				}
+
+		for (int i = 0; i < trans.size(); i++) {			
+			if ((trans.get(i).getDepositAmount() > 0) || (trans.get(i).getWithdrawAmount() == 0)) {
+				trans.remove(i);
+			}				
+			if (i != trans.size()) {
 				totalWithdrawAmount = totalWithdrawAmount + trans.get(i).getWithdrawAmount();
-			}
-		}		
+			}			
+		}
+		
+//		for (int i = 0; i < trans.size(); i++) {
+//			
+//		}
 //		for (Transaction transaction : trans) {
 //			if (transaction.getDepositAmount() > 0) {
 //				trans.remove(transaction);
@@ -78,8 +83,9 @@ public class SpendCatReportActivity extends ListActivity{
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
-				Intent i = new Intent(SpendCatReportActivity.this, AccountMain.class);
-				startActivity(i);
+				Intent intent = new Intent(SpendCatReportActivity.this, AccountMain.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
+				startActivity(intent);
 			}
 		});		
 		

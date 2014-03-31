@@ -12,10 +12,13 @@ public class Transaction {
 	private double withdrawAmount;	
 	private long date;
 	private Account account;
+	private static final String DEPOSIT = "Deposit";
+	private static final String WITHDRAW = "Withdraw";
+	private String transactionType;
 	
 	// to be stored for record
-	private double finalWithdrawAmount;
-	private double finalDepositAmount;
+//	private double finalWithdrawAmount;
+//	private double finalDepositAmount;
 	
 	public Transaction(){
 		
@@ -55,7 +58,7 @@ public class Transaction {
 		if (withdrawAmount <= curBalance && withdrawAmount > 0) {
 			account.setBalance(curBalance - withdrawAmount);			
 		}
-		this.finalWithdrawAmount = withdrawAmount;
+		this.withdrawAmount = withdrawAmount;
 	}
 	
 	public void deposit(double depositAmount) {
@@ -63,7 +66,7 @@ public class Transaction {
 		if (depositAmount > 0) {
 			account.setBalance(curBalance + depositAmount);
 		}
-		this.finalDepositAmount = depositAmount;
+		this.depositAmount = depositAmount;
 	}
 	
 	public long getID() {
@@ -121,6 +124,14 @@ public class Transaction {
 	public void setDate(long d) {
 		this.date = d;
 	}	
+	
+	public void setTransactionType(String type) {
+		transactionType = type;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
 	
 	public String toString() {
 		NumberFormat us = NumberFormat.getCurrencyInstance();

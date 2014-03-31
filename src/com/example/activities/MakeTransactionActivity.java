@@ -7,6 +7,7 @@ import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.presenters.AccountRules;
 import com.example.presenters.IDatabaseHandler;
+import com.example.presenters.TransactionAdapter;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -75,7 +76,6 @@ public class MakeTransactionActivity extends Activity {
 				long itemID = getIntent().getLongExtra("itemID", 0);
 				date = new Date();
 					if (transactionAmount.getText().toString().length() > 0 && getTransactionReason().length() > 0) {
-						setTransactionType(transactionRadioButton.getText().toString());
 						String transactionName = transactionReason.getText().toString();
 						double amount = Double.parseDouble(transactionAmount.getText().toString());
 
@@ -88,19 +88,20 @@ public class MakeTransactionActivity extends Activity {
 						double curBalance = curAccount.getBalance();
 						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), 
 														transactionName, 0, 0, date.getTime());
-						//Transaction trans = new Transaction(curAccount, transactionName, date.getTime());
-						//Toast.makeText(context, "Date: " + date.getTime(), Toast.LENGTH_SHORT).show();
-						//Toast.makeText(context, "Date: " + date, Toast.LENGTH_SHORT).show();
+						trans.setTransactionType(transactionRadioButton.getText().toString());
+						TransactionAdapter transAdapter = new TransactionAdapter();
 						NumberFormat us = NumberFormat.getCurrencyInstance();
 
-						if (transactionType.equals(DEPOSIT)) {							
-							if (amount < 0) {
+						if (trans.getTransactionType().equals(DEPOSIT)) {							
+							if (amount <= 0) {
 								Toast.makeText(context, "Invalid deposit amount!", Toast.LENGTH_SHORT).show();
 							} else {
 								//trans.deposit(amount);
 								//double currentBalance = curAccount.getBalance();
-								curAccount.setBalance(curBalance + amount);
+								transAdapter.setFinalDepositAmount(amount, curBalance);
+								curAccount.setBalance(transAdapter.getFinalDepositAmount());
 								trans.setDepositAmount(amount);
+								db.addTransaction(trans);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}
@@ -110,18 +111,21 @@ public class MakeTransactionActivity extends Activity {
 								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
 							} else {
 								//double curBalance = account.getBalance();
-									curAccount.setBalance(curBalance - amount);	
-									trans.setWithdrawAmount(amount);
+								transAdapter.setFinalWithdrawAmount(amount, curBalance);
+								curAccount.setBalance(transAdapter.getFinalWithdrawAmount());	
+								trans.setWithdrawAmount(amount);
 								//trans.withdraw(amount);
+								db.addTransaction(trans);
 								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
 																		Toast.LENGTH_SHORT).show();
 							}							
 						}
-						db.addTransaction(trans);
+						//db.addTransaction(trans);
 						db.updateAccount(curAccount);
 						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " 
 																		+ curAccount.getAccountName());
 						Intent i = new Intent(MakeTransactionActivity.this, ViewAccountsActivity.class);
+						MakeTransactionActivity.this.finish();
 						startActivity(i);
 					} else {
 						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
@@ -130,13 +134,13 @@ public class MakeTransactionActivity extends Activity {
 			});
 		}
 
-	public void setTransactionType(String type) {
-		transactionType = type;
-	}
-
-	public String getTransactionType() {
-		return transactionType;
-	}
+//	public void setTransactionType(String type) {
+//		transactionType = type;
+//	}
+//
+//	public String getTransactionType() {
+//		return transactionType;
+//	}
 
 	public String getTransactionReason() {
 		return transactionReason.getText().toString();

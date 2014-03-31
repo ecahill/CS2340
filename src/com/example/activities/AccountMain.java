@@ -13,15 +13,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class AccountMain extends Activity {
+	
+	private Button viewAcc;
+	private Button createAcc;
+	private Button viewSpendCatRep;
+	private Button logout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_account_main);
 		
-		Button viewAcc = (Button)this.findViewById(R.id.bViewAccount);
-		Button createAcc = (Button)this.findViewById(R.id.bCreateAccount);
-		Button viewSpendCatRep = (Button)this.findViewById(R.id.bViewSpendingCategoryReport);
+		viewAcc = (Button)this.findViewById(R.id.bViewAccount);
+		createAcc = (Button)this.findViewById(R.id.bCreateAccount);
+		viewSpendCatRep = (Button)this.findViewById(R.id.bViewSpendingCategoryReport);
+		logout = (Button)this.findViewById(R.id.bLogout);
 		
 		viewAcc.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v) {				
@@ -40,10 +46,18 @@ public class AccountMain extends Activity {
 		viewSpendCatRep.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(AccountMain.this, GetDatesActivity.class);
-				Intent report = new Intent(AccountMain.this, SpendCatReportActivity.class);
 				startActivity(i);
+				//Intent report = new Intent(AccountMain.this, SpendCatReportActivity.class);
 				//startActivity(report);
 				//Toast.makeText(AccountMain.this, "View report", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+		logout.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v) {				
+				Intent i = new Intent(AccountMain.this, LoginActivity.class);
+				AccountMain.this.finish();
+				startActivity(i);
 			}
 		});
 	}

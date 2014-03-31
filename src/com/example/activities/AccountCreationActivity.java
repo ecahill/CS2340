@@ -24,12 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AccountCreationActivity extends Activity {
-	EditText accName;
-	EditText accBalance;
-	EditText monthlyInterestRate;
-	Button acceptButton;
+	private EditText accName;
+	private EditText accBalance;
+	private EditText monthlyInterestRate;
+	private Button acceptButton;
 //	Button declineButton;
-	SessionManager session;
+	private SessionManager session;
 	
 	/** Called when the activity is first created. */
 	@Override

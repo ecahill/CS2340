@@ -17,15 +17,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.activities.MainActivity"
+            android:name="com.example.activities.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="com.example.activities.LoginActivity" >
         </activity>
         <activity android:name="com.example.cs2340.LoginSuccessfulView" >
         </activity>
@@ -39,7 +37,7 @@
         <activity android:name="com.example.activities.AccountViewActivity"></activity>
         <activity android:name="com.example.activities.MakeTransactionActivity"></activity>
         <activity android:name="com.example.activities.genSpendCatReportActivity"></activity>
-        <activity android:name="com.example.activities.GetDates"></activity>
+        <activity android:name="com.example.activities.GetDatesActivity"></activity>
         <activity android:name="com.example.activities.SpendCatReportActivity"></activity>
     </application>
 
