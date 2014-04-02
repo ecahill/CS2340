@@ -8,6 +8,12 @@ import com.example.model.User;
 
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * DatabaseHandler interface 
+ * 
+ * @author Emily Cahill
+ *
+ */
 public interface IDatabaseHandler {
 
     public void onCreate(SQLiteDatabase db);
