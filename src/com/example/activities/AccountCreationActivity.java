@@ -23,76 +23,115 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Allows the user to create a new account.
+ * 
+ * @author Jesse Wu
+ *
+ */
 public class AccountCreationActivity extends Activity {
-	private EditText accName;
-	private EditText accBalance;
-	private EditText monthlyInterestRate;
-	private Button acceptButton;
-//	Button declineButton;
-	private SessionManager session;
-	
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.accountcreation_view);
-		final Context context = this;
-		final IDatabaseHandler db = new DatabaseHandler(context);
-		final AccountRules rules = new AccountRules(db);
-		session = new SessionManager(getApplicationContext());
-		
-	    accName = (EditText)findViewById(R.id.AccNameField);
-        accBalance = (EditText)findViewById(R.id.AccBalanceField);
-        monthlyInterestRate = (EditText)findViewById(R.id.MonthlyInterestField);
-        acceptButton = (Button)findViewById(R.id.acceptButton);
-//      declineButton = (Button)findViewById(R.id.declineButton);
+    
+    /**
+     * @param accName the name of the new account.
+     */
+    private EditText accName;
+    
+    /**
+     * @param accBalance the starting balance of the new account.
+     */
+    private EditText accBalance;
+    
+    /**
+     * @param monthlyInterestRate the interest rate of the new account.
+     */
+    private EditText monthlyInterestRate;
+    
+    /**
+     * @param acceptButton creates the new account.
+     */
+    private Button acceptButton;
+    
+    /**
+     * @param session the current session to allow access to the current user's information.
+     */
+    private SessionManager session;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.accountcreation_view);
+        final Context context = this;
+        final IDatabaseHandler db = new DatabaseHandler(context);
+        final AccountRules rules = new AccountRules(db);
+        session = new SessionManager(getApplicationContext());
+
+        accName = (EditText) findViewById(R.id.AccNameField);
+        accBalance = (EditText) findViewById(R.id.AccBalanceField);
+        monthlyInterestRate = (EditText) findViewById(R.id.MonthlyInterestField);
+        acceptButton = (Button) findViewById(R.id.acceptButton);
+        // declineButton = (Button)findViewById(R.id.declineButton);
         session.checkLogin();
-        acceptButton.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				if (accName.getText().toString().length() > 0 && accBalance.getText().toString().length() > 0 && 
-							monthlyInterestRate.getText().toString().length() > 0){
-					long userID = session.getUserID();
-					if (rules.checkAccountName(userID, accName.getText().toString())){
-						Account a = new Account(accName.getText().toString(), 
-											Double.parseDouble(accBalance.getText().toString()),
-											userID, Double.parseDouble(monthlyInterestRate.getText().toString()));
-						long id = db.createAccount(a);
-						Log.d("Account Balance", "Balance: " + a.getBalance());
-						Log.d("Account Balance", "Balance from db: " + db.getAccount(id).getBalance());
-						a.setID(id);
-					
-						Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
-						startActivity(i);
-					} else {
-						Toast.makeText(context, "Account name already exists!", Toast.LENGTH_LONG).show();
-					}
-				} else {
-					Toast.makeText(context, "Account creation unsuccessful!", Toast.LENGTH_LONG).show();
-				}
-			}
-		});
-//        declineButton.setOnClickListener(new View.OnClickListener(){
-//			public void onClick(View v){
-//				//account is not created
-//				
-//				//for now, go back to previous page
-//				Intent i = new Intent(AccountCreationActivity.this, AccountMain.class);
-//				startActivity(i);
-//			}
-//		});
-	}
-        
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (accName.getText().toString().length() > 0
+                        && accBalance.getText().toString().length() > 0
+                        && monthlyInterestRate.getText().toString().length() > 0) {
+                    long userID = session.getUserID();
+                    if (rules.checkAccountName(userID, accName.getText()
+                            .toString())) {
+                        Account a = new Account(accName.getText().toString(),
+                                Double.parseDouble(accBalance.getText()
+                                        .toString()), userID, Double
+                                        .parseDouble(monthlyInterestRate
+                                                .getText().toString()));
+                        long id = db.createAccount(a);
+                        Log.d("Account Balance", "Balance: " + a.getBalance());
+                        Log.d("Account", "Balance from db: "
+                                + db.getAccount(id).getBalance());
+                        a.setID(id);
+
+                        Intent i = new Intent(AccountCreationActivity.this,
+                                AccountMain.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(context, "Account name already exists!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, "Account creation unsuccessful!",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * Returns the account name.
+     * 
+     * @return the account name based on the string entered in the accName field
+     */
     public String getAccountName() {
-		return accName.getText().toString();
-	}
-	
-	public double getAccountBalance() {
-		String accBalanceString = accBalance.getText().toString();
-		return Double.parseDouble(accBalanceString);
-	}
-	
-	public double getMonthlyInterestRate() {
-		String monthlyInterestRateString = monthlyInterestRate.getText().toString();
-		return Double.parseDouble(monthlyInterestRateString);
-	}
+        return accName.getText().toString();
+    }
+
+    /**
+     * Returns the account balance.
+     * 
+     * @return the account balance based on the double entered in the accBalance field
+     */
+    public double getAccountBalance() {
+        String accBalanceString = accBalance.getText().toString();
+        return Double.parseDouble(accBalanceString);
+    }
+
+    /**
+     * Returns the monthly interest rate.
+     * 
+     * @return the monthly interest rate based on the double entered in the monthlyInterestRate field
+     */
+    public double getMonthlyInterestRate() {
+        String monthlyInterestRateString = monthlyInterestRate.getText()
+                .toString();
+        return Double.parseDouble(monthlyInterestRateString);
+    }
 }

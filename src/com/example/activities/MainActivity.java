@@ -20,40 +20,39 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity {
-	
-	Button loginButton;
-	Button registerButton;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		//final Context context = this; 
-		IDatabaseHandler db = new DatabaseHandler(this);
-		
-		/**
-		 * Refresh database
-		 * Delete these 2 lines after running app ONE time
-		 */
-//		SQLiteDatabase d = ((DatabaseHandler) db).getDB();
-//		db.onUpgrade(d, 1, 1);
-		
-		List<User> l = db.getAllUsers();
-		loginButton = (Button)this.findViewById(R.id.acceptButton);
-		registerButton = (Button)this.findViewById(R.id.declineButton);
-		
-		loginButton.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				Intent i = new Intent(MainActivity.this, LoginActivity.class);
-				startActivity(i);
-			}
-		}); // Add event listener to button
-		
-		registerButton.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				Intent i = new Intent(MainActivity.this, RegisterActivity.class);
-				startActivity(i);
-			}
-		});		
-	}
+
+    private Button loginButton;
+    private Button registerButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // final Context context = this;
+        IDatabaseHandler db = new DatabaseHandler(this);
+
+        /**
+         * Refresh database Delete these 2 lines after running app ONE time
+         */
+        // SQLiteDatabase d = ((DatabaseHandler) db).getDB();
+        // db.onUpgrade(d, 1, 1);
+
+        List<User> l = db.getAllUsers();
+        loginButton = (Button) this.findViewById(R.id.acceptButton);
+        registerButton = (Button) this.findViewById(R.id.declineButton);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+            }
+        }); // Add event listener to button
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(i);
+            }
+        });
+    }
 }

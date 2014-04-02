@@ -22,68 +22,76 @@ import com.example.model.SessionManager;
 import com.example.presenters.IDatabaseHandler;
 
 public class ViewAccountsActivity extends ListActivity {
-	
-	private SessionManager session;
-	private ArrayAdapter<Account> adapter;
-	private List<Account> accountList;
-	private IDatabaseHandler db;
-	private long itemID;
-	private Button back;
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.viewaccounts_view);
-	    
-	    db = new DatabaseHandler(this);
-		session = new SessionManager(getApplicationContext());
-		back = (Button)findViewById(R.id.bBacktoAccMain);
-	
-		final Context context = this; 
-		long id = session.getUserID();
-		
-		accountList = db.getAllAccountsByID(id);	
-		Log.d("SessionManager", "ID: " + id);
-		
-		back.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v){
-				Intent intent = new Intent(ViewAccountsActivity.this, AccountMain.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); 
-				ViewAccountsActivity.this.finish();
-				startActivity(intent);
-			}
-		});		
-		//ListView myListView = getListView();
-	    
-		if (!accountList.isEmpty()) {
-			Log.d("AccountList", accountList.get(0).toString());
-			adapter = new ArrayAdapter<Account>(context, android.R.layout.simple_list_item_1, accountList);
-			setListAdapter(adapter);
-		} else {
-			//myListView.getEmptyView();
-			Toast.makeText(context, "No accounts to display!", Toast.LENGTH_LONG).show();
-		}
-	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id1) {
-		itemID = l.getItemIdAtPosition(position) + 1;
-		//Account account = db.getAccount(itemID);
-		//session.createAccountSession(account.getAccountName(), session.getUserID(), account.getID());
-		//Toast.makeText(getBaseContext(), "AccName: " + account.getAccountName() + " UserID: " + session.getUserID(), Toast.LENGTH_LONG).show();
-		//Log.d("AccountID", "ID" + session.getAccountID());
-		
-		Intent viewAccount = new Intent(ViewAccountsActivity.this, AccountViewActivity.class);
-		viewAccount.putExtra("itemID", itemID);
-		startActivity(viewAccount);
-	}
+    private SessionManager session;
+    private ArrayAdapter<Account> adapter;
+    private List<Account> accountList;
+    private IDatabaseHandler db;
+    private long itemID;
+    private Button back;
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		long id = session.getUserID();
-		accountList = db.getAllAccountsByID(id);
-		adapter = new ArrayAdapter<Account>(this, android.R.layout.simple_list_item_1, accountList);
-		setListAdapter(adapter);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.viewaccounts_view);
+
+        db = new DatabaseHandler(this);
+        session = new SessionManager(getApplicationContext());
+        back = (Button) findViewById(R.id.bBacktoAccMain);
+
+        final Context context = this;
+        long id = session.getUserID();
+
+        accountList = db.getAllAccountsByID(id);
+        Log.d("SessionManager", "ID: " + id);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewAccountsActivity.this,
+                        AccountMain.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                ViewAccountsActivity.this.finish();
+                startActivity(intent);
+            }
+        });
+        // ListView myListView = getListView();
+
+        if (!accountList.isEmpty()) {
+            Log.d("AccountList", accountList.get(0).toString());
+            adapter = new ArrayAdapter<Account>(context,
+                    android.R.layout.simple_list_item_1, accountList);
+            setListAdapter(adapter);
+        } else {
+            // myListView.getEmptyView();
+            Toast.makeText(context, "No accounts to display!",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id1) {
+        itemID = l.getItemIdAtPosition(position) + 1;
+        // Account account = db.getAccount(itemID);
+        // session.createAccountSession(account.getAccountName(),
+        // session.getUserID(), account.getID());
+        // Toast.makeText(getBaseContext(), "AccName: " +
+        // account.getAccountName() + " UserID: " + session.getUserID(),
+        // Toast.LENGTH_LONG).show();
+        // Log.d("AccountID", "ID" + session.getAccountID());
+
+        Intent viewAccount = new Intent(ViewAccountsActivity.this,
+                AccountViewActivity.class);
+        viewAccount.putExtra("itemID", itemID);
+        startActivity(viewAccount);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        long id = session.getUserID();
+        accountList = db.getAllAccountsByID(id);
+        adapter = new ArrayAdapter<Account>(this,
+                android.R.layout.simple_list_item_1, accountList);
+        setListAdapter(adapter);
+    }
 }

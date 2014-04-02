@@ -17,54 +17,56 @@ import com.example.model.DatabaseHandler;
 import com.example.presenters.IDatabaseHandler;
 import com.example.cs2340.*;
 
- 
 public class RegisterActivity extends Activity {
-	private EditText username;
-	private EditText password;
-	private EditText cPassword;
-	private Button goButton;
-	
+    private EditText username;
+    private EditText password;
+    private EditText cPassword;
+    private Button goButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_view); 
-         
+        setContentView(R.layout.register_view);
+
         final Context context = this;
         final IDatabaseHandler db = new DatabaseHandler(context);
-        
-        username = (EditText)findViewById(R.id.NameField);
-        password = (EditText)findViewById(R.id.PassField);
-        cPassword = (EditText)findViewById(R.id.CPassField);
-        goButton = (Button)findViewById(R.id.RegButton);
-        
-        goButton.setOnClickListener(new View.OnClickListener(){
-			public void onClick(View v){
-				if (db.checkUsername(getName())){
-					if (getPassword().equals(getCPassword())){
-						long id = db.addUser(new User(getName(), getPassword()));
-						User u = db.getUser(id);
-						u.setID(id);
-					} else {
-						Toast.makeText(context, "Passwords do not match", Toast.LENGTH_LONG).show();
-					}
-					Toast.makeText(context, "User has been registered", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(context, "Username is taken", Toast.LENGTH_LONG).show();
-				}
-			}
-        });        
+
+        username = (EditText) findViewById(R.id.NameField);
+        password = (EditText) findViewById(R.id.PassField);
+        cPassword = (EditText) findViewById(R.id.CPassField);
+        goButton = (Button) findViewById(R.id.RegButton);
+
+        goButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (db.checkUsername(getName())) {
+                    if (getPassword().equals(getCPassword())) {
+                        long id = db
+                                .addUser(new User(getName(), getPassword()));
+                        User u = db.getUser(id);
+                        u.setID(id);
+                    } else {
+                        Toast.makeText(context, "Passwords do not match",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    Toast.makeText(context, "User has been registered",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Username is taken",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
-        
-	public String getName() {
-		return username.getText().toString();
-	}
-	
-	public String getPassword(){
-		return password.getText().toString();
-	}
-	
-	public String getCPassword(){
-		return cPassword.getText().toString();
-	}
+
+    public String getName() {
+        return username.getText().toString();
+    }
+
+    public String getPassword() {
+        return password.getText().toString();
+    }
+
+    public String getCPassword() {
+        return cPassword.getText().toString();
+    }
 }
-    
