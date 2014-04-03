@@ -37,7 +37,7 @@ public interface IDatabaseHandler {
 
     public List<Account> getAllAccountsByID(long id);
 
-    public TransactionHistory getAllTransactionsByID(long id);
+//    public TransactionHistory getAllTransactionsByID(long id);
 
     public List<Transaction> getTransactionsByDates(long startDate,
             long endDate, long userID);

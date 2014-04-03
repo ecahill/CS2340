@@ -25,7 +25,6 @@ import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.presenters.IDatabaseHandler;
-import com.example.presenters.TransactionHistory;
 
 public class GetDatesActivity extends Activity {
     private SessionManager session;

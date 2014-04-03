@@ -12,7 +12,6 @@ import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.model.User;
 import com.example.presenters.IDatabaseHandler;
-import com.example.presenters.TransactionHistory;
 
 import android.app.ListActivity;
 import android.content.Context;

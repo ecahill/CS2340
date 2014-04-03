@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.presenters.IDatabaseHandler;
-import com.example.presenters.TransactionHistory;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -274,23 +273,23 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         return accounts;
     }
 
-    public TransactionHistory getAllTransactionsByID(long id) {
-        List<Transaction> transactions = new ArrayList<Transaction>();
-        String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE "
-                + KEY_ACCOUNT_ID + " = " + id;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery(selectQuery, null);
-        if (c.moveToFirst()) {
-            do {
-                Transaction t = new Transaction();
-                t.setID(c.getLong(c.getColumnIndex(KEY_ID)));
-
-                // t.set...set everything like in accounts above
-                transactions.add(t);
-            } while (c.moveToNext());
-        }
-        return new TransactionHistory(transactions);
-    }
+//    public TransactionHistory getAllTransactionsByID(long id) {
+//        List<Transaction> transactions = new ArrayList<Transaction>();
+//        String selectQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE "
+//                + KEY_ACCOUNT_ID + " = " + id;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor c = db.rawQuery(selectQuery, null);
+//        if (c.moveToFirst()) {
+//            do {
+//                Transaction t = new Transaction();
+//                t.setID(c.getLong(c.getColumnIndex(KEY_ID)));
+//
+//                // t.set...set everything like in accounts above
+//                transactions.add(t);
+//            } while (c.moveToNext());
+//        }
+//        return new TransactionHistory(transactions);
+//    }
 
     // get number of users in db
     public int getUsersCount() {
