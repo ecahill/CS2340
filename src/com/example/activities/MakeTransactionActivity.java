@@ -33,121 +33,143 @@ import android.widget.RadioGroup;
 
 public class MakeTransactionActivity extends Activity {
 
-	private RadioGroup transactionRadioGroup;
-	private RadioButton transactionRadioButton;
-	private Button acceptButton;
-	private String transactionType;
-	private EditText transactionReason;
-	private EditText transactionAmount;
-	private SessionManager session;
-	private static final String DEPOSIT = "Deposit";
-	private static final String WITHDRAW = "Withdraw";
-	private Date date;
-	private List<Account> accountList;
+    private RadioGroup transactionRadioGroup;
+    private RadioButton transactionRadioButton;
+    private Button acceptButton;
+    private String transactionType;
+    private EditText transactionReason;
+    private EditText transactionAmount;
+    private SessionManager session;
+    private static final String DEPOSIT = "Deposit";
+    private static final String WITHDRAW = "Withdraw";
+    private Date date;
+    private List<Account> accountList;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.maketransaction_view);
-	    
-	    session = new SessionManager(getApplicationContext());
-	    final Context context = this;   
-	    final IDatabaseHandler db = new DatabaseHandler(context);
-		final long userID = session.getUserID();		    
-	    
-		accountList = db.getAllAccountsByID(userID);
-		transactionReason = (EditText) findViewById(R.id.transactionReasonEditText);
-		transactionAmount = (EditText) findViewById(R.id.transactionAmountEditText);
-		transactionRadioGroup = (RadioGroup) findViewById(R.id.transactionradiogroup);
-		acceptButton = (Button) findViewById(R.id.acceptTransaction); 
-	    
-		//final long accountID = session.getAccountID();	
-		
-		acceptButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-			    // get the selected radio button from the group
-				int selectedOption = transactionRadioGroup.getCheckedRadioButtonId();
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.maketransaction_view);
 
-				// find the radiobutton by the previously returned id
-				transactionRadioButton = (RadioButton) findViewById(selectedOption);
-				long itemID = getIntent().getLongExtra("itemID", 0);
-				date = new Date();
-					if (transactionAmount.getText().toString().length() > 0 && getTransactionReason().length() > 0) {
-						String transactionName = transactionReason.getText().toString();
-						double amount = Double.parseDouble(transactionAmount.getText().toString());
+        session = new SessionManager(getApplicationContext());
+        final Context context = this;
+        final IDatabaseHandler db = new DatabaseHandler(context);
+        final long userID = session.getUserID();
 
-						Account curAccount = null;
-						for (int i = 0; i < accountList.size(); i++) {
-							if (i == itemID - 1) {
-								curAccount = accountList.get(i);
-							}
-						}
-						double curBalance = curAccount.getBalance();
-						Transaction trans = new Transaction(session.getUserID(), curAccount.getID(), 
-														transactionName, 0, 0, date.getTime());
-						trans.setTransactionType(transactionRadioButton.getText().toString());
-						TransactionAdapter transAdapter = new TransactionAdapter();
-						NumberFormat us = NumberFormat.getCurrencyInstance();
+        accountList = db.getAllAccountsByID(userID);
+        transactionReason = (EditText) findViewById(R.id.transactionReasonEditText);
+        transactionAmount = (EditText) findViewById(R.id.transactionAmountEditText);
+        transactionRadioGroup = (RadioGroup) findViewById(R.id.transactionradiogroup);
+        acceptButton = (Button) findViewById(R.id.acceptTransaction);
 
-						if (trans.getTransactionType().equals(DEPOSIT)) {							
-							if (amount <= 0) {
-								Toast.makeText(context, "Invalid deposit amount!", Toast.LENGTH_SHORT).show();
-							} else {
-								//trans.deposit(amount);
-								//double currentBalance = curAccount.getBalance();
-								transAdapter.setFinalDepositAmount(amount, curBalance);
-								curAccount.setBalance(transAdapter.getFinalDepositAmount());
-								trans.setDepositAmount(amount);
-								db.addTransaction(trans);
-								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
-																		Toast.LENGTH_SHORT).show();
-							}
+        // final long accountID = session.getAccountID();
 
-						} else {
-							if (amount > curBalance || amount < 0) {
-								Toast.makeText(context, "Invalid withdraw amount!", Toast.LENGTH_SHORT).show();		
-							} else {
-								//double curBalance = account.getBalance();
-								transAdapter.setFinalWithdrawAmount(amount, curBalance);
-								curAccount.setBalance(transAdapter.getFinalWithdrawAmount());	
-								trans.setWithdrawAmount(amount);
-								//trans.withdraw(amount);
-								db.addTransaction(trans);
-								Toast.makeText(context, "New balance: " + us.format(curAccount.getBalance()),
-																		Toast.LENGTH_SHORT).show();
-							}							
-						}
-						//db.addTransaction(trans);
-						db.updateAccount(curAccount);
-						Log.d("DatabaseHandler", "Transaction: [" + trans.getTransactionName() + "] added to account: " 
-																		+ curAccount.getAccountName());
-						Intent i = new Intent(MakeTransactionActivity.this, ViewAccountsActivity.class);
-						MakeTransactionActivity.this.finish();
-						startActivity(i);
-					} else {
-						Toast.makeText(context, "Transaction Failed.", Toast.LENGTH_LONG).show();
-					}		
-				}
-			});
-		}
+        acceptButton.setOnClickListener(new OnClickListener() {
 
-//	public void setTransactionType(String type) {
-//		transactionType = type;
-//	}
-//
-//	public String getTransactionType() {
-//		return transactionType;
-//	}
+            @Override
+            public void onClick(View v) {
+                // get the selected radio button from the group
+                int selectedOption = transactionRadioGroup
+                        .getCheckedRadioButtonId();
 
-	public String getTransactionReason() {
-		return transactionReason.getText().toString();
-	}
+                // find the radiobutton by the previously returned id
+                transactionRadioButton = (RadioButton) findViewById(selectedOption);
+                long itemID = getIntent().getLongExtra("itemID", 0);
+                date = new Date();
+                if (transactionAmount.getText().toString().length() > 0
+                        && getTransactionReason().length() > 0) {
+                    String transactionName = transactionReason.getText()
+                            .toString();
+                    double amount = Double.parseDouble(transactionAmount
+                            .getText().toString());
 
-	public double getTransactionAmount() {
-		String transactionAmountString = transactionAmount.getText().toString();
-		return Double.parseDouble(transactionAmountString);
-	}
+                    Account curAccount = null;
+                    for (int i = 0; i < accountList.size(); i++) {
+                        if (i == itemID - 1) {
+                            curAccount = accountList.get(i);
+                        }
+                    }
+                    double curBalance = curAccount.getBalance();
+                    Transaction trans = new Transaction(session.getUserID(),
+                            curAccount.getID(), transactionName, 0, 0, date
+                                    .getTime());
+                    trans.setTransactionType(transactionRadioButton.getText()
+                            .toString());
+                    TransactionAdapter transAdapter = new TransactionAdapter();
+                    NumberFormat us = NumberFormat.getCurrencyInstance();
+
+                    if (trans.getTransactionType().equals(DEPOSIT)) {
+                        if (amount <= 0) {
+                            Toast.makeText(context, "Invalid deposit amount!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // trans.deposit(amount);
+                            // double currentBalance = curAccount.getBalance();
+                            transAdapter.setFinalDepositAmount(amount,
+                                    curBalance);
+                            curAccount.setBalance(transAdapter
+                                    .getFinalDepositAmount());
+                            trans.setDepositAmount(amount);
+                            db.addTransaction(trans);
+                            Toast.makeText(
+                                    context,
+                                    "New balance: "
+                                            + us.format(curAccount.getBalance()),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        if (amount > curBalance || amount < 0) {
+                            Toast.makeText(context, "Invalid withdraw amount!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // double curBalance = account.getBalance();
+                            transAdapter.setFinalWithdrawAmount(amount,
+                                    curBalance);
+                            curAccount.setBalance(transAdapter
+                                    .getFinalWithdrawAmount());
+                            trans.setWithdrawAmount(amount);
+                            // trans.withdraw(amount);
+                            db.addTransaction(trans);
+                            Toast.makeText(
+                                    context,
+                                    "New balance: "
+                                            + us.format(curAccount.getBalance()),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    // db.addTransaction(trans);
+                    db.updateAccount(curAccount);
+                    Log.d("DatabaseHandler",
+                            "Transaction: [" + trans.getTransactionName()
+                                    + "] added to account: "
+                                    + curAccount.getAccountName());
+                    Intent i = new Intent(MakeTransactionActivity.this,
+                            ViewAccountsActivity.class);
+                    MakeTransactionActivity.this.finish();
+                    startActivity(i);
+                } else {
+                    Toast.makeText(context, "Transaction Failed.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    // public void setTransactionType(String type) {
+    // transactionType = type;
+    // }
+    //
+    // public String getTransactionType() {
+    // return transactionType;
+    // }
+
+    public String getTransactionReason() {
+        return transactionReason.getText().toString();
+    }
+
+    public double getTransactionAmount() {
+        String transactionAmountString = transactionAmount.getText().toString();
+        return Double.parseDouble(transactionAmountString);
+    }
 }
