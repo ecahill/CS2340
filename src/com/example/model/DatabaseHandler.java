@@ -1,6 +1,7 @@
 package com.example.model;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.example.presenters.IDatabaseHandler;
@@ -12,41 +13,98 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * A compilation of methods that access the database 
+ * @author Emily Cahill
+ *
+ */
+
 public class DatabaseHandler extends SQLiteOpenHelper implements
         IDatabaseHandler {
-    // DB version
+	/**
+	 * @param DATABASE_VERSION the version of the database
+	 */
     private static final int DATABASE_VERSION = 1;
-    // DB name
+    /**
+     * @param DATABASE_NAME the name of the database
+     */
     private static final String DATABASE_NAME = "userManager";
-    // Table names
+    /**
+     * @param TABLE_USERS the name of the users table
+     */
     private static final String TABLE_USERS = "users";
+    /**
+     * @param TABLE_ACCOUNTS the name of the accounts table
+     */
     private static final String TABLE_ACCOUNTS = "accounts";
+    /**
+     * @param TABLE_TRANSACTIONS the name of the transactions table
+     */
     private static final String TABLE_TRANSACTIONS = "transactions";
-    // Column names
+    /**
+     * @param KEY_ID the name of the id column
+     */
     private static final String KEY_ID = "id";
+    /**
+     * @param KEY_USERNAME the name of the username column
+     */
     private static final String KEY_USERNAME = "username";
+    /**
+     * @param KEY_PASSWORD the name of the passwords column
+     */
     private static final String KEY_PASSWORD = "password";
-
+    /**
+     * @param KEY_ACCOUNT_NAME the name of the account name column
+     */
     private static final String KEY_ACCOUNT_NAME = "account_name";
+    /**
+     * @param KEY_BALANCE the name of the balance column
+     */
     private static final String KEY_BALANCE = "balance";
+    /**
+     * @param KEY_USER_ID the name of the user id column
+     */
     private static final String KEY_USER_ID = "user_id";
+    /**
+     * @param KEY_INTEREST the name of the interest column
+     */
     private static final String KEY_INTEREST = "interest";
-
+    /**
+     * @param KEY_ACCOUNT_ID the name of the account id column
+     */
     private static final String KEY_ACCOUNT_ID = "account_id";
+    /**
+     * @param KEY_DEPOSIT the name of the deposit column
+     */
     private static final String KEY_DEPOSIT = "deposit_amount";
+    /**
+     * @param KEY_WITHDRAWAL the name of the withdrawal column
+     */
     private static final String KEY_WITHDRAWAL = "withdrawal_amount";
+    /**
+     * @param KEY_DATE the name of the date column
+     */
     private static final String KEY_DATE = "date";
+    /**
+     * @param KEY_TRANSACTION_NAME the name of the transaction name column
+     */
     private static final String KEY_TRANSACTION_NAME = "transaction_name";
-
+    /**
+     * @param CREATE_USERS_TABLE the SQL statement that creates the users table
+     */
     private static final String CREATE_USERS_TABLE = "CREATE TABLE "
             + TABLE_USERS + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_USERNAME + " TEXT," + KEY_PASSWORD + " TEXT" + ")";
-
+    /**
+     * @param CREATE_ACCOUNTS_TABLE the SQL statement that creates the accounts table
+     */
     private static final String CREATE_ACCOUNTS_TABLE = "CREATE TABLE "
             + TABLE_ACCOUNTS + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_ACCOUNT_NAME + " TEXT," + KEY_BALANCE + " REAL,"
             + KEY_USER_ID + " INTEGER," + KEY_INTEREST + " REAL)";
-
+    /**
+     * @param CREATE_TRANSACTIONS_TABLE the SQL statement that creates the transactions table
+     */
     private static final String CREATE_TRANSACTIONS_TABLE = "CREATE TABLE "
             + TABLE_TRANSACTIONS + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_TRANSACTION_NAME + " TEXT," + KEY_ACCOUNT_ID + " INTEGER,"
@@ -80,6 +138,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         onCreate(db);
     }
 
+    @Override
     public long createAccount(Account a) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -94,6 +153,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // add user to db
+    @Override
     public long addUser(User u) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -108,6 +168,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // add transaction
+    @Override
     public long addTransaction(Transaction t) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -125,7 +186,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         return transaction_id;
     }
 
-    // USER ID CORRECTLY USED??
+    @Override
     public List<Transaction> getTransactionsByDates(long startDate,
             long endDate, long userID) {
         List<Transaction> result = new ArrayList<Transaction>();
@@ -157,7 +218,8 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         }
         return result;
     }
-
+    
+    @Override
     public boolean checkUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
@@ -173,6 +235,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // get user from db by ID
+    @Override
     public User getUser(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -181,12 +244,14 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
-        }
-        User user = new User(Integer.parseInt(cursor.getString(0)),
+            User user = new User(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2));
-        return user;
+            return user;
+        }
+        return null;
     }
-
+    
+    @Override
     public Account getAccount(long account_id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM " + TABLE_ACCOUNTS + " WHERE "
@@ -206,6 +271,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // get user from db by username and password
+    @Override
     public User getUserByUP(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         /*
@@ -231,6 +297,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // get arraylist of all users in db
+    @Override
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<User>();
         String selectQuery = "SELECT * FROM " + TABLE_USERS;
@@ -249,6 +316,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         return userList;
     }
 
+    @Override
     public List<Account> getAllAccountsByID(long id) {
         List<Account> accounts = new ArrayList<Account>();
 
@@ -292,6 +360,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
 //    }
 
     // get number of users in db
+    @Override
     public int getUsersCount() {
         String countQuery = "SELECT * FROM " + TABLE_USERS;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -302,6 +371,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // update a user in the database
+    @Override
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -313,6 +383,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // FIX PLEASE:
+    @Override
     public int updateAccount(Account a) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -326,6 +397,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     // Delete a user from the database
+    @Override
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + " = ?",

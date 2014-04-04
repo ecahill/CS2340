@@ -9,33 +9,55 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.example.activities.LoginActivity;
-
+/**
+ * A class to manage what user that is logged in and what account they are viewing 
+ * @author Emily Cahill
+ *
+ */
 public class SessionManager {
-    // Shared Preferences
+	/**
+	 * @param Shared preferences
+	 */
     private SharedPreferences pref;
 
-    // Editor for Shared preferences
+    /**
+     *@param Editor for shared preferences
+     */
     private Editor editor;
 
-    // Context
+    /**
+     * @param Context
+     */
     private Context _context;
 
-    // Shared pref mode
+    /**
+     * @param shared pref mode
+     */
     private int PRIVATE_MODE = 0;
 
-    // Sharedpref file name
+    /**
+     * Shared pref file name
+     */
     private static final String PREF_NAME = "Pref";
 
-    // All Shared Preferences Keys
+    /**
+     * Shared pref loggedIn key name
+     */
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    // User name (make variable public to access from outside)
+    /**
+     * Shared pref username key name
+     */
     public static final String KEY_NAME = "name";
 
-    // User id (make variable public to access from outside)
+    /**
+     * Shared pref user id key name
+     */
     public static final String KEY_ID = "id";
 
-    // Account id
+    /**
+     * Shared pref account id key name
+     */
     public static final String KEY_ACCOUNT_ID = "account_id";
 
     // Constructor
@@ -47,6 +69,8 @@ public class SessionManager {
 
     /**
      * Create login session
+     * @param name The username of the user logging in
+     * @param id The id of the user logging in
      * */
     public void createLoginSession(String name, long id) {
         // Storing login value as TRUE
@@ -61,11 +85,14 @@ public class SessionManager {
         // commit changes
         editor.commit();
 
-        Log.d("SessionManager", "Name: " + name + ", ID: " + id);
+        //Log.d("SessionManager", "Name: " + name + ", ID: " + id);
     }
 
     /**
      * Create account session
+     * @param name The username of the user logged in
+     * @param id The user id of the user logged in
+     * @param accountid The account id of the account that the user is using
      */
 
     public void createAccountSession(String name, long id, long accountid) {
@@ -78,6 +105,7 @@ public class SessionManager {
 
     /**
      * Get stored session data
+     * @return Hashmap of the current user's name and id
      * */
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<String, String>();
@@ -93,17 +121,21 @@ public class SessionManager {
 
     /**
      * Get session user id
+     * @return the ID of the current user
      */
     public long getUserID() {
         return pref.getLong(KEY_ID, 0);
     }
-
+    /**
+     * Get current account id
+     * @return the ID of the current account
+     */
     public long getAccountID() {
         return pref.getLong(KEY_ACCOUNT_ID, 0);
     }
 
     /**
-     * Check login method wil check user login status If false it will redirect
+     * Check login method will check user login status If false it will redirect
      * user to login page Else won't do anything
      * */
     public void checkLogin() {
@@ -122,6 +154,9 @@ public class SessionManager {
         }
     }
 
+    /**
+     * Removes account from session
+     */
     public void removeAccount() {
         editor.remove(KEY_ACCOUNT_ID);
         editor.commit();
@@ -150,6 +185,7 @@ public class SessionManager {
 
     /**
      * Quick check for login
+     * @return true if someone is logged in
      * **/
     // Get Login State
     public boolean isLoggedIn() {
