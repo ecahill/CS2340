@@ -21,13 +21,36 @@ import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.presenters.IDatabaseHandler;
 
+/**
+ * Activity for viewing any existing accounts belonging to the user.
+ *  
+ * @author Jesse Wu
+ */
 public class ViewAccountsActivity extends ListActivity {
 
+	/**
+	 *  @param session  the database agent that helps save user input
+	 */
     private SessionManager session;
+    /**
+     *  @param adapter  the customizer for viewing the account list
+     */
     private ArrayAdapter<Account> adapter;
+    /**
+     *  @param accountList  the list of all the user's accounts
+     */
     private List<Account> accountList;
+    /**
+     * @param db  the database that is being interacted with
+     */
     private IDatabaseHandler db;
+    /**
+     *  @param itemID  id of the selected account item
+     */
     private long itemID;
+    /**
+     * @param back  button used to go back to previous menu
+     */
     private Button back;
 
     @Override
