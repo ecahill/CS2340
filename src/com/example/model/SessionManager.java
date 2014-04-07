@@ -6,11 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 
 import com.example.activities.LoginActivity;
 /**
- * A class to manage what user that is logged in and what account they are viewing 
+ * A class to manage what user that is logged in and what account they are viewing.
+ * 
  * @author Emily Cahill
  *
  */
@@ -28,47 +28,52 @@ public class SessionManager {
     /**
      * @param Context
      */
-    private Context _context;
+    private Context context;
 
     /**
-     * @param shared pref mode
+     * @param PRIVATE_MODE shared pref mode
      */
-    private int PRIVATE_MODE = 0;
+    private static final int PRIVATE_MODE = 0;
 
     /**
-     * Shared pref file name
+     * @param PREF_NAME Shared pref file name
      */
     private static final String PREF_NAME = "Pref";
 
     /**
-     * Shared pref loggedIn key name
+     * @param IS_LOGIN Shared pref loggedIn key name
      */
     private static final String IS_LOGIN = "IsLoggedIn";
 
     /**
-     * Shared pref username key name
+     * @param KEY_NAME Shared pref username key name
      */
     public static final String KEY_NAME = "name";
 
     /**
-     * Shared pref user id key name
+     * @param KEY_ID Shared pref user id key name
      */
     public static final String KEY_ID = "id";
 
     /**
-     * Shared pref account id key name
+     * @param KEY_ACCOUNT_ID Shared pref account id key name
      */
     public static final String KEY_ACCOUNT_ID = "account_id";
 
-    // Constructor
-    public SessionManager(Context context) {
-        this._context = context;
-        pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+    /**
+     * Constructor for SessionManager takes in the current application context.
+     * 
+     * @param c the current application context
+     */
+    public SessionManager(Context c) {
+        this.context = c;
+        pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
 
     /**
-     * Create login session
+     * Creates a login session.
+     * 
      * @param name The username of the user logging in
      * @param id The id of the user logging in
      * */
@@ -89,7 +94,8 @@ public class SessionManager {
     }
 
     /**
-     * Create account session
+     * Creates an account session.
+     * 
      * @param name The username of the user logged in
      * @param id The user id of the user logged in
      * @param accountid The account id of the account that the user is using
@@ -104,7 +110,8 @@ public class SessionManager {
     }
 
     /**
-     * Get stored session data
+     * Get stored session data.
+     * 
      * @return Hashmap of the current user's name and id
      * */
     public HashMap<String, String> getUserDetails() {
@@ -120,14 +127,16 @@ public class SessionManager {
     }
 
     /**
-     * Get session user id
+     * Get session user id.
+     * 
      * @return the ID of the current user
      */
     public long getUserID() {
         return pref.getLong(KEY_ID, 0);
     }
+    
     /**
-     * Get current account id
+     * Get current account id.
      * @return the ID of the current account
      */
     public long getAccountID() {
@@ -136,13 +145,13 @@ public class SessionManager {
 
     /**
      * Check login method will check user login status If false it will redirect
-     * user to login page Else won't do anything
+     * user to login page Else won't do anything.
      * */
     public void checkLogin() {
         // Check login status
         if (!this.isLoggedIn()) {
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, LoginActivity.class);
+            Intent i = new Intent(context, LoginActivity.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -150,12 +159,12 @@ public class SessionManager {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             // Staring Login Activity
-            _context.startActivity(i);
+            context.startActivity(i);
         }
     }
 
     /**
-     * Removes account from session
+     * Removes account from session.
      */
     public void removeAccount() {
         editor.remove(KEY_ACCOUNT_ID);
@@ -164,7 +173,7 @@ public class SessionManager {
     }
 
     /**
-     * Clear session details
+     * Clear session details.
      * */
     public void logoutUser() {
         // Clearing all data from Shared Preferences
@@ -172,7 +181,7 @@ public class SessionManager {
         editor.commit();
 
         // After logout redirect user to Login Activity
-        Intent i = new Intent(_context, LoginActivity.class);
+        Intent i = new Intent(context, LoginActivity.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -180,11 +189,12 @@ public class SessionManager {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         // Staring Login Activity
-        _context.startActivity(i);
+        context.startActivity(i);
     }
 
     /**
-     * Quick check for login
+     * Quick check for login.
+     * 
      * @return true if someone is logged in
      * **/
     // Get Login State

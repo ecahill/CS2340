@@ -1,17 +1,7 @@
 package com.example.activities;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import com.example.cs2340.R;
-import com.example.model.Account;
-import com.example.model.DatabaseHandler;
-import com.example.model.SessionManager;
-import com.example.model.Transaction;
-import com.example.model.User;
-import com.example.presenters.IDatabaseHandler;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -22,7 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.cs2340.R;
+import com.example.model.DatabaseHandler;
+import com.example.model.SessionManager;
+import com.example.model.Transaction;
+import com.example.model.User;
+import com.example.presenters.IDatabaseHandler;
 
 /**
  * Activity for viewing the user's spending category report.

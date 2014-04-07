@@ -2,30 +2,58 @@ package com.example.activities;
 
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.presenters.IDatabaseHandler;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
+/**
+ * This is the account's main screen.
+ * 
+ * @author Jesse Wu
+ *
+ */
 public class AccountViewActivity extends Activity {
 
+	/**
+	 * @param session the current application session.
+	 */
     private SessionManager session;
+    
+    /**
+     * @para db the current database.
+     */
     private IDatabaseHandler db;
+    
+    /**
+     * @param itemID the position of the account relative to the accountList.
+     */
     private long itemID;
+    
+    /**
+     * @param accName the current account name.
+     */
     private TextView accName;
+    
+    /**
+     * @param curAccount the current account.
+     */
     private Account curAccount;
+    
+    /**
+     * @param ITEM_ID a string that holds the value "itemID".
+     */
+    private static final String ITEM_ID = "itemID";
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_account_view);
@@ -39,7 +67,7 @@ public class AccountViewActivity extends Activity {
         List<Account> accountList = db.getAllAccountsByID(userID);
 
         // receives the clicked account position from ViewAccountsActivity
-        itemID = getIntent().getLongExtra("itemID", 0);
+        itemID = getIntent().getLongExtra(ITEM_ID, 0);
 
         // gets the account to display from the account list
         for (int i = 0; i < accountList.size(); i++) {
@@ -60,7 +88,7 @@ public class AccountViewActivity extends Activity {
             public void onClick(View v) {
                 Intent transaction = new Intent(AccountViewActivity.this,
                         MakeTransactionActivity.class);
-                transaction.putExtra("itemID", itemID);
+                transaction.putExtra(ITEM_ID, itemID);
                 AccountViewActivity.this.finish();
                 startActivity(transaction);
             }

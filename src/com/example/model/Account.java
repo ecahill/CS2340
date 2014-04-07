@@ -3,20 +3,20 @@ package com.example.model;
 import java.text.NumberFormat;
 
 /**
- * Model for the Account object
+ * Model for the Account object.
+ * 
  * @author Emily Cahill
  *
  */
-
 public class Account {
 	/**
 	 * @param id The id of the account
 	 */
     private long id;
     /**
-     * @param account_name The name of the account
+     * @param accountName The name of the account
      */
-    private String account_name;
+    private String accountName;
     /**
      * @param balance The current balance of the account
      */
@@ -30,103 +30,134 @@ public class Account {
      */
     private double interestRate;
 
+    /**
+     * Default constructor for Account.
+     */
     public Account() {
 
     }
 
-    public Account(String account_name, double balance, long userID,
-            double interestRate) {
-        this.account_name = account_name;
-        this.balance = balance;
-        this.userID = userID;
-        this.interestRate = interestRate;
+    /**
+     * Constructor for account.
+     * 
+     * @param accName the account name
+     * @param bal the account balance
+     * @param uID the current user's ID
+     * @param intRate the interest rate
+     */
+    public Account(String accName, double bal, long uID,
+            double intRate) {
+        this.accountName = accName;
+        this.balance = bal;
+        this.userID = uID;
+        this.interestRate = intRate;
     }
 
-    public Account(long id, String account_name, double balance, long userID,
-            double interestRate) {
-        this.id = id;
-        this.account_name = account_name;
-        this.balance = balance;
-        this.userID = userID;
-        this.interestRate = interestRate;
-    }
     /**
-     * sets the id of the account
-     * @param id The new account id
+     * Constructor for Account.
+     * 
+     * @param curID the account ID
+     * @param accName the account name
+     * @param bal the starting account balance
+     * @param uID the current user's ID
+     * @param intRate the interest rate
      */
-    public void setID(long id) {
-        this.id = id;
+    public Account(long curID, String accName, double bal, long uID,
+            double intRate) {
+        this.id = curID;
+        this.accountName = accName;
+        this.balance = bal;
+        this.userID = uID;
+        this.interestRate = intRate;
     }
+    
     /**
-     * sets the account name
+     * Sets the id of the account.
+     * @param newID The new account's id
+     */
+    public void setID(long newID) {
+        this.id = newID;
+    }
+    
+    /**
+     * Sets the account name.
      * @param name The new account name
      */
 
     public void setAccountName(String name) {
-        this.account_name = name;
+        this.accountName = name;
     }
+    
     /**
-     * sets the balance of the account
+     * Sets the balance of the account.
      * @param bal The new balance
      */
     public void setBalance(double bal) {
         this.balance = bal;
     }
+    
     /**
-     * sets the user id of the account
-     * @param id The new User ID
+     * Sets the user ID of the account.
+     * @param newID The new User ID
      */
-    public void setUserID(long id) {
-        this.userID = id;
+    public void setUserID(long newID) {
+        this.userID = newID;
     }
+    
     /**
-     * Sets the interest rate of the account
+     * Sets the interest rate of the account.
      * @param rate The new interest rate
      */
     public void setInterestRate(double rate) {
         this.interestRate = rate;
     }
+    
     /**
-     * Returns the id of the account
-     * @return the id of the account
+     * Returns the ID of the account.
+     * @return the ID of the account
      */
     public long getID() {
         return this.id;
     }
+    
     /**
-     * returns the account name
+     * Returns the account name.
      * @return the account name
      */
     public String getAccountName() {
-        return this.account_name;
+        return this.accountName;
     }
+    
     /**
-     * returns the current balance
+     * Returns the current balance.
      * @return the balance of the account
      */
     public double getBalance() {
         return this.balance;
     }
+    
     /**
-     * returns the user id
+     * Returns the user ID.
      * @return the user id of the account
      */
     public long getUserID() {
         return this.userID;
     }
+    
     /**
-     * returns the interest rate
+     * Returns the interest rate.
      * @return the interest rate of the account
      */
     public double getInterestRate() {
         return this.interestRate;
     }
+    
     /**
-     * creates a string of account details
+     * Creates a string of account details.
      * @return a string of the account name and balance
      */
     public String toString() {
         NumberFormat us = NumberFormat.getCurrencyInstance();
-        return this.account_name + " [" + us.format(balance) + "]";
+        return this.accountName + " [" + us.format(balance) + "]";
     }
 }

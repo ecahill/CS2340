@@ -3,7 +3,6 @@ package com.example.presenters;
 import java.util.List;
 
 import com.example.model.Account;
-import com.example.model.DatabaseHandler;
 
 /**
  * Checks the database to see if the given account already exists. 

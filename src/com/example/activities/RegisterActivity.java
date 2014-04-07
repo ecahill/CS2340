@@ -1,26 +1,44 @@
 package com.example.activities;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.model.User;
+import com.example.cs2340.R;
 import com.example.model.DatabaseHandler;
+import com.example.model.User;
 import com.example.presenters.IDatabaseHandler;
-import com.example.cs2340.*;
 
+/**
+ * This activity allows the user to register.
+ * 
+ * @author Ryan Farrow
+ *
+ */
 public class RegisterActivity extends Activity {
+	
+	/**
+	 * @param username the user's desired username.
+	 */
     private EditText username;
+    
+    /**
+     * @param passwrod the user's desired password.
+     */
     private EditText password;
+    
+    /**
+     * @param cPassword the confirm password field.
+     */
     private EditText cPassword;
+    
+    /**
+     * @param the button the user should press to finish the registration.
+     */
     private Button goButton;
 
     @Override
@@ -58,14 +76,29 @@ public class RegisterActivity extends Activity {
         });
     }
 
+    /**
+     * Returns the username that was entered in the username field.
+     * 
+     * @return the username
+     */
     public String getName() {
         return username.getText().toString();
     }
 
+    /**
+     * returns the password that was entered in the password field.
+     * 
+     * @return the password
+     */
     public String getPassword() {
         return password.getText().toString();
     }
 
+    /**
+     * Returns the second confirm password that was entered.
+     * 
+     * @return the second password entry
+     */
     public String getCPassword() {
         return cPassword.getText().toString();
     }
