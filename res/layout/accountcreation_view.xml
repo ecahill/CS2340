@@ -25,7 +25,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/AccBalanceField"
+        android:id="@+id/eAccBalanceField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/AccBalanceField"
+        android:layout_below="@+id/eAccBalanceField"
         android:layout_marginTop="33dp"
         android:text="@string/monthlyinterestrate"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -68,7 +68,7 @@
         android:id="@+id/MonthlyInterestField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/AccBalanceField"
+        android:layout_alignLeft="@+id/eAccBalanceField"
         android:layout_below="@+id/textView4"
         android:ems="10"
         android:inputType="numberDecimal" />

@@ -1,17 +1,5 @@
 package com.example.activities;
 
-import com.example.cs2340.R;
-import com.example.model.Account;
-import com.example.model.DatabaseHandler;
-import com.example.model.SessionManager;
-import com.example.presenters.AccountRules;
-import com.example.presenters.IDatabaseHandler;
-
-import android.app.Activity;
-import android.os.Bundle;
-
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,44 +8,50 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.cs2340.R;
+import com.example.model.Account;
+import com.example.model.DatabaseHandler;
+import com.example.model.SessionManager;
+import com.example.presenters.AccountRules;
+import com.example.presenters.IDatabaseHandler;
 
 /**
  * Allows the user to create a new account.
- * 
- * @author Jesse Wu
  *
+ * @author Jesse Wu
  */
 public class AccountCreationActivity extends Activity {
-    
+
     /**
      * @param accName the name of the new account.
      */
     private EditText accName;
-    
+
     /**
      * @param accBalance the starting balance of the new account.
      */
     private EditText accBalance;
-    
+
     /**
      * @param monthlyInterestRate the interest rate of the new account.
      */
     private EditText monthlyInterestRate;
-    
+
     /**
      * @param acceptButton creates the new account.
      */
     private Button acceptButton;
-    
+
     /**
-     * @param session the current session to allow access to the current user's information.
+     * @param session the current session to allow access to the current
+     * user's information.
      */
     private SessionManager session;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accountcreation_view);
         final Context context = this;
@@ -66,13 +60,14 @@ public class AccountCreationActivity extends Activity {
         session = new SessionManager(getApplicationContext());
 
         accName = (EditText) findViewById(R.id.AccNameField);
-        accBalance = (EditText) findViewById(R.id.AccBalanceField);
-        monthlyInterestRate = (EditText) findViewById(R.id.MonthlyInterestField);
+        accBalance = (EditText) findViewById(R.id.eAccBalanceField);
+        monthlyInterestRate = (EditText) 
+        					findViewById(R.id.MonthlyInterestField);
         acceptButton = (Button) findViewById(R.id.acceptButton);
         // declineButton = (Button)findViewById(R.id.declineButton);
         session.checkLogin();
         acceptButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 if (accName.getText().toString().length() > 0
                         && accBalance.getText().toString().length() > 0
                         && monthlyInterestRate.getText().toString().length() > 0) {
@@ -107,7 +102,7 @@ public class AccountCreationActivity extends Activity {
 
     /**
      * Returns the account name.
-     * 
+     *
      * @return the account name based on the string entered in the accName field
      */
     public String getAccountName() {
@@ -116,20 +111,21 @@ public class AccountCreationActivity extends Activity {
 
     /**
      * Returns the account balance.
-     * 
-     * @return the account balance based on the double entered in the accBalance field
+     *
+     * @return the account balance based on the double entered in the 
+     * accBalance field
      */
-    public double getAccountBalance() {
+    public final double getAccountBalance() {
         String accBalanceString = accBalance.getText().toString();
         return Double.parseDouble(accBalanceString);
     }
 
     /**
      * Returns the monthly interest rate.
-     * 
+     *
      * @return the monthly interest rate based on the double entered in the monthlyInterestRate field
      */
-    public double getMonthlyInterestRate() {
+    public final double getMonthlyInterestRate() {
         String monthlyInterestRateString = monthlyInterestRate.getText()
                 .toString();
         return Double.parseDouble(monthlyInterestRateString);

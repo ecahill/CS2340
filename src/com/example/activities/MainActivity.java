@@ -1,27 +1,29 @@
 package com.example.activities;
 
-import java.util.List;
-
-import com.example.cs2340.R;
-import com.example.cs2340.R.id;
-import com.example.cs2340.R.layout;
-import com.example.model.DatabaseHandler;
-import com.example.model.User;
-import com.example.presenters.IDatabaseHandler;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.view.View.OnClickListener;
 
+import com.example.cs2340.R;
+
+/**
+ * The main home screen of the application.
+ * 
+ * @author Erin Cahill
+ *
+ */
 public class MainActivity extends Activity {
 
+	/**
+	 * @param loginButton logs the user in
+	 */
     private Button loginButton;
+    
+    /**
+     * @param registerButton takes the user to a registration screen
+     */
     private Button registerButton;
 
     @Override
@@ -29,7 +31,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // final Context context = this;
-        IDatabaseHandler db = new DatabaseHandler(this);
+        //IDatabaseHandler db = new DatabaseHandler(this);
 
         /**
          * Refresh database Delete these 2 lines after running app ONE time
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
         // SQLiteDatabase d = ((DatabaseHandler) db).getDB();
         // db.onUpgrade(d, 1, 1);
 
-        List<User> l = db.getAllUsers();
+       // List<User> l = db.getAllUsers();
         loginButton = (Button) this.findViewById(R.id.acceptButton);
         registerButton = (Button) this.findViewById(R.id.declineButton);
 

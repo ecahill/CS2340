@@ -1,28 +1,20 @@
 package com.example.activities;
 
-import com.example.cs2340.R;
-import com.example.cs2340.R.id;
-import com.example.cs2340.R.layout;
-import com.example.cs2340.R.menu;
-
-import com.example.model.SessionManager;
-import com.example.model.User;
-import com.example.views.ClickListener;
-import com.example.model.DatabaseHandler;
-import com.example.presenters.IDatabaseHandler;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 
-import android.util.Log;
+import com.example.cs2340.R;
+import com.example.model.DatabaseHandler;
+import com.example.model.SessionManager;
+import com.example.model.User;
+import com.example.presenters.IDatabaseHandler;
 
 /**
  * Allows the user to login by entering their username or password or register.

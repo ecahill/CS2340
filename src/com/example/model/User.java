@@ -1,80 +1,110 @@
 package com.example.model;
 
 /**
- * Model for the User object
+ * Model for the User object.
+ * 
  * @author Emily Cahill
  * 
  */
 
 public class User {
+	
 	/**
-	 * @param _id The user id
+	 * @param id The user id
 	 */
-    private long _id;
+    private long id;
     /**
-     * @param _username The user's username
+     * @param username The user's username.
      */
-    private String _username;
+    private String username;
     /**
-     * @param _password The user's password
+     * @param password The user's password.
      */
-    private String _password;
+    private String password;
 
+    /**
+     * Default constructor for User.
+     */
     public User() {
 
     }
 
-    public User(long id, String u, String p) {
-        this._id = id;
-        this._username = u;
-        this._password = p;
+    /**
+     * Constructor for User.
+     * 
+     * @param aID the user ID
+     * @param u the username
+     * @param p the password
+     */
+    public User(long aID, String u, String p) {
+        this.id = aID;
+        this.username = u;
+        this.password = p;
     }
 
-    public User(String u, String p) {
-        this._username = u;
-        this._password = p;
-    }
     /**
-     * Gets the id of the user
+     * Constructor for User.
+     * 
+     * @param u the username
+     * @param p the password
+     */
+    public User(String u, String p) {
+        this.username = u;
+        this.password = p;
+    }
+    
+    /**
+     * Gets the id of the user.
+     * 
      * @return the user id
      */
     public long getID() {
-        return this._id;
+        return this.id;
     }
+    
     /**
-     * Sets the user id of the user
-     * @param id The new user id
+     * Sets the user id of the user.
+     * 
+     * @param aID The new user id
      */
 
-    public void setID(long id) {
-        this._id = id;
+    public void setID(long aID) {
+        this.id = aID;
     }
+    
     /**
-     * Gets the username of the user
+     * Gets the username of the user.
+     * 
      * @return the username
      */
     public String getUsername() {
-        return this._username;
+        return this.username;
     }
+    
     /**
-     * Sets the username of the user
+     * Sets the username of the user.
+     * 
      * @param u the new username
      */
     public void setUsername(String u) {
-        this._username = u;
+        this.username = u;
     }
+    
     /**
-     * Gets the password of the user
+     * Gets the password of the user.
+     * 
      * @return the user's password
      */
     public String getPassword() {
-        return this._password;
+        return this.password;
     }
+    
     /**
-     * sets the password of the user
+     * sets the password of the user.
+     * 
      * @param p the new password
      */
     public void setPassword(String p) {
-        this._password = p;
+        this.password = p;
     }
 }

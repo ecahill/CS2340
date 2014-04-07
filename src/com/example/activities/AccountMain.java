@@ -1,22 +1,39 @@
 package com.example.activities;
 
-import com.example.cs2340.R;
-import com.example.cs2340.R.layout;
-import com.example.cs2340.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.cs2340.R;
+
+/**
+ * The main account activity.
+ * 
+ * @author Kristian Zhelyazkov
+ *
+ */
 public class AccountMain extends Activity {
 
+	/**
+	 * @param viewAcc the button that takes the user to a list of current accounts.
+	 */
     private Button viewAcc;
+    
+    /**
+     * @param createAcc the button that takes the user to the account creation page.
+     */
     private Button createAcc;
+    
+    /**
+     * @param viewSpendCatRep the button that takes the user to the spending category report page.
+     */
     private Button viewSpendCatRep;
+    
+    /**
+     * @param logout the button that logs the current user out
+     */
     private Button logout;
 
     @Override

@@ -24,7 +24,6 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int AccBalanceField=0x7f080003;
         public static final int AccNameField=0x7f080001;
         public static final int AccountNameField=0x7f080012;
         public static final int AcctBalanceField=0x7f080010;
@@ -44,6 +43,7 @@ public final class R {
         public static final int bViewAccount=0x7f08000b;
         public static final int bViewSpendingCategoryReport=0x7f08000a;
         public static final int declineButton=0x7f08000c;
+        public static final int eAccBalanceField=0x7f080003;
         public static final int eDate=0x7f08000e;
         public static final int loginButton=0x7f080011;
         public static final int makeReport=0x7f08000f;

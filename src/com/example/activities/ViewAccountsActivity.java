@@ -1,18 +1,16 @@
 package com.example.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.cs2340.R;
@@ -21,13 +19,36 @@ import com.example.model.DatabaseHandler;
 import com.example.model.SessionManager;
 import com.example.presenters.IDatabaseHandler;
 
+/**
+ * Activity for viewing any existing accounts belonging to the user.
+ *  
+ * @author Jesse Wu
+ */
 public class ViewAccountsActivity extends ListActivity {
 
+	/**
+	 *  @param session  the database agent that helps save user input
+	 */
     private SessionManager session;
+    /**
+     *  @param adapter  the customizer for viewing the account list
+     */
     private ArrayAdapter<Account> adapter;
+    /**
+     *  @param accountList  the list of all the user's accounts
+     */
     private List<Account> accountList;
+    /**
+     * @param db  the database that is being interacted with
+     */
     private IDatabaseHandler db;
+    /**
+     *  @param itemID  id of the selected account item
+     */
     private long itemID;
+    /**
+     * @param back  button used to go back to previous menu
+     */
     private Button back;
 
     @Override
@@ -56,15 +77,24 @@ public class ViewAccountsActivity extends ListActivity {
         });
         // ListView myListView = getListView();
 
-        if (!accountList.isEmpty()) {
+//        if (!accountList.isEmpty()) {
+//            Log.d("AccountList", accountList.get(0).toString());
+//            adapter = new ArrayAdapter<Account>(context,
+//                    android.R.layout.simple_list_item_1, accountList);
+//            setListAdapter(adapter);
+//        } else {
+//            // myListView.getEmptyView();
+//            Toast.makeText(context, "No accounts to display!",
+//                    Toast.LENGTH_LONG).show();
+//        }
+        if (accountList.isEmpty()) {           
+            Toast.makeText(context, "No accounts to display!",
+                    Toast.LENGTH_LONG).show();
+        } else {
             Log.d("AccountList", accountList.get(0).toString());
             adapter = new ArrayAdapter<Account>(context,
                     android.R.layout.simple_list_item_1, accountList);
             setListAdapter(adapter);
-        } else {
-            // myListView.getEmptyView();
-            Toast.makeText(context, "No accounts to display!",
-                    Toast.LENGTH_LONG).show();
         }
     }
 

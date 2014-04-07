@@ -1,20 +1,19 @@
 package com.example.model;
 
 import java.util.ArrayList;
-
 import java.util.List;
-
-import com.example.presenters.IDatabaseHandler;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import com.example.presenters.IDatabaseHandler;
 
 /**
- * A compilation of methods that access the database 
+ * A compilation of methods that access the database.
+ *  
  * @author Emily Cahill
  *
  */
@@ -111,6 +110,11 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
             + KEY_USER_ID + " INTEGER," + KEY_DEPOSIT + " REAL,"
             + KEY_WITHDRAWAL + " REAL," + KEY_DATE + " TEXT" + ")";
 
+    /**
+     * Default constructor for DatabaseHandler takes in a context.
+     * 
+     * @param context the current application context
+     */
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -124,6 +128,11 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         // Log.d("Database Creation", "Users and Accounts tables created");
     }
 
+    /**
+     * Gets the current database.
+     * 
+     * @return the current database
+     */
     public SQLiteDatabase getDB() {
         return this.getWritableDatabase();
     }
@@ -147,9 +156,9 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         values.put(KEY_USER_ID, a.getUserID());
         values.put(KEY_INTEREST, a.getInterestRate());
 
-        long account_id = db.insert(TABLE_ACCOUNTS, null, values);
+        long accountID = db.insert(TABLE_ACCOUNTS, null, values);
         db.close();
-        return account_id;
+        return accountID;
     }
 
     // add user to db
@@ -162,9 +171,9 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         values.put(KEY_PASSWORD, u.getPassword());
 
         // insert row
-        long user_id = db.insert(TABLE_USERS, null, values);
+        long userID = db.insert(TABLE_USERS, null, values);
         db.close(); // close db connection
-        return user_id;
+        return userID;
     }
 
     // add transaction
@@ -179,11 +188,11 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         values.put(KEY_DEPOSIT, t.getDepositAmount());
         values.put(KEY_DATE, t.getDate());
 
-        long transaction_id = db.insert(TABLE_TRANSACTIONS, null, values);
+        long transactionID = db.insert(TABLE_TRANSACTIONS, null, values);
         db.close();
         // Log.d("DatabaseHandler", "Transaction: " + t.getTransactionName() +
         // " added to account: " + this.getAccount(t.getAccountID()));
-        return transaction_id;
+        return transactionID;
     }
 
     @Override
@@ -222,16 +231,12 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     @Override
     public boolean checkUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
-                KEY_USERNAME, KEY_PASSWORD }, KEY_USERNAME + "=?",
-                new String[] { String.valueOf(username) }, null, null, null,
+        Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,
+            KEY_USERNAME, KEY_PASSWORD }, KEY_USERNAME + "=?",
+                new String[] {String.valueOf(username)}, null, null, null,
                 null);
         db.close();
-        if ((cursor.getCount() != 0) && (cursor.moveToFirst())) {
-            return false;
-        } else {
-            return true;
-        }
+        return !((cursor.getCount() != 0) && (cursor.moveToFirst()));
     }
 
     // get user from db by ID
@@ -239,9 +244,9 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     public User getUser(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
-                KEY_USERNAME, KEY_PASSWORD }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,
+            KEY_USERNAME, KEY_PASSWORD}, KEY_ID + "=?",
+            new String[] {String.valueOf(id) }, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
             User user = new User(Integer.parseInt(cursor.getString(0)),
@@ -252,10 +257,10 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
     
     @Override
-    public Account getAccount(long account_id) {
+    public Account getAccount(long accountID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT * FROM " + TABLE_ACCOUNTS + " WHERE "
-                + KEY_ID + " = " + account_id;
+                + KEY_ID + " = " + accountID;
 
         Cursor c = db.rawQuery(selectQuery, null);
         if (c != null) {
@@ -283,11 +288,11 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
          * cursor.getString(1), cursor.getString(2)); return user; } return
          * null;
          */
-        Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
-                KEY_USERNAME, KEY_PASSWORD }, KEY_USERNAME + "=? AND "
-                + KEY_PASSWORD + "=?", new String[] { String.valueOf(username),
-                String.valueOf(password) }, null, null, null, null);
-        if (cursor.moveToFirst()) {// (cursor!=null){
+        Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_ID,
+            KEY_USERNAME, KEY_PASSWORD}, KEY_USERNAME + "=? AND "
+                + KEY_PASSWORD + "=?", new String[] {String.valueOf(username),
+                    String.valueOf(password)}, null, null, null, null);
+        if (cursor.moveToFirst()) { // (cursor!=null){
             // cursor.moveToFirst();
             User user = new User(Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1), cursor.getString(2));
@@ -379,7 +384,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         values.put(KEY_PASSWORD, user.getPassword());
 
         return db.update(TABLE_USERS, values, KEY_ID + " =?",
-                new String[] { String.valueOf(user.getID()) });
+                new String[] {String.valueOf(user.getID())});
     }
 
     // FIX PLEASE:
@@ -393,7 +398,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
         values.put(KEY_INTEREST, a.getInterestRate());
 
         return db.update(TABLE_ACCOUNTS, values, KEY_ID + " =?",
-                new String[] { String.valueOf(a.getID()) });
+                new String[] {String.valueOf(a.getID()) });
     }
 
     // Delete a user from the database
@@ -401,7 +406,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + " = ?",
-                new String[] { String.valueOf(user.getID()) });
+                new String[] {String.valueOf(user.getID())});
         db.close();
     }
 }

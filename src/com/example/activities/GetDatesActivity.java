@@ -1,21 +1,14 @@
 package com.example.activities;
 
 import java.sql.Date;
-import java.util.ArrayList;
-
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +19,38 @@ import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.presenters.IDatabaseHandler;
 
+/**
+ * Allows the user to enter the time frame that will be used to generate 
+ * reports.
+ * 
+ * @author Johnny Farrow
+ *
+ */
 public class GetDatesActivity extends Activity {
+	/**
+	 * @param session the current application session.
+	 */
     private SessionManager session;
+    
+    /**
+     * @param startDate the starting date of the time frame.
+     */
     private TextView startDate;
+    
+    /**
+     * @param endDate the end date of the time frame.
+     */
     private TextView endDate;
+    
+    /**
+     * @param makeReportButton takes the user to a screen that displays
+     * the generated report.
+     */
     private Button makeReportButton;
+    
+    /**
+     * @param accounts the list of accounts the current user has.
+     */
     private List<Account> accounts;
 
     @Override
@@ -47,13 +67,12 @@ public class GetDatesActivity extends Activity {
         endDate = (TextView) findViewById(R.id.eDate);
         makeReportButton = (Button) findViewById(R.id.makeReport);
 
-        // final long id = session.getAccountID();
-
         makeReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (startDate.getText().toString().length() > 0
                         && endDate.getText().toString().length() > 0) {
-                    long start = 0, end = 0;
+                    long start = 0;
+                    long end = 0;
                     boolean flag = false;
                     try {
                         start = Date.parse(startDate.getText().toString());
@@ -64,18 +83,13 @@ public class GetDatesActivity extends Activity {
                                 Toast.LENGTH_SHORT).show();
                     }
 
-                    // long startDate = startDate.getMinDate();
-                    // long endDate = endDate.getMinDate();
-
                     List<Transaction> trans = db.getTransactionsByDates(start,
                             end, session.getUserID());
-                    // Toast.makeText(context, "UserID: " + session.getUserID(),
-                    // Toast.LENGTH_SHORT).show();
 
-                    if (flag == true) {
+                    if (flag) {
                         Intent i = new Intent(GetDatesActivity.this,
                                 SpendCatReportActivity.class);
-                        long[] dates = { start, end };
+                        long[] dates = {start, end};
                         i.putExtra("DATES", dates);
                         startActivity(i);
                     }
@@ -84,7 +98,6 @@ public class GetDatesActivity extends Activity {
                             Toast.LENGTH_SHORT).show();
                 }
             }
-            // }
         });
     }
 }
