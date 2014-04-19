@@ -21,7 +21,7 @@ import com.example.presenters.IDatabaseHandler;
 public class DatabaseHandler extends SQLiteOpenHelper implements
         IDatabaseHandler {
 	/**
-	 * @param DATABASE_VERSION the version of the database
+	 * @param DATABASE_VERSION t	he version of the database
 	 */
     private static final int DATABASE_VERSION = 1;
     /**
@@ -88,6 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
      * @param KEY_TRANSACTION_NAME the name of the transaction name column
      */
     private static final String KEY_TRANSACTION_NAME = "transaction_name";
+ 
     /**
      * @param CREATE_USERS_TABLE the SQL statement that creates the users table
      */
