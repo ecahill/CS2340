@@ -8,7 +8,7 @@ import java.text.NumberFormat;
  * @author Emily Cahill
  *
  */
-public class Account {
+public class Account implements IAccount {
 	/**
 	 * @param id The id of the account
 	 */

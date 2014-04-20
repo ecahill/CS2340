@@ -11,15 +11,6 @@
         android:layout_centerHorizontal="true"
         android:text="@string/makeTransaction"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <Button
-        android:id="@+id/acceptTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/transactionAmountEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="@string/accept" />
 
     <TextView
         android:id="@+id/textView3"
@@ -80,5 +71,25 @@
         android:layout_marginBottom="60dp"
         android:text="@string/transactionReason"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/fromMakeTransToAccView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/acceptTransaction"
+        android:layout_alignBottom="@+id/acceptTransaction"
+        android:layout_alignLeft="@+id/transactionAmountEditText"
+        android:onClick="onButtonClick"
+        android:text="Back" />
+
+    <Button
+        android:id="@+id/acceptTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_below="@+id/transactionAmountEditText"
+        android:layout_marginTop="30dp"
+        android:onClick="onButtonClick"
+        android:text="@string/accept" />
 
 </RelativeLayout>

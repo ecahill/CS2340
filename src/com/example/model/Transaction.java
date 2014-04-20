@@ -9,7 +9,7 @@ import java.text.NumberFormat;
  *
  */
 
-public class Transaction {
+public class Transaction implements ITransaction {
 	/**
 	 * @param id the id of the transaction.
 	 */
@@ -54,10 +54,6 @@ public class Transaction {
      * @param transactionType the type of transaction.
      */
     private String transactionType;
-
-    // to be stored for record
-    // private double finalWithdrawAmount;
-    // private double finalDepositAmount;
 
     /**
      * Default constructor for a transaction.
@@ -123,6 +119,7 @@ public class Transaction {
         this.withdrawAmount = withdraw;
         this.date = d;
     }
+    
     /**
      * Create a withdraw transaction.
      * 

@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/logout" />
+        android:text="@string/logout"
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/bCreateAccount"
@@ -25,7 +26,8 @@
         android:layout_below="@+id/bLogout"
         android:layout_marginTop="51dp"
         android:text="@string/createAccount"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/bViewSpendingCategoryReport"
@@ -35,7 +37,8 @@
         android:layout_below="@+id/bViewAccount"
         android:layout_marginTop="54dp"
         android:text="@string/viewSpendingCategoryReport"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/bViewAccount"
@@ -45,6 +48,7 @@
         android:layout_below="@+id/bCreateAccount"
         android:layout_marginTop="57dp"
         android:text="@string/viewAccounts"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="onButtonClick" />
 
 </RelativeLayout>

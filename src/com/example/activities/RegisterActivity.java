@@ -1,17 +1,11 @@
 package com.example.activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.cs2340.R;
-import com.example.model.DatabaseHandler;
-import com.example.model.User;
-import com.example.presenters.IDatabaseHandler;
+import com.example.presenters.RegisterPresenter;
+import com.example.views.RegisterView;
 
 /**
  * This activity allows the user to register.
@@ -19,7 +13,7 @@ import com.example.presenters.IDatabaseHandler;
  * @author Ryan Farrow
  *
  */
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends DesignActivity implements RegisterView {
 	
 	/**
 	 * @param username the user's desired username.
@@ -36,44 +30,13 @@ public class RegisterActivity extends Activity {
      */
     private EditText cPassword;
     
-    /**
-     * @param the button the user should press to finish the registration.
-     */
-    private Button goButton;
+    private RegisterPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_view);
-
-        final Context context = this;
-        final IDatabaseHandler db = new DatabaseHandler(context);
-
-        username = (EditText) findViewById(R.id.NameField);
-        password = (EditText) findViewById(R.id.PassField);
-        cPassword = (EditText) findViewById(R.id.CPassField);
-        goButton = (Button) findViewById(R.id.RegButton);
-
-        goButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (db.checkUsername(getName())) {
-                    if (getPassword().equals(getCPassword())) {
-                        long id = db
-                                .addUser(new User(getName(), getPassword()));
-                        User u = db.getUser(id);
-                        u.setID(id);
-                    } else {
-                        Toast.makeText(context, "Passwords do not match",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    Toast.makeText(context, "User has been registered",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(context, "Username is taken",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        presenter = new RegisterPresenter(this, this);
     }
 
     /**
@@ -81,7 +44,8 @@ public class RegisterActivity extends Activity {
      * 
      * @return the username
      */
-    public String getName() {
+    public String getUsername() {
+    	username = (EditText) findViewById(R.id.NameField);
         return username.getText().toString();
     }
 
@@ -91,6 +55,7 @@ public class RegisterActivity extends Activity {
      * @return the password
      */
     public String getPassword() {
+    	password = (EditText) findViewById(R.id.PassField);
         return password.getText().toString();
     }
 
@@ -99,7 +64,8 @@ public class RegisterActivity extends Activity {
      * 
      * @return the second password entry
      */
-    public String getCPassword() {
+    public String getCheckPassword() {
+    	cPassword = (EditText) findViewById(R.id.CPassField);
         return cPassword.getText().toString();
     }
 }

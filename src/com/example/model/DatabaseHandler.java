@@ -9,8 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.presenters.IDatabaseHandler;
-
 /**
  * A compilation of methods that access the database.
  *  
@@ -21,7 +19,7 @@ import com.example.presenters.IDatabaseHandler;
 public class DatabaseHandler extends SQLiteOpenHelper implements
         IDatabaseHandler {
 	/**
-	 * @param DATABASE_VERSION t	he version of the database
+	 * @param DATABASE_VERSION the version of the database
 	 */
     private static final int DATABASE_VERSION = 1;
     /**

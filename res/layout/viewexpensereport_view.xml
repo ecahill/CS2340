@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/back" />
+        android:text="@string/back"
+        android:onClick="onButtonClick" />
 
     <TextView
         android:id="@+id/tTotal"

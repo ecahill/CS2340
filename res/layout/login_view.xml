@@ -51,7 +51,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
         android:textSize="30sp"
-        android:text="@string/login" />
+        android:text="@string/login" 
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/registerButton"
@@ -61,6 +62,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="53dp"
         android:text="@string/register"
-        android:textSize="30sp" />
+        android:textSize="30sp" 
+        android:onClick="onButtonClick"/>
 
 </RelativeLayout>

@@ -26,12 +26,24 @@
 
     <Button
         android:id="@+id/makeTransaction"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/accNameHeader"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="112dp"
+        android:onClick="onButtonClick"
         android:text="@string/makeTransaction"
-        android:textSize="50sp" />
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/fromSingleAccToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/makeTransaction"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:text="Back"
+        android:onClick="onButtonClick"
+        android:textSize="30sp" />
 
 </RelativeLayout>

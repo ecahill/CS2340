@@ -86,9 +86,20 @@
         android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/MonthlyInterestField"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="48dp"
+        android:onClick="onButtonClick"
         android:text="@string/accept" />
+
+    <Button
+        android:id="@+id/fromAccCreationtoAccMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/acceptButton"
+        android:layout_alignBottom="@+id/acceptButton"
+        android:layout_alignLeft="@+id/textView4"
+        android:onClick="onButtonClick"
+        android:text="Back" />
 
 </RelativeLayout>

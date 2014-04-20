@@ -14,7 +14,7 @@ import com.example.activities.LoginActivity;
  * @author Emily Cahill
  *
  */
-public class SessionManager {
+public class SessionManager implements ISessionManager {
 	/**
 	 * @param Shared preferences
 	 */

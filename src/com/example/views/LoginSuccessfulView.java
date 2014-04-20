@@ -17,7 +17,6 @@ public class LoginSuccessfulView extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginsuccess_view);
-        // TODO Auto-generated method stub
     }
 
 }

@@ -15,15 +15,6 @@
         android:text="@string/register"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/RegButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="41dp"
-        android:text="@string/go" />
-
         <EditText
             android:id="@+id/PassField"
             android:layout_width="wrap_content"
@@ -83,7 +74,28 @@
             android:layout_alignLeft="@+id/textView1"
             android:text="@string/username"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        
+
+        <Button
+            android:id="@+id/RegButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/NameField"
+            android:layout_below="@+id/CPassField"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="27dp"
+            android:onClick="onButtonClick"
+            android:text="@string/go" />
+
+        <Button
+            android:id="@+id/bReturntoMain"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/CPassField"
+            android:layout_alignTop="@+id/RegButton"
+            android:layout_marginLeft="14dp"
+            android:text="Back" 
+            android:onClick="onButtonClick"/>
 
 </RelativeLayout>
 
