@@ -10,12 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.activities.AccountViewActivity;
 import com.example.activities.ViewAccountsActivity;
 import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
+import com.example.model.ISessionManager;
 import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.views.ClickListener;
@@ -26,7 +26,7 @@ public class MakeTransactionPresenter implements ClickListener {
 	private MakeTransactionView view;
 	private Activity activity;
 	private IDatabaseHandler db;
-	private SessionManager session;
+	private ISessionManager session;
 	/**
      * @param DEPOSIT a string used for comparison.
      */

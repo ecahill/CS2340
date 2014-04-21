@@ -147,7 +147,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
     }
 
     @Override
-    public long createAccount(Account a) {
+    public long createAccount(IAccount a) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ACCOUNT_NAME, a.getAccountName());
@@ -162,7 +162,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
 
     // add user to db
     @Override
-    public long addUser(User u) {
+    public long addUser(IUser u) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         // get user username and passowrd
@@ -177,7 +177,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
 
     // add transaction
     @Override
-    public long addTransaction(Transaction t) {
+    public long addTransaction(ITransaction t) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_TRANSACTION_NAME, t.getTransactionName());
@@ -376,7 +376,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
 
     // update a user in the database
     @Override
-    public int updateUser(User user) {
+    public int updateUser(IUser user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_USERNAME, user.getUsername());
@@ -388,7 +388,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
 
     // FIX PLEASE:
     @Override
-    public int updateAccount(Account a) {
+    public int updateAccount(IAccount a) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ACCOUNT_NAME, a.getAccountName());
@@ -402,7 +402,7 @@ public class DatabaseHandler extends SQLiteOpenHelper implements
 
     // Delete a user from the database
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(IUser user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + " = ?",
                 new String[] {String.valueOf(user.getID())});

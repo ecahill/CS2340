@@ -13,6 +13,7 @@ import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
+import com.example.model.ISessionManager;
 import com.example.model.SessionManager;
 import com.example.views.AccountCreationView;
 import com.example.views.ClickListener;
@@ -22,7 +23,7 @@ public class AccountCreationPresenter implements ClickListener {
 	private Activity activity;
 	private AccountCreationView view;
 	private IDatabaseHandler db;
-	private SessionManager session;
+	private ISessionManager session;
 	
 	public AccountCreationPresenter(AccountCreationView aView, Activity act) {
 		view = aView;

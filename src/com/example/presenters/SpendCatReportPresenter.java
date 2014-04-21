@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import com.example.activities.GetDatesActivity;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
+import com.example.model.ISessionManager;
 import com.example.model.SessionManager;
 import com.example.model.Transaction;
 import com.example.model.User;
@@ -22,7 +23,7 @@ public class SpendCatReportPresenter implements ClickListener {
 	private ListActivity activity;
 	private long[] dates;
 	private IDatabaseHandler db;
-	private SessionManager session;
+	private ISessionManager session;
 	
 	public SpendCatReportPresenter(SpendCatReportView v, ListActivity act) {
 		view = v;

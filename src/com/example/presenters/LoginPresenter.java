@@ -10,6 +10,7 @@ import com.example.activities.RegisterActivity;
 import com.example.cs2340.R;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
+import com.example.model.ISessionManager;
 import com.example.model.SessionManager;
 import com.example.model.User;
 import com.example.views.ClickListener;
@@ -20,7 +21,7 @@ public class LoginPresenter implements ClickListener {
 	private LoginView view;
 	private Activity activity;
 	private IDatabaseHandler db;
-	private SessionManager session;
+	private ISessionManager session;
 
 	public LoginPresenter(LoginView v, Activity act) {
 		view = v;

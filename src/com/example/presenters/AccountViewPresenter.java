@@ -11,7 +11,9 @@ import com.example.activities.ViewAccountsActivity;
 import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
+import com.example.model.IAccount;
 import com.example.model.IDatabaseHandler;
+import com.example.model.ISessionManager;
 import com.example.model.SessionManager;
 import com.example.views.AccountViewView;
 import com.example.views.ClickListener;
@@ -21,9 +23,9 @@ public class AccountViewPresenter implements ClickListener {
 	private AccountViewView view;
 	private Activity activity;
 	private IDatabaseHandler db;
-	private SessionManager session;
+	private ISessionManager session;
 	private long itemID;
-	private Account curAccount;
+	private IAccount curAccount;
 	
 	public AccountViewPresenter(AccountViewView v, Activity act) {
 		view = v;

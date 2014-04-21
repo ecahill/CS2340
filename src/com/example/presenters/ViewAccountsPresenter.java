@@ -16,6 +16,7 @@ import com.example.activities.AccountViewActivity;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
+import com.example.model.ISessionManager;
 import com.example.model.SessionManager;
 import com.example.views.ClickListener;
 import com.example.views.ViewAccountsView;
@@ -25,7 +26,7 @@ public class ViewAccountsPresenter implements ClickListener {
 	private ViewAccountsView view;
 	private ListActivity activity;
 	private IDatabaseHandler db;
-	private SessionManager session;
+	private ISessionManager session;
 	private long itemID;
 	
 	public ViewAccountsPresenter(ViewAccountsView v, ListActivity act) {

@@ -36,14 +36,14 @@ public interface IDatabaseHandler {
      * @param a The account being added
      * @return the id of the account added
      */
-    long createAccount(Account a);
+    long createAccount(IAccount a);
 
     /**
      * Add a user to the users table.
      * @param u The user to be added
      * @return the id of the user added
      */
-    long addUser(User u);
+    long addUser(IUser u);
     /**
      * Checks the database to see if the username exists.
      * @param username name being checked
@@ -102,23 +102,23 @@ public interface IDatabaseHandler {
      * @param user User with new criteria
      * @return The id of the user
      */
-    int updateUser(User user);
+    int updateUser(IUser user);
     /**
      * Updates an account in the accounts table.
      * @param a The account being updated
      * @return the account id
      */
-    int updateAccount(Account a);
+    int updateAccount(IAccount a);
     /**
      * Deletes a user from the users table.
      * @param user The user to be deleted
      */
-    void deleteUser(User user);
+    void deleteUser(IUser user);
     /**
      * Adds a transactions to the transactions table. 
      * @param t The transaction to be added
      * @return the id of the transaction
      */
-    long addTransaction(Transaction t);
+    long addTransaction(ITransaction t);
 
 }
