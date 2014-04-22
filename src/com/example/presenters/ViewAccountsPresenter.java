@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.activities.AccountMainActivity;
 import com.example.activities.AccountViewActivity;
+import com.example.cs2340.R;
 import com.example.model.Account;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
@@ -63,6 +64,7 @@ public class ViewAccountsPresenter implements ClickListener {
 			        viewAccount.putExtra("itemID", itemID);
 			        activity.finish();
 			        activity.startActivity(viewAccount);
+			        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 				}            	
 			});
         }
@@ -74,5 +76,6 @@ public class ViewAccountsPresenter implements ClickListener {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         activity.finish();
         activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}	
 }

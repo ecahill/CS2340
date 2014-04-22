@@ -42,6 +42,7 @@ public class LoginPresenter implements ClickListener {
 		} else if (curButton == registerButton) {
 			launchRegisterActivity();
 		}
+		activity.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
 	}
 	
 	private void login() {

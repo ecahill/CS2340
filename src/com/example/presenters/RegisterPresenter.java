@@ -36,16 +36,18 @@ public class RegisterPresenter implements ClickListener {
 		if (curButton == goButton) {
 			if (register()) {
 				launchLoginActivity();
+				activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			}			
 		} else if (curButton == backButton) {			
 			launchLoginActivity();
+			activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 		}
 	}
 	
 	private void launchLoginActivity() { 
 		Intent login = new Intent(activity, LoginActivity.class);
 		activity.finish();
-		activity.startActivity(login);
+		activity.startActivity(login);		
 	}
 	
 	private boolean register() {

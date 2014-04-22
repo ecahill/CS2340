@@ -65,11 +65,13 @@ public class AccountViewPresenter implements ClickListener {
 	        transaction.putExtra("itemID", itemID);
 	        activity.finish();
 	        activity.startActivity(transaction);	
+	        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 		} else if (curButton == backB) {
 			Intent transaction = new Intent(activity, ViewAccountsActivity.class);
 	        transaction.putExtra("itemID", itemID);
 	        activity.finish();
 	        activity.startActivity(transaction);
+	        activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 		}		
 	}
 

@@ -114,6 +114,7 @@ public class MakeTransactionPresenter implements ClickListener {
 	                }
 	            }
 	            launchViewAccountsActivity(curAccount, trans);
+	            activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	        } else {
 	            Toast.makeText(activity, "Transaction Failed.",
 	                    Toast.LENGTH_LONG).show();
@@ -127,5 +128,6 @@ public class MakeTransactionPresenter implements ClickListener {
 		Intent i = new Intent(activity, ViewAccountsActivity.class);
 		activity.finish();
 		activity.startActivity(i);
+		activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}
 }

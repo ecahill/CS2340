@@ -42,22 +42,26 @@ public class AccountMainPresenter implements ClickListener {
 	private void launchViewAccountsActivity() {
 		Intent viewAccts = new Intent(activity, ViewAccountsActivity.class);
         activity.startActivity(viewAccts);
+        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	}	
 	
 	private void launchCreateAccountActivity() {
 		Intent createAcc = new Intent(activity, AccountCreationActivity.class);
         activity.startActivity(createAcc);
+        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	}
 	
 	private void launchViewSpendingCatReportActivity() {
 		Intent spendCatReport = new Intent(activity, GetDatesActivity.class);
         activity.startActivity(spendCatReport);
+        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	}
 	
 	private void launchLoginActivity() {
 		Intent login = new Intent(activity, LoginActivity.class);
         activity.finish();
         activity.startActivity(login);
+        activity.overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 	}
 	
 }

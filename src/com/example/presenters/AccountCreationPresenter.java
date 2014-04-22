@@ -57,6 +57,7 @@ public class AccountCreationPresenter implements ClickListener {
                     Toast.makeText(activity, "Account: [" + accName + "] created!",
                                             Toast.LENGTH_LONG).show();
                     launchAccountMainActivity();
+                    activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 } else {
                     Toast.makeText(activity, "Account name already exists!",
                             Toast.LENGTH_LONG).show();
@@ -67,6 +68,7 @@ public class AccountCreationPresenter implements ClickListener {
             }
 		} else if (curButton == backButton) {
 			launchAccountMainActivity();
+			activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 		}
 	}
 	

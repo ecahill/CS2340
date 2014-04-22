@@ -55,6 +55,7 @@ public class GetDatesPresenter implements ClickListener {
 	                i.putExtra("DATES", dates);	                
 	                activity.finish();
 	                activity.startActivity(i);
+	                activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	            }
 	        } else {
 	            Toast.makeText(activity, "Invalid date!",
@@ -69,6 +70,7 @@ public class GetDatesPresenter implements ClickListener {
 		Intent i = new Intent(activity, AccountMainActivity.class);
 		activity.finish();
 		activity.startActivity(i);
+		activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}
 	
 }

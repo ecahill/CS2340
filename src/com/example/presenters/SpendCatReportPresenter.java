@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.example.activities.GetDatesActivity;
+import com.example.cs2340.R;
 import com.example.model.DatabaseHandler;
 import com.example.model.IDatabaseHandler;
 import com.example.model.ISessionManager;
@@ -42,6 +43,7 @@ public class SpendCatReportPresenter implements ClickListener {
 		activity.finish();
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         activity.startActivity(intent);		
+        activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}
 	
 	public void prepare() {
